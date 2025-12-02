@@ -1,0 +1,65 @@
+### Gradle / Spring Boot
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Kotlin ###
+.kotlin
+
+---
+## 🌐 Node / Angular (Frontend)
+
+# Dependências
+**/node_modules
+./node_modules
+.yarn/
+yarn-error.log
+
+# Artefatos de Build do Angular
+dist/
+out-tsc/
+npm-debug.log*
+
+# Output de Integração (Angular Build no local do Spring Boot)
+build/resources/main/static/
+
+# Configurações de IDE do Node (Opcional, mas útil)
+.cache/
+.eslintcache
+
+## Variaveis de ambiente
+environment.ts

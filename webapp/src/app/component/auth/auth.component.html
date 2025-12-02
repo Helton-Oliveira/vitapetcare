@@ -1,0 +1,48 @@
+<body class="flex h-screen items-center justify-center bg-gradient-to-r from-cyan-50 to-cyan-200  ">
+<section class="flex bg-blue-200 items-stretch justify-center rounded-md p-2 w-[80%] h-[65%]">
+  <form [formGroup]="form" (ngSubmit)="login()"
+        class="flex flex-col justify-center items-start p-20 rounded-md w-[75%] gap-5">
+    <div class="mb-10 w-full">
+      <label class="text-[2.1rem] text-black font-bold ">Bem vindo de volta</label>
+    </div>
+
+    <div class="flex shadow-xs rounded-md bg-white w-[100%]">
+      <label class="label-input-text" translate="login.email"></label>
+      <input class="input-text" type="email" formControlName="email" required/>
+    </div>
+
+    <div class="flex shadow-xs rounded-base bg-white rounded-md w-[100%]">
+      <span class="label-input-text" translate="login.password"></span>
+      <input class="input-text" type="password" formControlName="password" required/>
+    </div>
+
+    <div class="flex items-center justify-between w-full">
+      <div class="flex gap-2">
+        <input class="accent-blue-500" type="checkbox"/>
+        <label class="text-[90%]">Lembrar de mim</label>
+      </div>
+
+      <a class="underline text-[90%] cursor-pointer text-blue-800">Esqueceu a senha?</a>
+    </div>
+
+    <button
+      class="btn-primary  w-[100%] mt-10 "
+      [style]="!canSubmit() ? 'disabled' : '' "
+      [disabled]="!canSubmit()"
+      type="submit"
+    >Login
+    </button>
+
+    <div class="flex gap-2 ml-[15%] mt-[15%]">
+      <label>Nao possui conta?</label>
+      <a class="underline cursor-pointer text-blue-800">Criar conta</a>
+    </div>
+  </form>
+
+  <img
+    src="assets/dog_cat.jpeg"
+    alt="Logo do app"
+    class="bg-blue-300 w-full rounded-md"/>
+</section>
+</body>
+
