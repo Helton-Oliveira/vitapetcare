@@ -53,6 +53,8 @@ yarn-error.log
 dist/
 out-tsc/
 npm-debug.log*
+.angular
+.tsbuildinfo
 
 # Output de Integração (Angular Build no local do Spring Boot)
 build/resources/main/static/
