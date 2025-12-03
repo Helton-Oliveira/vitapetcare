@@ -1,0 +1,30 @@
+<nav
+  class="group flex flex-col items-center justify-start mt-5 ml-5 gap-6
+         w-16 hover:w-60 transition-all duration-20
+         bg-white shadow-lg py-6 hover:rounded-lg
+         rounded-2xl group-hover:rounded-2xl hover:cursor-pointer">
+
+  <ul class="flex flex-col gap-6 w-full px-1">
+
+    <!-- DASHBOARD -->
+    <li>
+      <a routerLink="/dashboard" class="sidebar-icon">
+        <i class="fa-solid fa-gauge text-2xl"></i>
+        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-sm font-medium"
+              translate="sidebar.dashboard">
+          </span>
+      </a>
+    </li>
+
+    <!-- COLLABORATORS -->
+    <li>
+      <a routerLink="/collaborators" class="sidebar-icon">
+        <i class="fa-solid fa-person fa-person-digging text-2xl"></i>
+        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
+              translate="sidebar.collaborators">
+        </span>
+      </a>
+    </li>
+
+  </ul>
+</nav>
