@@ -2,5 +2,9 @@
   "login": {
     "email": "Email",
     "password": "Senha"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "collaborators": "Colaboradores"
   }
 }
