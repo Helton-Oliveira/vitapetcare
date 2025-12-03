@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,12 @@ import {TranslateModule} from '@ngx-translate/core';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    TranslateModule
+    TranslateModule,
   ]
 })
 export class AuthComponent implements OnInit {
+
+  private router = inject(Router);
 
   private fb = inject(FormBuilder);
 
@@ -27,7 +30,9 @@ export class AuthComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.form.value)
+    this.router.navigate(["/dashboard"]).then(ok => {
+      console.log("Navigation result:", ok);
+    });
   }
 
   canSubmit(): boolean {
