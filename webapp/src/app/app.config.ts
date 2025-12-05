@@ -3,16 +3,17 @@ import {provideRouter} from '@angular/router';
 
 import {APP_ROUTES} from './app.routes';
 import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
-import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
 import {createTranslateLoader} from './shared/loaders/translate.loader';
+import {tokenInterceptor} from './interceptor/token-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(APP_ROUTES),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,
@@ -23,4 +24,4 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: 'pt_br'
     }),
   ]
-};
+}
