@@ -10,25 +10,25 @@ export type ButtonType = {
 @Injectable({providedIn: 'root'})
 export class ButtonBuilder {
 
-  static add(btn: ButtonType): Button {
+  static saveButton({title, action}: { title?: string, action?: () => void }): Button {
     return new Button(
-      btn?.title,
-      btn?.icon,
+      title,
+      '',
       '#DF4G3',
       '',
       'submit',
-      btn?.action
+      action
     );
   }
 
-  static saveButton(btn: ButtonType): Button {
+  static add({title, action}: { title?: string, action?: () => void }): Button {
     return new Button(
-      btn?.title,
-      btn?.icon,
-      '#DF4G3',
+      title,
+      'fa-solid fa-plus',
+      'orange',
       '',
       'submit',
-      btn?.action
+      action
     );
   }
 
