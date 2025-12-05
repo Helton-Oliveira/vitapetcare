@@ -8,7 +8,7 @@
 
     <!-- DASHBOARD -->
     <li>
-      <a routerLink="/dashboard" class="sidebar-icon">
+      <a routerLink="/app/dashboard" class="sidebar-icon">
         <i class="fa-solid fa-gauge text-2xl"></i>
         <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-sm font-medium"
               translate="sidebar.dashboard">
@@ -16,10 +16,20 @@
       </a>
     </li>
 
-    <!-- COLLABORATORS -->
+    <!-- USER -->
     <li>
-      <a routerLink="/collaborators" class="sidebar-icon">
-        <i class="fa-solid fa-person fa-person-digging text-2xl"></i>
+      <a routerLink="/app/user" class="sidebar-icon">
+        <i class="fa-solid fa-users text-2xl"></i>
+        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
+              translate="sidebar.collaborators">
+        </span>
+      </a>
+    </li>
+
+    <!-- ROLE -->
+    <li>
+      <a routerLink="/app/role" class="sidebar-icon">
+        <i class="fa-solid fa-shield-halved text-2xl"></i>
         <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
               translate="sidebar.collaborators">
         </span>
