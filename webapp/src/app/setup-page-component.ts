@@ -60,7 +60,7 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
                       ></i>
                     }
                     @if (btn.title) {
-                      <span>{{ btn.title }}</span>
+                      <span class="text-2xl font-bold">{{ btn.title }}</span>
                     }
 
                   </button>
