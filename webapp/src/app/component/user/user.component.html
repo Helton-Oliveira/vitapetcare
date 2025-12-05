@@ -1,0 +1,44 @@
+@if (users) {
+  <body class="h-full max-h-full bg-white rounded-lg">
+  <div class="h-full p-4">
+
+    <table class="w-full table-auto border-collapse rounded-t-lg shadow-sm">
+      <thead class="bg-gray-100">
+      <tr class="text-left text-sm text-gray-600">
+        <th class="p-3"></th>
+        <th class="p-3">Profile ID</th>
+        <th class="p-3">Name</th>
+        <th class="p-3">email</th>
+        <th class="p-3 w-24 text-center"></th>
+      </tr>
+      </thead>
+
+      <tbody class="text-sm">
+        @if (!users?.length) {
+          <button>Sem usuarios</button>
+        }
+
+        @if (users?.length) {
+          @for (user of users; track user?.id) {
+            <tr>
+              <td></td>
+              <td class="p-3">{{ user?.id }}</td>
+              <td class="p-3">{{ user?.name }}</td>
+              <td class="p-3">{{ user?.email }}</td>
+
+              <td class="p-3 flex gap-1 justify-center items-center">
+                <button class="hover:cursor-pointer text-blue-500">
+                  <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                </button>
+                <button class="hover:cursor-pointer">
+                  <i class="fa-regular fa-trash-can text-2xl text-gray-500"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+  </body>
+}
