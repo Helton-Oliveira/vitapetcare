@@ -3,6 +3,8 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import AuthService from '../../shared/services/auth/auth.service';
+import {LoginRequest} from '../../shared/models/auth/auth-dto';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,8 @@ import {Router} from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
+  private authService = inject(AuthService);
   private router = inject(Router);
-
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
@@ -24,15 +26,19 @@ export class AuthComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-
   ngOnInit(): void {
-    console.log(this.form)
   }
 
   login(): void {
-    this.router.navigate(["/dashboard"]).then(ok => {
-      console.log("Navigation result:", ok);
-    });
+    const loginRequest: LoginRequest = this.form.value as LoginRequest;
+
+    this.authService.login(loginRequest).then(async (res) => {
+      if (res.accessToken != null && res.refreshToken != null) {
+        localStorage.setItem('accessToken', res.accessToken)
+        localStorage.setItem('refreshToken', res.refreshToken)
+      }
+      await this.router.navigate(['app', 'dashboard'])
+    }).catch(e => console.warn(e.message))
   }
 
   canSubmit(): boolean {
