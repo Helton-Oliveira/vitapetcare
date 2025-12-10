@@ -12,11 +12,13 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/users")
 class UserResource(
   private val createUser: CreateUser,
@@ -25,6 +27,7 @@ class UserResource(
 ) {
 
   @PostMapping
+  @PreAuthorize("hasAuthority('USER_CREATE')")
   fun create(@RequestBody @Valid input: User, uriBuilder: UriComponentsBuilder): ResponseEntity<*> =
     createUser.execute(input)
       .fold(
@@ -44,6 +47,7 @@ class UserResource(
       )
 
   @GetMapping("/{id}")
+  @PreAuthorize("hasAuthority('USER_VIEW')")
   fun getOne(@PathVariable id: Long): ResponseEntity<*> =
     getUser.execute(id)
       .fold(
@@ -61,6 +65,7 @@ class UserResource(
       )
 
   @GetMapping
+  @PreAuthorize("hasAuthority('USER_VIEW')")
   fun getAll(
     @PageableDefault(size = 10, sort = ["createdAt"], direction = Sort.Direction.DESC) pagination: Pageable
   ): ResponseEntity<Page<User>> =

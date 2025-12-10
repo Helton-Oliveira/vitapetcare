@@ -1,11 +1,15 @@
 package com.exampledigisphere.vitapetcare.user.domain
 
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity
-import com.exampledigisphere.vitapetcare.roles.domain.Role
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.exampledigisphere.vitapetcare.config.security.Permissions
+import com.exampledigisphere.vitapetcare.roles.Role
 import com.fasterxml.jackson.annotation.JsonView
-import jakarta.persistence.*
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.Table
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import org.hibernate.Hibernate
 
 @Entity
@@ -23,11 +27,13 @@ class User : BaseEntity() {
   @field:NotBlank
   lateinit var password: String
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "role_id")
-  @field:JsonIgnoreProperties("role")
-  @field:JsonView(Role.Json.Detail::class)
-  val role: Role? = null;
+  @field:NotNull
+  @field:Enumerated(EnumType.STRING)
+  var role: Role = Role.NOT_INFORMED;
+
+  @get:JsonView(Json.List::class)
+  val permissions: Set<String>
+    get() = role.permissions;
 
   fun loadRole() = Hibernate.initialize(role)
 
@@ -37,14 +43,7 @@ class User : BaseEntity() {
     interface All : Detail;
   }
 
-  interface Permissions {
-    companion object {
-      const val USER_CREATE = "USER_CREATE"
-      const val USER_VIEW = "USER_VIEW"
-      const val USER_EDIT = "USER_EDIT"
-      const val USER_DELETE = "USER_DELETE"
-
-      fun all() = setOf(USER_CREATE, USER_VIEW, USER_EDIT, USER_DELETE)
-    }
+  object UserPermissions : Permissions {
+    override var resource = "USER"
   }
 }
