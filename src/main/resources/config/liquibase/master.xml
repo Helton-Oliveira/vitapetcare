@@ -12,36 +12,19 @@
   <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
   <!-- modules entities -->
-  <include file="config/liquibase/migrate/roles/77777777777777_modules_entities.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/permission/77777777777777_modules_entities.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/roles_permissions/77777777777777_modules_entities.xml"
-           relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/user/77777777777777_modules_entities.xml"
            relativeToChangelogFile="false"/>
 
   <!-- modules fks -->
-  <include file="config/liquibase/migrate/roles/88888888888888_modules_fks.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/permission/88888888888888_modules_fks.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/roles_permissions/88888888888888_modules_fks.xml"
-           relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/user/88888888888888_modules_fks.xml"
            relativeToChangelogFile="false"/>
 
   <!-- modules fixes -->
-  <include file="config/liquibase/migrate/roles/99999999999999_modules_fixes.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/permission/99999999999999_modules_fixes.xml"
-           relativeToChangelogFile="false"/>
-  <include file="config/liquibase/migrate/roles_permissions/99999999999999_modules_fixes.xml"
-           relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/user/99999999999999_modules_fixes.xml"
            relativeToChangelogFile="false"/>
 
   <!-- global fixes - must be always the last one -->
   <include file="config/liquibase/migrate/99999999999999_global_fixes.xml"
            relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
