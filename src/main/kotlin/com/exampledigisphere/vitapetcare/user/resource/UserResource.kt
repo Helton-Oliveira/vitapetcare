@@ -67,7 +67,7 @@ class UserResource(
       )
 
   @GetMapping
-  @PreAuthorize("hasAuthority('USER_VIEW')")
+  @PreAuthorize("hasAuthority('USER_VIEW_LIST')")
   fun getAll(
     @PageableDefault(size = 10, sort = ["createdAt"], direction = Sort.Direction.DESC) pagination: Pageable
   ): ResponseEntity<Page<User>> =
