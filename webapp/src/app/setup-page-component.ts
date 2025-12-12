@@ -12,8 +12,8 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
     SidebarComponent
   ],
   template: `
-    <div class="flex h-screen w-full bg-gray-50 pt-20 bg-gradient-to-r from-cyan-50 to-cyan-200">
-
+    <header>HEADER AQUI</header>
+    <div class="flex h-screen w-full bg-pet-background from-cyan-50 to-cyan-200">
       <!-- SIDEBAR -->
       <app-sidebar/>
 
@@ -25,7 +25,7 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
 
           <!-- TÍTULOS -->
           <div>
-            <h1 class="text-5xl font-bold text-blue-300">
+            <h1 class="text-pet-primary font-semibold">
               {{ page()?.title }}
             </h1>
 
@@ -44,7 +44,7 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
               <div class="flex gap-2">
                 @for (btn of page()?.actions; track btn) {
                   <button
-                    class="px-4 py-2 rounded-lg text-white btn-primary h-[2.5rem]"
+                    class="btn-primary"
                     [class.flex]="true"
                     [class.items-center]="true"
                     [class.justify-center]="!btn.title"
@@ -60,7 +60,7 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
                       ></i>
                     }
                     @if (btn.title) {
-                      <span class="text-2xl font-bold">{{ btn.title }}</span>
+                      <span class="text-2xl font-medium" [style.color]="btn.fontColor">{{ btn.title }}</span>
                     }
 
                   </button>
@@ -72,7 +72,7 @@ import {SidebarComponent} from './component/sidebar/sidebar.component';
         </header>
 
         <!-- CONTEÚDO DAS ROTAS -->
-        <main class="px-6 pb-6 overflow-auto">
+        <main class="px-6 pb-6 w-full h-full">
           <router-outlet></router-outlet>
         </main>
 
