@@ -1,6 +1,8 @@
 {
   "sidebar": {
     "dashboard": "Dashboard",
-    "collaborators": "Colaboradores"
+    "collaborators": "Colaboradores",
+    "users": "Usuarios",
+    "permissions": "Permissões"
   }
 }

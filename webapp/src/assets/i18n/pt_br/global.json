@@ -1,0 +1,24 @@
+{
+  "global": {
+    "field": {
+      "id": "ID",
+      "new": "Novo",
+      "status": "Status",
+      "name": "Nome",
+      "age": "Idade",
+      "email": "Email",
+      "password": "Senha",
+      "function": "Função",
+      "required": "Campo {{field}} é obrigatório"
+    },
+    "role": {
+      "ADMIN": "Administrador",
+      "MANAGER": "Gerente",
+      "CLIENT": "Cliente",
+      "RECEPTIONIST": "Recepcionista",
+      "VETERINARIAN": "Veterinario",
+      "GROOMER": "Tosador",
+      "NOT_INFORMED": "Não Informado"
+    }
+  }
+}
