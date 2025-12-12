@@ -31,4 +31,8 @@ export class UserService {
     return firstValueFrom(this._http.get(`${this.BASE_URL}/${id}`))
   }
 
+  disable(id: string): Promise<EntityResponseType> {
+    return firstValueFrom(this._http.delete(`${this.BASE_URL}/${id}`));
+  }
+
 }
