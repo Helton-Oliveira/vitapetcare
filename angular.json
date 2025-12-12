@@ -38,6 +38,7 @@
               }
             ],
             "styles": [
+              "webapp/src/custom-theme.scss",
               "webapp/src/styles.css"
             ]
           },

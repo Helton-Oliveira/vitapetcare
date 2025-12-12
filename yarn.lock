@@ -212,6 +212,14 @@
   optionalDependencies:
     lmdb "3.4.3"
 
+"@angular/cdk@21.0.3":
+  version "21.0.3"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-21.0.3.tgz#004eb7fd0705e456374d0f7d999f68c7a8a8fcb6"
+  integrity sha512-abfckeZfFvovdpxuQHRE4gS1VLNa05Dx0ZSKLGVL9DsQsi4pgn6wWg1y9TkXMlmtpG/EhLmCBxUc6LOHfdeWQA==
+  dependencies:
+    parse5 "^8.0.0"
+    tslib "^2.3.0"
+
 "@angular/cli@^21.0.1":
   version "21.0.1"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-21.0.1.tgz#e462b4c67fc6c7f2ec0c58597b2fd677ea4f2c25"
@@ -276,6 +284,13 @@
   version "21.0.2"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-21.0.2.tgz#576855677b9a9c87b89f2cb38cfa0d1dd97b9d2f"
   integrity sha512-QZHGKmYlyiQMXyAcuWgQ93kTi9OvoD9tzLX+iQt8O3O8sJT1kEKiANmKR6jKihTG1W3Ckmti804kcbpjCeoGyg==
+  dependencies:
+    tslib "^2.3.0"
+
+"@angular/material@21.0.3":
+  version "21.0.3"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-21.0.3.tgz#54fec8162497beb13b6fb0cfdc67c87cb5e38c39"
+  integrity sha512-Sjv88NbW8R5UTBqoVa8q4p55VP7KPEmXFTJiQYCz1oK7JqbLcQnH27rjetQBAWMEb1O/z1jqpMnpnYUuHNp1IA==
   dependencies:
     tslib "^2.3.0"
 
@@ -1246,6 +1261,13 @@
     "@emnapi/core" "^1.5.0"
     "@emnapi/runtime" "^1.5.0"
     "@tybys/wasm-util" "^0.10.1"
+
+"@ng-select/ng-select@^21.1.2":
+  version "21.1.2"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-21.1.2.tgz#9cb60b0af63344c626b4ccd20b0a78bf0c471a94"
+  integrity sha512-llphmTbqVCBLJMSX8YoygjzPsh5ahQHZeUQjBpmY7Aji4AvlLe6XOOvuzQNv1/iU6Zd5Y0PDKKApjgsdkOkVbQ==
+  dependencies:
+    tslib "^2.8.1"
 
 "@ngx-translate/core@^17.0.0":
   version "17.0.0"
