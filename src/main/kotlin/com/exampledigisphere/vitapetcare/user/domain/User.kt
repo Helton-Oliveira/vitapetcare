@@ -3,6 +3,7 @@ package com.exampledigisphere.vitapetcare.user.domain
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity
 import com.exampledigisphere.vitapetcare.config.security.Permissions
 import com.exampledigisphere.vitapetcare.roles.Role
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonView
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -25,6 +26,7 @@ class User : BaseEntity() {
   lateinit var email: String
 
   @field:NotBlank
+  @JsonIgnore
   lateinit var password: String
 
   @field:NotNull
