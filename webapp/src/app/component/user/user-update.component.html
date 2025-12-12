@@ -1,0 +1,59 @@
+<form [formGroup]="form" (ngSubmit)="onSave()" class="p-10 h-full bg-white rounded-lg">
+  <div class="flex flex-wrap gap-4 w-full">
+    <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.name"></label>
+      <input class="input-text" type="text" formControlName="name" required/>
+    </div>
+
+    @if (form.get('name')?.touched && form.get('name')?.invalid) {
+      <div class="flex justify-center items-center gap-1 -mt-3">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.name' | translate} }}</span>
+      </div>
+    }
+
+    <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.email"></label>
+      <input class="input-text" type="email" formControlName="email" required/>
+    </div>
+
+    @if (form.get('email')?.touched && form.get('email')?.invalid) {
+      <div class="flex items-center gap-1 -mt-3 w-full">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.email' | translate} }}</span>
+      </div>
+    }
+
+    <div class="flex shadow-xs rounded-md bg-white w-[49%] border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.password"></label>
+      <input class="input-text" type="password" formControlName="password" required/>
+    </div>
+
+    <div class="flex shadow-xs rounded-md bg-white w-[49%] border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.function"></label>
+      <select id="role" class="select input-text" formControlName="role">
+        @for (role of roles; track role) {
+          <option class="select-option" translate="global.role.{{ role }}" value="{{role}}"></option>
+        }
+      </select>
+    </div>
+
+    @if (form.get('password')?.touched && form.get('password')?.invalid) {
+      <div class="flex items-center gap-1 -mt-3 w-full">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.password' | translate} }}</span>
+      </div>
+    }
+
+    @if (form.get('role')?.touched && form.get('role')?.invalid) {
+      <div class="flex justify-center items-center gap-1 -mt-3 ml-[50%]">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.function' | translate} }}</span>
+      </div>
+    }
+  </div>
+</form>
