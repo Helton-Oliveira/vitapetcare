@@ -1,10 +1,44 @@
 {
+  "button": {
+    "new": "Novo",
+    "save": "Salvar",
+    "cancel": "Cancelar"
+  },
+  "global": {
+    "field": {
+      "id": "ID",
+      "new": "Novo",
+      "status": "Status",
+      "name": "Nome",
+      "age": "Idade",
+      "email": "Email",
+      "password": "Senha",
+      "function": "Função",
+      "required": "Campo {{field}} é obrigatório"
+    },
+    "role": {
+      "ADMIN": "Administrador",
+      "MANAGER": "Gerente",
+      "CLIENT": "Cliente",
+      "RECEPTIONIST": "Recepcionista",
+      "VETERINARIAN": "Veterinario",
+      "GROOMER": "Tosador",
+      "NOT_INFORMED": "Não Informado"
+    }
+  },
   "login": {
     "email": "Email",
     "password": "Senha"
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "collaborators": "Colaboradores"
+    "collaborators": "Colaboradores",
+    "users": "Usuarios",
+    "permissions": "Permissões"
+  },
+  "user": {
+    "title": "Usuários",
+    "singleTitle": "Usuário",
+    "subTitle": "Lista de Usuários"
   }
 }
