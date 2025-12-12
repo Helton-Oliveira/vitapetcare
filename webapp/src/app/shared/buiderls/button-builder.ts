@@ -1,21 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Button} from '../models/config/button';
 
-export type ButtonType = {
-  title?: string,
-  icon?: string,
-  action?: () => void
-}
-
 @Injectable({providedIn: 'root'})
 export class ButtonBuilder {
 
   static saveButton({title, action}: { title?: string, action?: () => void }): Button {
     return new Button(
       title,
-      '',
-      '#DF4G3',
-      '',
+      'fa-solid fa-floppy-disk',
+      '#3182ce',
+      'text-white',
       'submit',
       action
     );
@@ -25,7 +19,7 @@ export class ButtonBuilder {
     return new Button(
       title,
       'fa-solid fa-plus',
-      'orange',
+      '#4A9327',
       '',
       'submit',
       action
@@ -60,6 +54,17 @@ export class ButtonBuilder {
       'fa-solid fa-sort',
       'white',
       'gray',
+      'submit',
+      action
+    );
+  }
+
+  static cancel({title, action}: { title?: string, action?: () => void }): Button {
+    return new Button(
+      title,
+      'fa-solid fa-ban',
+      '#727D92',
+      '#FFF',
       'submit',
       action
     );
