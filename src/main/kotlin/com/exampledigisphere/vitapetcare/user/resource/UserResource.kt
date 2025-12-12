@@ -2,6 +2,7 @@ package com.exampledigisphere.vitapetcare.user.resource
 
 import com.exampledigisphere.vitapetcare.user.domain.User
 import com.exampledigisphere.vitapetcare.user.useCases.CreateUser
+import com.exampledigisphere.vitapetcare.user.useCases.Disable
 import com.exampledigisphere.vitapetcare.user.useCases.GetAll
 import com.exampledigisphere.vitapetcare.user.useCases.GetUser
 import jakarta.validation.ConstraintViolationException
@@ -24,6 +25,7 @@ class UserResource(
   private val createUser: CreateUser,
   private val getUser: GetUser,
   private val getAll: GetAll,
+  private val disable: Disable
 ) {
 
   @PostMapping
@@ -81,6 +83,25 @@ class UserResource(
           ResponseEntity.status(status).body(null)
         },
         onSuccess = { usr -> ResponseEntity.status(HttpStatus.OK).body(usr) }
+      )
+
+
+  @DeleteMapping("/{id}")
+  @PreAuthorize("hasAuthority('USER_DELETE')")
+  fun disable(@PathVariable id: Long): ResponseEntity<*> =
+    disable.execute(id)
+      .fold(
+        onFailure = { err ->
+          err.printStackTrace()
+          val status = when (err) {
+            is HttpClientErrorException.Unauthorized -> HttpStatus.UNAUTHORIZED
+            is IllegalArgumentException -> HttpStatus.CONFLICT
+            else -> HttpStatus.INTERNAL_SERVER_ERROR
+          }
+
+          ResponseEntity.status(status).body(null)
+        },
+        onSuccess = { ResponseEntity.status(HttpStatus.OK).body(it) }
       )
 
 }
