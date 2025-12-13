@@ -1,4 +1,4 @@
-<body class="flex h-screen items-center justify-center bg-gradient-to-r from-cyan-50 to-cyan-200  ">
+<body class="flex h-screen items-center justify-center bg-linear-to-r from-cyan-50 to-cyan-200  ">
 <section class="flex bg-blue-200 items-stretch justify-center rounded-md p-2 w-[80%] h-[65%]">
   <form [formGroup]="form" (ngSubmit)="login()"
         class="flex flex-col justify-center items-start p-20 rounded-md w-[75%] gap-5">
@@ -6,15 +6,31 @@
       <label class="text-[2.1rem] text-black font-bold ">Bem vindo de volta</label>
     </div>
 
-    <div class="flex shadow-xs rounded-md bg-white w-[100%]">
+    <div class="flex shadow-xs rounded-md bg-white w-full">
       <label class="label-input-text" translate="login.email"></label>
       <input class="input-text" type="email" formControlName="email" required/>
     </div>
 
-    <div class="flex shadow-xs rounded-base bg-white rounded-md w-[100%]">
+    @if (form.get('email')?.touched && form.get('email')?.invalid) {
+      <div class="flex justify-center items-center gap-1 -mt-3">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.email' | translate} }}</span>
+      </div>
+    }
+
+    <div class="flex shadow-xs rounded-base bg-white rounded-md w-full">
       <span class="label-input-text" translate="login.password"></span>
       <input class="input-text" type="password" formControlName="password" required/>
     </div>
+
+    @if (form.get('password')?.touched && form.get('password')?.invalid) {
+      <div class="flex justify-center items-center gap-1 -mt-3">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.password' | translate} }}</span>
+      </div>
+    }
 
     <div class="flex items-center justify-between w-full">
       <div class="flex gap-2">
@@ -26,8 +42,8 @@
     </div>
 
     <button
-      class="btn-primary  w-[100%] mt-10 "
-      [style]="!canSubmit() ? 'disabled' : '' "
+      class="btn-primary bg-green-300  w-full -mt-2 "
+      [ngClass]="!canSubmit() ? 'opacity-50 hover:cursor-auto' : '' "
       [disabled]="!canSubmit()"
       type="submit"
     >Login
