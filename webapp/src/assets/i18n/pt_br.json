@@ -14,7 +14,9 @@
       "email": "Email",
       "password": "Senha",
       "function": "Função",
-      "required": "Campo {{field}} é obrigatório"
+      "required": "Campo {{field}} é obrigatório",
+      "welcome": "Bem vindo de volta, {{ name }}!",
+      "profession": "{{ profession }}"
     },
     "role": {
       "ADMIN": "Administrador",
