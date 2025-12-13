@@ -15,9 +15,6 @@
       </thead>
 
       <tbody class="text-sm">
-        @if (!users.length) {
-          <button>Sem usuarios</button>
-        }
 
         @if (users.length) {
           @for (user of users; track user.id) {
