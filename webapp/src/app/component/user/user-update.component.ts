@@ -25,7 +25,7 @@ export class UserUpdateComponent implements OnInit {
   private userService = inject(UserService)
   private translateService = inject(TranslateService);
   private fb = inject(FormBuilder);
-  private route = inject(ActivatedRoute)
+  private route = inject(ActivatedRoute);
 
   user: User = new User();
   roles: Role[] = Object.values(Role);
@@ -47,6 +47,7 @@ export class UserUpdateComponent implements OnInit {
           this.updateForm();
         })
     }
+    this.form.valueChanges.subscribe(() => this.setup());
   }
 
   setup() {
@@ -57,6 +58,7 @@ export class UserUpdateComponent implements OnInit {
       actions: [
         ButtonBuilder.saveButton({
           title: this.translateService.instant(_('button.save')),
+          isActive: this.canSubmit(),
           action: () => this.onSave()
         }),
         ButtonBuilder.cancel({
@@ -103,5 +105,4 @@ export class UserUpdateComponent implements OnInit {
       && this.form.dirty
   }
 
-  protected readonly name = name;
 }
