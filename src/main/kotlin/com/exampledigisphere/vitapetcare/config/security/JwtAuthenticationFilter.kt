@@ -52,7 +52,6 @@ class JwtAuthenticationFilter(
   }
 
   override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-    return (request.servletPath == "/api/users" && request.method == "POST") ||
-      (request.servletPath == "/api/auth/login" && request.method == "POST")
+    return (request.servletPath == "/api/auth/login" && request.method == "POST")
   }
 }
