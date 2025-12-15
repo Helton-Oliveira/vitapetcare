@@ -1,18 +1,13 @@
-import {HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
-import {catchError, from, switchMap, throwError} from 'rxjs';
 import AuthService from '../shared/services/auth/auth.service';
+import {HttpInterceptorFn} from '@angular/common/http';
+import {catchError, from, switchMap, throwError} from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
 
-  let accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
-    try {
-      accessToken = JSON.parse(accessToken);
-    } catch {
-    }
-  }
+  let accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
+  if (!accessToken) accessToken = null;
 
   const clonedReq = accessToken
     ? req.clone({
@@ -22,6 +17,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedReq).pipe(
     catchError((error) => {
+      console.log(error.status, error.message)
       if (error.status !== 401) return throwError(() => error);
 
       return from(authService.refreshToken()).pipe(
@@ -30,18 +26,23 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
             return throwError(() => error);
           }
 
+          sessionStorage.setItem('accessToken', JSON.stringify(res.accessToken));
           localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
+          
+          const accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
 
           const retryReq = req.clone({
             setHeaders: {
-              Authorization: `Bearer ${res.accessToken}`,
+              Authorization: `Bearer ${accessToken}`,
             },
           });
 
           return next(retryReq);
         }),
-        catchError((_) => {
+        catchError((err) => {
+          console.warn(err.message)
           localStorage.clear();
+          sessionStorage.clear();
           window.location.href = '/login';
           return throwError(() => error);
         })

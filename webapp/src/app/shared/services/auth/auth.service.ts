@@ -20,7 +20,7 @@ export default class AuthService {
   }
 
   refreshToken(): Promise<TokenResponse> {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = localStorage.getItem('refreshToken') || sessionStorage.getItem('refreshToken');
 
     return firstValueFrom(
       this._http.post<TokenResponse>(`${this.BASE_URL}/refresh`, {refreshToken})

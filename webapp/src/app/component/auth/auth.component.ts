@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import AuthService from '../../shared/services/auth/auth.service';
@@ -13,6 +13,7 @@ import {LoginRequest} from '../../shared/models/auth/auth-dto';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule,
+    NgOptimizedImage,
   ]
 })
 export class AuthComponent implements OnInit {
@@ -24,25 +25,35 @@ export class AuthComponent implements OnInit {
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    rememberMe: [false],
   });
 
   ngOnInit(): void {
   }
 
-  login(): void {
-    const loginRequest: LoginRequest = this.form.value as LoginRequest;
+  async login(): Promise<void> {
+    try {
+      const loginRequest: LoginRequest = this.form.value as LoginRequest;
+      const response = await this.authService.login(loginRequest);
 
-    this.authService.login(loginRequest).then(async (res) => {
-      if (res.accessToken != null && res.refreshToken != null) {
-        localStorage.setItem('accessToken', res.accessToken)
-        localStorage.setItem('refreshToken', res.refreshToken)
+      if (response.accessToken && response.refreshToken) {
+        const storage = this.form.value.rememberMe
+          ? localStorage
+          : sessionStorage;
+
+        storage.setItem('accessToken', response.accessToken);
+        storage.setItem('refreshToken', response.refreshToken);
+
+        await this.router.navigate(['app', 'dashboard']);
       }
-      await this.router.navigate(['app', 'dashboard'])
-    }).catch(e => console.warn(e.message))
+
+    } catch (error) {
+      console.error('Erro ao autenticar', error);
+    }
   }
 
   canSubmit(): boolean {
-    return this.form.valid && this.form.dirty;
+    return this.form.valid;
   }
 
 }

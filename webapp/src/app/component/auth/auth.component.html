@@ -1,9 +1,9 @@
-<body class="flex h-screen items-center justify-center bg-linear-to-r from-cyan-50 to-cyan-200  ">
-<section class="flex bg-blue-200 items-stretch justify-center rounded-md p-2 w-[80%] h-[65%]">
+<body class="flex h-screen items-center justify-center bg-pet-background from-cyan-50 to-cyan-200 ">
+<section class="flex bg-green-200 items-stretch justify-center rounded-md p-2 w-[80%] h-[65%]">
   <form [formGroup]="form" (ngSubmit)="login()"
         class="flex flex-col justify-center items-start p-20 rounded-md w-[75%] gap-5">
-    <div class="mb-10 w-full">
-      <label class="text-[2.1rem] text-black font-bold ">Bem vindo de volta</label>
+    <div class="w-full flex items-center justify-center">
+      <img ngSrc="assets/logo.png" height="1024" width="1024" alt="Logo do app" class="h-50 w-50" priority/>
     </div>
 
     <div class="flex shadow-xs rounded-md bg-white w-full">
@@ -34,24 +34,24 @@
 
     <div class="flex items-center justify-between w-full">
       <div class="flex gap-2">
-        <input class="accent-blue-500" type="checkbox"/>
-        <label class="text-[90%]">Lembrar de mim</label>
+        <input class="accent-blue-500" type="checkbox" formControlName="rememberMe"/>
+        <span class="text-[90%]" translate="global.field.rememberMe"></span>
       </div>
 
-      <a class="underline text-[90%] cursor-pointer text-blue-800">Esqueceu a senha?</a>
+      <a class="underline text-[90%] cursor-pointer text-blue-800" translate="global.field.forgotPassword"></a>
     </div>
 
     <button
-      class="btn-primary bg-green-300  w-full -mt-2 "
+      class="btn-primary bg-green-500  w-full -mt-2 "
       [ngClass]="!canSubmit() ? 'opacity-50 hover:cursor-auto' : '' "
       [disabled]="!canSubmit()"
       type="submit"
     >Login
     </button>
 
-    <div class="flex gap-2 ml-[15%] mt-[15%]">
-      <label>Nao possui conta?</label>
-      <a class="underline cursor-pointer text-blue-800">Criar conta</a>
+    <div class="flex gap-2 ml-[10%] mt-[10%]">
+      <span translate="global.field.dontHaveAnAccount"></span>
+      <a class="underline cursor-pointer text-blue-800" translate="global.field.createAccount"></a>
     </div>
   </form>
 

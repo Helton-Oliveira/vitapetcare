@@ -9,15 +9,15 @@ export class RedirectGuard implements CanActivate {
   ) {
   }
 
-  canActivate(): boolean {
-    const isLoggedIn = localStorage.getItem('accessToken');
+  async canActivate(): Promise<boolean> {
+    const isLoggedIn = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
 
     if (isLoggedIn) {
-      this.router.navigate(['app', 'dashboard']);
+      await this.router.navigate(['app', 'dashboard']);
       return false;
     }
 
-    this.router.navigate(['/login']);
+    await this.router.navigate(['/login']);
     return false;
   }
 }
