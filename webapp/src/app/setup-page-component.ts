@@ -1,12 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {PageService} from './shared/services/page/page-service';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {User} from './shared/models/user/user.model';
 import AuthService from './shared/services/auth/auth.service';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslateDirective, TranslatePipe} from '@ngx-translate/core';
 import {RolePipe} from './shared/pipes/role-pipe';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-setup-page',
@@ -16,13 +17,16 @@ import {RolePipe} from './shared/pipes/role-pipe';
     SidebarComponent,
     NgOptimizedImage,
     TranslatePipe,
-    RolePipe
+    RolePipe,
+    FormsModule,
+    TranslateDirective
   ],
   template: `
     <header class="bg-pet-primary w-full h-20 flex items-center px-6 shadow-lg">
 
-      <div class="flex items-center w-full">
-        <img ngSrc="../assets/logo.png" class="w-[10%]" alt="Logo vita pet care" height="1024" width="1024"/>
+      <div class="flex items-center w-full hover:cursor-pointer">
+        <img ngSrc="../assets/logo.png" class="w-[10%] hover:cursor-pointer" alt="Logo vita pet care" height="1024"
+             width="1024"/>
       </div>
 
       <div class="flex items-center">
@@ -33,7 +37,27 @@ import {RolePipe} from './shared/pipes/role-pipe';
           <span [ngClass]="user.role | rolePipe">{{ "global.role." + user.role | translate }}</span>
         </div>
 
-        <div class="h-13 w-16 bg-white/30 rounded-full border-2 border-white"></div>
+        <div class="relative">
+          <div
+            class="flex items-center justify-center h-16 w-16 bg-white/30 rounded-full border-2 border-white cursor-pointer"
+            (click)="toggleMenu()">
+            <img ngSrc="../assets/logo.png" alt="User avatar" class="h-full w-full rounded-full object-cover"
+                 height="1024"
+                 width="1024"/>
+          </div>
+
+          @if (isOpen) {
+            <div class="absolute top-full mt-3 right-0 w-32 bg-white rounded-lg shadow-lg border
+               border-gray-200 overflow-hidden animate-dropdown">
+              <button
+                class="flex items-center justify-center gap-4 w-full px-4 py-3 text-lg text-red-600 hover:bg-gray-100 transition hover:cursor-pointer"
+                (click)="logout()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span translate="global.field.logout"></span>
+              </button>
+            </div>
+          }
+        </div>
       </div>
     </header>
 
@@ -110,11 +134,22 @@ import {RolePipe} from './shared/pipes/role-pipe';
 export class SetupPageComponent implements OnInit {
   private pageService = inject(PageService)
   private authService = inject(AuthService)
+  private router = inject(Router)
   page = this.pageService.page;
   user = new User();
+  isOpen = false;
 
   ngOnInit(): void {
     this.authService.getCurrentAccount()
       .then(res => this.user = res);
+  }
+
+  async logout(): Promise<void> {
+    localStorage.clear();
+    await this.router.navigate(['/login'])
+  }
+
+  toggleMenu(): void {
+    this.isOpen = !this.isOpen;
   }
 }
