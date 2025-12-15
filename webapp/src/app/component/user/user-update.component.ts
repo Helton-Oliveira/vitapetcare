@@ -89,7 +89,8 @@ export class UserUpdateComponent implements OnInit {
   }
 
   async onSave() {
-    switch (!!this.user?.id) {
+    const canId = this.user?.id != null;
+    switch (canId) {
       case false:
         this.updateUser();
         await this.userService.save(this.user);
@@ -98,6 +99,7 @@ export class UserUpdateComponent implements OnInit {
         await this.userService.update(this.user);
         break;
     }
+    await this.userActionsService.goToList();
   }
 
   canSubmit(): boolean {
