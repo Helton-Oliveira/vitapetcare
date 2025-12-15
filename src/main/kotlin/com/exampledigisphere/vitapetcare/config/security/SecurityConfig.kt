@@ -34,7 +34,6 @@ class SecurityConfig(private val customAuthenticationEntryPoint: CustomAuthentic
       .authorizeHttpRequests { auth ->
         auth
           .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-          .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
           .anyRequest().authenticated()
       }
       .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
