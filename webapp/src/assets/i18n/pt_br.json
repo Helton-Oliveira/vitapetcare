@@ -16,7 +16,12 @@
       "function": "Função",
       "required": "Campo {{field}} é obrigatório",
       "welcome": "Bem vindo de volta, {{ name }}!",
-      "profession": "{{ profession }}"
+      "profession": "{{ profession }}",
+      "logout": "Sair",
+      "rememberMe": "Lembrar de mim",
+      "forgotPassword": "Esqueceu a senha?",
+      "createAccount": "Criar conta",
+      "dontHaveAnAccount": "Não possio uma conta?"
     },
     "role": {
       "ADMIN": "Administrador",
