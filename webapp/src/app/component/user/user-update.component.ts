@@ -9,6 +9,10 @@ import {UserService} from '../../shared/services/user/user-service';
 import {Role} from '../../shared/models/user/role';
 import {UserActionsService} from './UserActionsService';
 import {ActivatedRoute} from '@angular/router';
+import {FileUploadService} from '../../shared/services/img/FileUploadService';
+import {FileApp, IFileApp} from '../../shared/models/file/file-app-model';
+import {FileType} from '../../shared/models/file/file-type';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +21,7 @@ import {ActivatedRoute} from '@angular/router';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule,
+    NgxDropzoneModule,
   ]
 })
 export class UserUpdateComponent implements OnInit {
@@ -26,9 +31,12 @@ export class UserUpdateComponent implements OnInit {
   private translateService = inject(TranslateService);
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
+  private fileUploadService = inject(FileUploadService);
 
   user: User = new User();
   roles: Role[] = Object.values(Role);
+  fileApp: IFileApp = new FileApp();
+  files: File[] = [];
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -69,12 +77,36 @@ export class UserUpdateComponent implements OnInit {
     });
   }
 
+  async addImage(event: any): Promise<void> {
+    if (event.addedFiles.length > 0) {
+      this.files = [event.addedFiles[0]];
+
+      try {
+        const fileToUpload = this.files[0];
+        const urlFile = await this.fileUploadService.uploadImage(fileToUpload);
+
+        this.fileApp = {
+          name: fileToUpload.name,
+          path: urlFile.url,
+          type: FileType.IMAGE
+        } as FileApp;
+
+        console.log('Sucesso!', urlFile);
+      } catch (error) {
+        this.files = [];
+        console.error('Erro na requisição:', error);
+      }
+    }
+  }
+
   private updateUser() {
     this.user = {
+      id: this.user.id || null,
       name: this.form.value.name,
       email: this.form.value.email,
       password: this.form.value.password,
       role: this.form.value.role,
+      files: [this.fileApp],
       _edited: true,
       active: true
     } as User;
@@ -96,6 +128,7 @@ export class UserUpdateComponent implements OnInit {
         await this.userService.save(this.user);
         break;
       case true:
+        this.updateUser();
         await this.userService.update(this.user);
         break;
     }

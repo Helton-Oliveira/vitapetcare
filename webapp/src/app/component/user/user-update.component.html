@@ -55,5 +55,23 @@
         {{ "global.field.required" | translate: {field: 'global.field.function' | translate} }}</span>
       </div>
     }
+
+    <ngx-dropzone (change)="addImage($event)" [multiple]="false" accept="image/*" class="w-full border-solid ">
+      <ngx-dropzone-label>
+        <div>
+          <h2>Arraste sua imagem aqui</h2>
+          <p>ou clique para selecionar</p>
+        </div>
+      </ngx-dropzone-label>
+
+      @for (f of files; track f) {
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          [file]="f"
+          [removable]="true">
+          <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      }
+    </ngx-dropzone>
   </div>
 </form>
