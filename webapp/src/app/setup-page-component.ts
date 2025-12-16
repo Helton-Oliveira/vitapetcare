@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {PageService} from './shared/services/page/page-service';
@@ -34,14 +34,14 @@ import {FormsModule} from '@angular/forms';
             <span class="text-sm text-white hidden md:inline">
                 {{ 'global.field.welcome' | translate: {name: user.name} }}
             </span>
-          <span [ngClass]="user.role | rolePipe">{{ "global.role." + user.role | translate }}</span>
+          <span [ngClass]="user().role | rolePipe">{{ "global.role." + user().role | translate }}</span>
         </div>
 
         <div class="relative">
           <div
             class="flex items-center justify-center h-16 w-16 bg-white/30 rounded-full border-2 border-white cursor-pointer"
             (click)="toggleMenu()">
-            @if (user?.files?.[0]; as avatar) {
+            @if (user().files?.[0]; as avatar) {
               <img [ngSrc]="avatar.path!"
                    alt="User avatar"
                    class="h-full w-full rounded-full object-cover"
@@ -73,7 +73,7 @@ import {FormsModule} from '@angular/forms';
 
     <div class="flex h-screen w-full bg-pet-background from-cyan-50 to-cyan-200">
       <!-- SIDEBAR -->
-      <app-sidebar/>
+      <app-sidebar [currentAccount]="user()"/>
 
       <!-- ÁREA PRINCIPAL -->
       <div class="flex-1 flex flex-col ">
@@ -146,12 +146,12 @@ export class SetupPageComponent implements OnInit {
   private authService = inject(AuthService)
   private router = inject(Router)
   page = this.pageService.page;
-  user = new User();
   isOpen = false;
+  user = signal<User>(new User());
 
   ngOnInit(): void {
     this.authService.getCurrentAccount()
-      .then(res => this.user = res);
+      .then(res => this.user.set(res)); // Atualiza o sinal
   }
 
   async logout(): Promise<void> {

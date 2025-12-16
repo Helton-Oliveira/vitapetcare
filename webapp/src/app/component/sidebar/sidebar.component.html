@@ -7,24 +7,28 @@
   <ul class="flex flex-col gap-6 w-full px-1">
 
     <!-- DASHBOARD -->
-    <li>
-      <a routerLink="/app/dashboard" class="sidebar-icon">
-        <i class="fa-solid fa-gauge text-2xl"></i>
-        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-sm font-medium"
-              translate="sidebar.dashboard">
+    @if (isAdmin()) {
+      <li>
+        <a routerLink="/app/dashboard" class="sidebar-icon">
+          <i class="fa-solid fa-gauge text-2xl"></i>
+          <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-sm font-medium"
+                translate="sidebar.dashboard">
           </span>
-      </a>
-    </li>
+        </a>
+      </li>
+    }
 
     <!-- USER -->
-    <li>
-      <a routerLink="/app/user" class="sidebar-icon">
-        <i class="fa-solid fa-users text-2xl"></i>
-        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
-              translate="sidebar.users">
+    @if (hasPermission("USER_VIEW_LIST")) {
+      <li>
+        <a routerLink="/app/user" class="sidebar-icon">
+          <i class="fa-solid fa-users text-2xl"></i>
+          <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
+                translate="sidebar.users">
         </span>
-      </a>
-    </li>
+        </a>
+      </li>
+    }
 
     <!-- ROLE
     <li>

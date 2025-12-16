@@ -1,6 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
-import {Router, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
+import {User} from '../../shared/models/user/user.model';
+import {Role} from '../../shared/models/user/role';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +13,24 @@ import {Router, RouterLink} from '@angular/router';
   ]
 })
 export class SidebarComponent {
-  private router = inject(Router);
+  private _currentAccount: User | undefined;
 
+  @Input()
+  set currentAccount(value: User | undefined) {
+    this._currentAccount = value;
+  }
+
+  get currentAccount(): User | undefined {
+    return this._currentAccount;
+  }
+
+  hasPermission(permission: string): boolean {
+    if (!this.currentAccount?.permissions) return false;
+    return this.currentAccount.permissions.includes(permission);
+  }
+
+  isAdmin(): boolean {
+    return this.currentAccount?.role === Role.ADMIN;
+  }
 
 }
