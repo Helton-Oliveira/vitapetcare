@@ -41,9 +41,19 @@ import {FormsModule} from '@angular/forms';
           <div
             class="flex items-center justify-center h-16 w-16 bg-white/30 rounded-full border-2 border-white cursor-pointer"
             (click)="toggleMenu()">
-            <img ngSrc="../assets/logo.png" alt="User avatar" class="h-full w-full rounded-full object-cover"
-                 height="1024"
-                 width="1024"/>
+            @if (user?.files?.[0]; as avatar) {
+              <img [ngSrc]="avatar.path!"
+                   alt="User avatar"
+                   class="h-full w-full rounded-full object-cover"
+                   height="1024"
+                   width="1024"
+                   priority/>
+            } @else {
+              <img ngSrc="../assets/logo.png"
+                   class="h-full w-full rounded-full object-cover"
+                   height="1024"
+                   width="1024" alt="Logo"/>
+            }
           </div>
 
           @if (isOpen) {
