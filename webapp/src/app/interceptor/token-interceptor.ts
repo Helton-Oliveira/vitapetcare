@@ -4,10 +4,17 @@ import {HttpInterceptorFn} from '@angular/common/http';
 import {catchError, from, switchMap, throwError} from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log(`Interceptando: ${req.method} ${req.url}`);
+
+  if (req.url.includes('cloudinary.com')) {
+    console.log('Ignorando Cloudinary...');
+    return next(req);
+  }
+
   const authService = inject(AuthService);
 
-  let accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken');
-  if (!accessToken) accessToken = null;
+  let accessToken = localStorage.getItem('accessToken') ||
+    sessionStorage.getItem('accessToken');
 
   const clonedReq = accessToken
     ? req.clone({
@@ -28,7 +35,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
           sessionStorage.setItem('accessToken', JSON.stringify(res.accessToken));
           localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
-          
+
           const accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
 
           const retryReq = req.clone({
