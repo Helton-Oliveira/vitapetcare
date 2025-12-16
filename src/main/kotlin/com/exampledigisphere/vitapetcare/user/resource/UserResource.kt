@@ -48,6 +48,22 @@ class UserResource(
         }
       )
 
+  @PutMapping
+  @PreAuthorize("hasAuthority('USER_EDIT')")
+  fun update(@RequestBody @Valid input: User): ResponseEntity<*> =
+    createUser.execute(input)
+      .fold(
+        onFailure = { error ->
+          error.printStackTrace()
+          ResponseEntity.status(HttpStatus.CONFLICT).body(error.message)
+        },
+        onSuccess = { usr ->
+          ResponseEntity
+            .status(HttpStatus.OK)
+            .body(usr.also { it.loadRole() })
+        }
+      )
+
   @GetMapping("/{id}")
   @PreAuthorize("hasAuthority('USER_VIEW')")
   fun getOne(@PathVariable id: Long): ResponseEntity<*> =
