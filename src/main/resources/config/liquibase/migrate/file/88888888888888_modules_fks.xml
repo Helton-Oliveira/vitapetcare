@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+
+  <!-- modules FKs-->
+  <changeSet id="79d9f2e0-e9ca-42b6-99f2-e0e9ca62b60c" author="heltonOliveira">
+    <addForeignKeyConstraint baseTableName="fil_files"
+                             baseColumnNames="user_id"
+                             constraintName="fk_fil_files__user_id"
+                             referencedTableName="usr_users"
+                             referencedColumnNames="id"/>
+  </changeSet>
+
+</databaseChangeLog>

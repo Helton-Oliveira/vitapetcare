@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="0156ca0a-fa8d-4701-96ca-0afa8d6701c0" author="heltonOliveira">
+    <createTable tableName="fil_files">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="true" nullable="false"/>
+      </column>
+
+      <column name="uuid" type="text">
+        <constraints unique="true" nullable="false"/>
+      </column>
+
+      <column name="active" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_at" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="last_modified_at" type="timestamp"/>
+
+      <column name="last_modified_by" type="text"/>
+
+      <column name="deleted_at" type="timestamp"/>
+
+      <column name="created_by" type="text"/>
+
+      <column name="name" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="path" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="type" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="user_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+
+    <createIndex tableName="fil_files" indexName="idx_fil_files__id">
+      <column name="id" type="bigint"/>
+    </createIndex>
+
+    <createIndex tableName="fil_files" indexName="idx_fil_files__active">
+      <column name="active" type="boolean"/>
+    </createIndex>
+
+    <createIndex tableName="fil_files" indexName="idx_fil_files__type">
+      <column name="type" type="text"/>
+    </createIndex>
+
+    <createIndex tableName="fil_files" indexName="idx_usr_user_id">
+      <column name="user_id" type="bigint"/>
+    </createIndex>
+
+  </changeSet>
+
+</databaseChangeLog>
