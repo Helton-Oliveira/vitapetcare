@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+
+  <!-- modules FKs-->
+  <changeSet id="111f0c87-4635-4356-9f0c-874635c356d8" author="heltonOliveira">
+    <addForeignKeyConstraint baseTableName="wrk_times_periods"
+                             baseColumnNames="work_day_id"
+                             constraintName="fk_wrk_times_periods__work_day_id"
+                             referencedTableName="wrk_works_days"
+                             referencedColumnNames="id"/>
+  </changeSet>
+
+</databaseChangeLog>
