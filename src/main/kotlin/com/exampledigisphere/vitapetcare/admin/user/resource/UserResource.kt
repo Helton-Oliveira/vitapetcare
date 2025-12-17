@@ -1,10 +1,10 @@
-package com.exampledigisphere.vitapetcare.user.resource
+package com.exampledigisphere.vitapetcare.admin.user.resource
 
-import com.exampledigisphere.vitapetcare.user.domain.User
-import com.exampledigisphere.vitapetcare.user.useCases.CreateUser
-import com.exampledigisphere.vitapetcare.user.useCases.Disable
-import com.exampledigisphere.vitapetcare.user.useCases.GetAll
-import com.exampledigisphere.vitapetcare.user.useCases.GetUser
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.user.useCases.CreateUser
+import com.exampledigisphere.vitapetcare.admin.user.useCases.Disable
+import com.exampledigisphere.vitapetcare.admin.user.useCases.GetAll
+import com.exampledigisphere.vitapetcare.admin.user.useCases.GetUser
 import jakarta.validation.ConstraintViolationException
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page

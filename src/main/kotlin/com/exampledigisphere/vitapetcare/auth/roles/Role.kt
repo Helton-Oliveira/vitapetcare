@@ -1,8 +1,8 @@
-package com.exampledigisphere.vitapetcare.roles
+package com.exampledigisphere.vitapetcare.auth.roles
 
+import com.exampledigisphere.vitapetcare.admin.file.domain.File
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
 import com.exampledigisphere.vitapetcare.config.security.Operation
-import com.exampledigisphere.vitapetcare.file.domain.File
-import com.exampledigisphere.vitapetcare.user.domain.User
 
 enum class Role(val permissions: Set<String>) {
   ADMIN(

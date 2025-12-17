@@ -1,6 +1,6 @@
-package com.exampledigisphere.vitapetcare.user.repository
+package com.exampledigisphere.vitapetcare.admin.user.repository
 
-import com.exampledigisphere.vitapetcare.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

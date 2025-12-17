@@ -1,8 +1,8 @@
-package com.exampledigisphere.vitapetcare.file.domain
+package com.exampledigisphere.vitapetcare.admin.file.domain
 
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity
 import com.exampledigisphere.vitapetcare.config.security.Permissions
-import com.exampledigisphere.vitapetcare.user.domain.User
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonView
 import jakarta.persistence.*

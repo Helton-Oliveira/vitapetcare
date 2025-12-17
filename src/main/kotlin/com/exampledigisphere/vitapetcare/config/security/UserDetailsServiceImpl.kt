@@ -1,6 +1,6 @@
 package com.exampledigisphere.vitapetcare.config.security
 
-import com.exampledigisphere.vitapetcare.user.repository.UserRepository
+import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException

@@ -1,7 +1,7 @@
-package com.exampledigisphere.vitapetcare.user.useCases
+package com.exampledigisphere.vitapetcare.admin.user.useCases
 
-import com.exampledigisphere.vitapetcare.user.domain.User
-import com.exampledigisphere.vitapetcare.user.repository.UserRepository
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

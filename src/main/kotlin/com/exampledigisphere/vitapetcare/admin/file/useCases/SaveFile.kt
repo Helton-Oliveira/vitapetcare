@@ -1,8 +1,8 @@
-package com.exampledigisphere.vitapetcare.file.useCases
+package com.exampledigisphere.vitapetcare.admin.file.useCases
 
-import com.exampledigisphere.vitapetcare.file.domain.File
-import com.exampledigisphere.vitapetcare.file.repository.FileRepository
-import com.exampledigisphere.vitapetcare.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.file.domain.File
+import com.exampledigisphere.vitapetcare.admin.file.repository.FileRepository
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
 import org.springframework.stereotype.Service
 
 @Service

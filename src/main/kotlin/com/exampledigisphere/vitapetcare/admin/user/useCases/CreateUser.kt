@@ -1,8 +1,8 @@
-package com.exampledigisphere.vitapetcare.user.useCases
+package com.exampledigisphere.vitapetcare.admin.user.useCases
 
-import com.exampledigisphere.vitapetcare.file.useCases.SaveFile
-import com.exampledigisphere.vitapetcare.user.domain.User
-import com.exampledigisphere.vitapetcare.user.repository.UserRepository
+import com.exampledigisphere.vitapetcare.admin.file.useCases.SaveFile
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository
 import jakarta.transaction.Transactional
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

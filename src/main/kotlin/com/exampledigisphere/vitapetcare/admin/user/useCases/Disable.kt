@@ -1,6 +1,6 @@
-package com.exampledigisphere.vitapetcare.user.useCases
+package com.exampledigisphere.vitapetcare.admin.user.useCases
 
-import com.exampledigisphere.vitapetcare.user.repository.UserRepository
+import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

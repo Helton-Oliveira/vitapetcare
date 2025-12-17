@@ -1,9 +1,9 @@
-package com.exampledigisphere.vitapetcare.user.domain
+package com.exampledigisphere.vitapetcare.admin.user.domain
 
+import com.exampledigisphere.vitapetcare.admin.file.domain.File
+import com.exampledigisphere.vitapetcare.auth.roles.Role
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity
 import com.exampledigisphere.vitapetcare.config.security.Permissions
-import com.exampledigisphere.vitapetcare.file.domain.File
-import com.exampledigisphere.vitapetcare.roles.Role
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonView

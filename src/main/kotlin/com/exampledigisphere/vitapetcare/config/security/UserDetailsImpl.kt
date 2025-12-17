@@ -1,6 +1,6 @@
 package com.exampledigisphere.vitapetcare.config.security
 
-import com.exampledigisphere.vitapetcare.user.domain.User
+import com.exampledigisphere.vitapetcare.admin.user.domain.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
