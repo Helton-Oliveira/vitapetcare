@@ -1,6 +1,7 @@
 package com.exampledigisphere.vitapetcare.admin.user.domain
 
 import com.exampledigisphere.vitapetcare.admin.file.domain.File
+import com.exampledigisphere.vitapetcare.admin.workDay.domain.WorkDay
 import com.exampledigisphere.vitapetcare.auth.roles.Role
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity
 import com.exampledigisphere.vitapetcare.config.security.Permissions
@@ -42,15 +43,23 @@ class User : BaseEntity() {
   @field:JsonView(Json.WithFIle::class)
   var files: MutableSet<File?> = emptySet();
 
+  @field:OneToMany(mappedBy = "user", cascade = [(CascadeType.ALL)], fetch = FetchType.LAZY)
+  @field:JsonIgnoreProperties("user")
+  @field:JsonView(Json.WithFIle::class)
+  var workDays: MutableSet<WorkDay?> = emptySet();
+
   fun loadRole() = Hibernate.initialize(role)
 
   fun loadFiles() = Hibernate.initialize(files)
+
+  fun loadWorkDay() = Hibernate.initialize(workDays)
 
   interface Json {
     interface List;
     interface Detail : List;
     interface WithFIle : File.Json.List
-    interface All : Detail, WithFIle;
+    interface WithWorkDay : WorkDay.Json.List
+    interface All : Detail, WithFIle, WithWorkDay;
   }
 
   object UserPermissions : Permissions {
