@@ -3,6 +3,74 @@
 @import "@ng-select/ng-select/themes/default.theme.css";
 @import "tailwindcss";
 
+::ng-deep .mat-expansion-panel {
+  @apply rounded-xl;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  @apply px-5 py-4;
+}
+
+::ng-deep .mat-expansion-panel-header .mat-content {
+  @apply flex items-center justify-between w-full;
+}
+
+::ng-deep .mat-expansion-panel-header .mat-expansion-indicator {
+  @apply text-gray-500;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  @apply bg-white p-6;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.cdk-overlay-backdrop-showing {
+  opacity: 1;
+}
+
+.cdk-overlay-pane.modal-panel {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  max-width: 95vw !important;
+}
+
+/* Classes de tamanho aplicadas pelo serviço */
+.cdk-overlay-pane.sm {
+  width: 380px !important;
+}
+
+.cdk-overlay-pane.md {
+  width: 520px !important;
+}
+
+.cdk-overlay-pane.lg {
+  width: 720px !important;
+}
+
+.cdk-overlay-pane.xl {
+  width: 920px !important;
+}
+
+/* Faz o componente injetado preencher toda a largura da 'pane' */
+.modal-panel > * {
+  width: 100%;
+}
+
+/* ============================= */
+/* TAILWIND COMPONENTS */
+/* ============================= */
+
 @layer components {
   .input-text {
     @apply block w-full px-3 py-2.5 text-sm rounded-md rounded-e-md focus:outline-none focus:ring-0;
@@ -107,7 +175,6 @@
     text-white
     transition duration-150 ease-in-out;
   }
-
 }
 
 
