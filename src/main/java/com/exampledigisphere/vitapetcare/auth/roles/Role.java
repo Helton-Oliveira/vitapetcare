@@ -1,6 +1,6 @@
 package com.exampledigisphere.vitapetcare.auth.roles;
 
-public enum ERole {
+public enum Role {
   ADMIN,
   MANAGER,
   CLIENT,

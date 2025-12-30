@@ -43,11 +43,10 @@ public class FileService {
     date = "29/12/2025",
     description = "Salva um arquivo"
   )
-  public Optional<FileOutput> save(@NonNull FileInput input) {
-    log.info("Iniciando persistência do arquivo: {}", input.name());
+  public Optional<FileOutput> save(@NonNull File input) {
+    log.info("Iniciando persistência do arquivo: {}", input.getName());
 
     return Optional.of(input)
-      .map(fileMapper::toDomain)
       .map(fileRepository::save)
       .map(fileMapper::toOutput);
   }
@@ -122,10 +121,8 @@ public class FileService {
   public void saveAllAndFlush(@NonNull Set<File> files, @NonNull User user) {
     log.info("Salvando lista de arquivos para o usuário: {}", user.getEmail());
 
-    files.forEach(file -> {
-      file.setUser(user);
-      fileRepository.save(file);
-    });
-    fileRepository.flush();
+    files.stream()
+      .map(peek(file -> file.setUser(user)))
+      .map(this::save);
   }
 }

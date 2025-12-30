@@ -1,6 +1,7 @@
 package com.exampledigisphere.vitapetcare.auth.service;
 
-import com.exampledigisphere.vitapetcare.admin.user.domain.User;
+import com.exampledigisphere.vitapetcare.admin.user.domain.UserMapper;
+import com.exampledigisphere.vitapetcare.admin.user.domain.UserOutput;
 import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository;
 import com.exampledigisphere.vitapetcare.auth.DTO.LoginRequest;
 import com.exampledigisphere.vitapetcare.auth.DTO.LoginResponse;
@@ -10,7 +11,6 @@ import com.exampledigisphere.vitapetcare.config.root.Info;
 import com.exampledigisphere.vitapetcare.config.root.util.SecurityUtils;
 import com.exampledigisphere.vitapetcare.config.security.JwtTokenUtil;
 import com.exampledigisphere.vitapetcare.config.security.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 @Info(
   dev = Info.Dev.heltonOliveira,
@@ -36,6 +35,19 @@ public class AuthService {
   private final JwtTokenUtil jwtTokenUtil;
   private final UserDetailsServiceImpl userDetailsServiceImpl;
   private final UserRepository userRepository;
+  private final UserMapper userMapper;
+
+  public AuthService(final AuthenticationManager manager,
+                     final JwtTokenUtil jwtTokenUtil,
+                     final UserDetailsServiceImpl userDetailsServiceImpl,
+                     final UserRepository userRepository,
+                     final UserMapper userMapper) {
+    this.manager = manager;
+    this.jwtTokenUtil = jwtTokenUtil;
+    this.userDetailsServiceImpl = userDetailsServiceImpl;
+    this.userRepository = userRepository;
+    this.userMapper = userMapper;
+  }
 
   public Optional<LoginResponse> login(LoginRequest credentials) {
     log.info("Iniciando login para o usuário: {}", credentials.email());
@@ -86,9 +98,10 @@ public class AuthService {
     }
   }
 
-  public Optional<User> getCurrentAccount() {
+  public Optional<UserOutput> getCurrentAccount() {
     String username = SecurityUtils.getAuthenticatedUsername();
     log.info("Buscando conta atual para o usuário: {}", username);
-    return userRepository.findByUsername(username);
+    return userRepository.findByUsername(username)
+      .map(userMapper::toOutput);
   }
 }

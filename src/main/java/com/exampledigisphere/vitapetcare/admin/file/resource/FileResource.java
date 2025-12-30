@@ -1,6 +1,7 @@
 package com.exampledigisphere.vitapetcare.admin.file.resource;
 
 import com.exampledigisphere.vitapetcare.admin.file.domain.FileInput;
+import com.exampledigisphere.vitapetcare.admin.file.domain.FileMapper;
 import com.exampledigisphere.vitapetcare.admin.file.domain.FileOutput;
 import com.exampledigisphere.vitapetcare.admin.file.service.FileService;
 import com.exampledigisphere.vitapetcare.config.root.Info;
@@ -27,11 +28,12 @@ import java.util.List;
 public class FileResource {
 
   private final FileService fileService;
+  private final FileMapper fileMapper;
 
   @PostMapping
   @PreAuthorize("hasAuthority('FILE_CREATE')")
   public ResponseEntity<FileOutput> create(@RequestBody @Valid FileInput input, UriComponentsBuilder uriBuilder) {
-    return fileService.save(input)
+    return fileService.save(fileMapper.toDomain(input))
       .map(file -> {
         var uri = uriBuilder.path("/api/files/{id}").buildAndExpand(file.id()).toUri();
         return ResponseEntity.created(uri).body(file);

@@ -6,7 +6,7 @@ import {PageService} from '../../shared/services/page/page-service';
 import {ButtonBuilder} from '../../shared/buiderls/button-builder';
 import {User} from '../../shared/models/user/user.model';
 import {UserService} from '../../shared/services/user/user-service';
-import {Role} from '../../shared/models/user/role';
+import {Role} from '../../shared/models/role/role.enum';
 import {UserActionsService} from './UserActionsService';
 import {ActivatedRoute} from '@angular/router';
 import {FileUploadService} from '../../shared/services/img/FileUploadService';
@@ -35,8 +35,6 @@ import {
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     NgOptimizedImage,
-
-
   ]
 })
 export class UserUpdateComponent implements OnInit {
@@ -150,9 +148,11 @@ export class UserUpdateComponent implements OnInit {
   }
 
   deleteWorkDay(uuid: string): void {
-    const filteredWk = this.user.workDays?.find(day => day.uuid !== uuid)!;
-    filteredWk.active = false;
-    filteredWk._edited = true;
+    this.user.workDays?.filter(wk => wk.uuid === uuid)
+      .forEach(wk => {
+        wk.active = false
+        wk._edited = true
+      });
     this.markFormAsChanged();
   }
 

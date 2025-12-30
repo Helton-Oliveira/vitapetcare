@@ -1,15 +1,13 @@
 package com.exampledigisphere.vitapetcare.config.security;
 
-import com.exampledigisphere.vitapetcare.admin.permission.Permission;
-import com.exampledigisphere.vitapetcare.admin.role.Role;
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
+import com.exampledigisphere.vitapetcare.auth.roles.RoleAuthorityMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
   private final User user;
@@ -18,15 +16,12 @@ public class UserDetailsImpl implements UserDetails {
     this.user = user;
   }
 
+  @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    Set<GrantedAuthority> authorities = new HashSet<>();
-    for (Role role : user.getRoles()) {
-      authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
-      for (Permission permission : role.getPermissions()) {
-        authorities.add(new SimpleGrantedAuthority(permission.getName()));
-      }
-    }
-    return authorities;
+    return RoleAuthorityMapper.getAuthorities(this.user.getRole())
+      .stream()
+      .map(SimpleGrantedAuthority::new)
+      .collect(Collectors.toSet());
   }
 
   @Override

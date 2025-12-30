@@ -11,11 +11,12 @@ import com.exampledigisphere.vitapetcare.config.root.Info;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -56,8 +57,7 @@ public class UserService {
   public Optional<UserOutput> save(@NonNull UserInput input) {
     log.info("Iniciando criação de usuário para o email: {}", input.email());
 
-    final var editedFiles = Optional.ofNullable(input.files())
-      .orElse(new HashSet<>())
+    final var editedFiles = input.files()
       .stream()
       .filter(File::wasEdited)
       .collect(Collectors.toSet());
@@ -101,12 +101,11 @@ public class UserService {
     date = "29/12/2025",
     description = "Busca todos os usuários ativos"
   )
-  public List<UserOutput> findAll() {
+  public Page<UserOutput> findAll(@NonNull Pageable pageable) {
     log.info("Buscando todos os usuários");
 
-    return userRepository.findAll().stream()
-      .map(userMapper::toOutput)
-      .collect(Collectors.toList());
+    return userRepository.findAll(pageable)
+      .map(userMapper::toOutput);
   }
 
   @Info(

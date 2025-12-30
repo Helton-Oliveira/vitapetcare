@@ -7,10 +7,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
+@Data
 @Entity
 @Table(name = "fil_files")
+@NoArgsConstructor
 public class File extends BaseEntity {
 
   @Transient
@@ -41,40 +45,6 @@ public class File extends BaseEntity {
     return this;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getPath() {
-    return path;
-  }
-
-  public void setPath(String path) {
-    this.path = path;
-  }
-
-  @NotNull
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(@NotNull User user) {
-    this.user = user;
-  }
-
-  @NotNull
-  public FileType getType() {
-    return type;
-  }
-
-  public void setType(@NotNull FileType type) {
-    this.type = type;
-  }
-
   public interface Json {
     interface List {
     }
@@ -87,6 +57,14 @@ public class File extends BaseEntity {
 
     interface All extends Detail, WithUser {
     }
+  }
+
+  public interface Authority {
+    String FILE_CREATE = "FILE_CREATE";
+    String FILE_EDIT = "FILE_EDIT";
+    String FILE_VIEW = "FILE_VIEW";
+    String FILE_VIEW_LIST = "FILE_VIEW_LIST";
+    String FILE_DELETE = "FILE_DELETE";
   }
 
 }
