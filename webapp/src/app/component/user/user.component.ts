@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {PageService} from '../../shared/services/page/page-service';
 import {ButtonBuilder} from '../../shared/buiderls/button-builder';
 import {User} from '../../shared/models/user/user.model';
@@ -18,6 +18,7 @@ import {ActionEditorModalService} from '../../shared/services/modal/action-modal
     CommonModule,
     RolePipe,
     TranslatePipe,
+    TranslateModule
   ]
 })
 export class UserComponent implements OnInit {
