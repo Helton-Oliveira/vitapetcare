@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+
+  <!-- modules FKs-->
+  <changeSet id="fcbcbce9-bea7-44db-bcbc-e9bea784db02" author="heltonOliveira">
+    <addForeignKeyConstraint baseTableName="roles_permissions"
+                             baseColumnNames="role_id"
+                             constraintName="fk_roles_permissions_user"
+                             referencedTableName="rol_roles"
+                             referencedColumnNames="id"/>
+  </changeSet>
+
+
+  <changeSet id="e70b2208-636d-4ebe-8b22-08636d9ebef6" author="heltonOliveira">
+    <addForeignKeyConstraint baseTableName="roles_permissions"
+                             baseColumnNames="permission_id"
+                             constraintName="fk_roles_permissions_role"
+                             referencedTableName="per_permissions"
+                             referencedColumnNames="id"/>
+  </changeSet>
+
+</databaseChangeLog>

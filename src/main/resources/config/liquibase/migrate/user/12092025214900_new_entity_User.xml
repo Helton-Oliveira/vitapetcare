@@ -39,13 +39,7 @@
         <constraints nullable="false"/>
       </column>
 
-      <column name="password" type="text">
-        <constraints nullable="false"/>
-      </column>
-
-      <column name="role" type="text">
-        <constraints nullable="false"/>
-      </column>
+      <column name="password" type="text"/>
 
     </createTable>
 
@@ -59,10 +53,6 @@
 
     <createIndex tableName="usr_users" indexName="idx_usr_users__email">
       <column name="email" type="text"/>
-    </createIndex>
-
-    <createIndex tableName="usr_users" indexName="idx_usr_role">
-      <column name="role" type="text"/>
     </createIndex>
 
   </changeSet>

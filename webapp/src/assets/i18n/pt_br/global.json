@@ -16,7 +16,8 @@
       "rememberMe": "Lembrar de mim",
       "forgotPassword": "Esqueceu a senha?",
       "createAccount": "Criar conta",
-      "dontHaveAnAccount": "Não possio uma conta?"
+      "dontHaveAnAccount": "Não possio uma conta?",
+      "day": "Dia"
     },
     "role": {
       "ADMIN": "Administrador",
@@ -26,6 +27,15 @@
       "VETERINARIAN": "Veterinario",
       "GROOMER": "Tosador",
       "NOT_INFORMED": "Não Informado"
+    },
+    "day": {
+      "MONDAY": "Segunda",
+      "TUESDAY": "Terça",
+      "WEDNESDAY": "Quarta",
+      "THURSDAY": "Quinta",
+      "FRIDAY": "Sexta",
+      "SATURDAY": "Sabado",
+      "SUNDAY": "Domingo"
     }
   }
 }

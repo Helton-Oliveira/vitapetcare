@@ -2,7 +2,8 @@
   "button": {
     "new": "Novo",
     "save": "Salvar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "add": "Adicionar"
   },
   "global": {
     "field": {
@@ -21,7 +22,8 @@
       "rememberMe": "Lembrar de mim",
       "forgotPassword": "Esqueceu a senha?",
       "createAccount": "Criar conta",
-      "dontHaveAnAccount": "Não possio uma conta?"
+      "dontHaveAnAccount": "Não possio uma conta?",
+      "day": "Dia"
     },
     "role": {
       "ADMIN": "Administrador",
@@ -31,6 +33,15 @@
       "VETERINARIAN": "Veterinario",
       "GROOMER": "Tosador",
       "NOT_INFORMED": "Não Informado"
+    },
+    "day": {
+      "MONDAY": "Segunda",
+      "TUESDAY": "Terça",
+      "WEDNESDAY": "Quarta",
+      "THURSDAY": "Quinta",
+      "FRIDAY": "Sexta",
+      "SATURDAY": "Sabado",
+      "SUNDAY": "Domingo"
     }
   },
   "login": {
@@ -43,9 +54,19 @@
     "users": "Usuarios",
     "permissions": "Permissões"
   },
+  "timePeriod": {
+    "startTime": "Início",
+    "endTime": "Término",
+    "addNewInterval": "Adicionar outro intervalo"
+  },
   "user": {
     "title": "Usuários",
     "singleTitle": "Usuário",
     "subTitle": "Lista de Usuários"
+  },
+  "workDay": {
+    "singleTitle": "Escala de trabalho",
+    "pluralTitle": "Escalas de trabalho",
+    "add": "Adicionar escala de trabalho"
   }
 }

@@ -31,10 +31,6 @@
 
       <column name="created_by" type="text"/>
 
-      <column name="name" type="text">
-        <constraints nullable="false"/>
-      </column>
-
       <column name="start_time" type="time">
         <constraints nullable="false"/>
       </column>

@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {_, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {PageService} from '../../shared/services/page/page-service';
 import {ButtonBuilder} from '../../shared/buiderls/button-builder';
@@ -13,6 +13,14 @@ import {FileUploadService} from '../../shared/services/img/FileUploadService';
 import {FileApp, IFileApp} from '../../shared/models/file/file-app-model';
 import {FileType} from '../../shared/models/file/file-type';
 import {NgxDropzoneModule} from 'ngx-dropzone';
+import {WorkDayEditorModalService} from './workDayModal/work-day-editor-modal-service';
+import {WorkDay} from '../../shared/models/workDay/work-day-model';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +30,13 @@ import {NgxDropzoneModule} from 'ngx-dropzone';
     CommonModule,
     TranslateModule,
     NgxDropzoneModule,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    NgOptimizedImage,
+
+
   ]
 })
 export class UserUpdateComponent implements OnInit {
@@ -32,6 +47,7 @@ export class UserUpdateComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private fileUploadService = inject(FileUploadService);
+  private workDayEditorModalService = inject(WorkDayEditorModalService);
 
   user: User = new User();
   roles: Role[] = Object.values(Role);
@@ -52,6 +68,7 @@ export class UserUpdateComponent implements OnInit {
       this.userService.get(id)
         .then(res => {
           this.user = res;
+          this.form.get('password')?.disable();
           this.updateForm();
         })
     }
@@ -91,17 +108,57 @@ export class UserUpdateComponent implements OnInit {
           type: FileType.IMAGE
         } as FileApp;
 
-        console.log('Sucesso!', urlFile);
+        this.markFormAsChanged();
       } catch (error) {
         this.files = [];
-        console.error('Erro na requisição:', error);
       }
     }
   }
 
+  deleteImage($event?: any, file?: FileApp): void {
+    $event?.stopPropagation();
+    this.user.files?.filter(f => f.uuid === file?.uuid)
+      .forEach(file => {
+        file._edited = true
+        file.active = false
+
+        this.markFormAsChanged();
+      });
+  }
+
+  addWorkDay($event?: any) {
+    $event?.stopPropagation();
+    this.workDayEditorModalService.show(
+      this.user, undefined,
+      (workDay) => {
+        this.user.workDays = [...(this.user.workDays || []), workDay];
+        this.markFormAsChanged();
+      }
+    );
+  }
+
+  editWorkDay(workDay: WorkDay) {
+    this.workDayEditorModalService.show(
+      this.user, workDay,
+      (updatedWorkDay) => {
+        this.user.workDays = this.user.workDays?.map(day =>
+          day.uuid === updatedWorkDay.uuid ? updatedWorkDay : day
+        );
+        this.markFormAsChanged();
+      }
+    )
+  }
+
+  deleteWorkDay(uuid: string): void {
+    const filteredWk = this.user.workDays?.find(day => day.uuid !== uuid)!;
+    filteredWk.active = false;
+    filteredWk._edited = true;
+    this.markFormAsChanged();
+  }
+
   private updateUser() {
     this.user = {
-      id: this.user.id || null,
+      ...this.user,
       name: this.form.value.name,
       email: this.form.value.email,
       password: this.form.value.password,
@@ -140,4 +197,13 @@ export class UserUpdateComponent implements OnInit {
       && this.form.dirty
   }
 
+  private markFormAsChanged(): void {
+    this.form.markAsDirty();
+    this.form.updateValueAndValidity({emitEvent: false});
+    this.setup();
+  }
+
+  getWorkDaysActive(): WorkDay[] | undefined {
+    return this.user.workDays?.filter(wk => wk.active);
+  }
 }

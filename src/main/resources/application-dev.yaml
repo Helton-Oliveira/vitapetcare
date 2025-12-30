@@ -49,6 +49,8 @@ spring:
 logging:
   level:
     liquibase: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
 
 
 jwt:

@@ -1,0 +1,66 @@
+@if (user) {
+
+  <div class="relative bg-white shadow-xl rounded-md border border-gray-200 animate-dropIn w-full">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <span class="text-xl font-semibold text-gray-800" translate="workDay.add"></span>
+    </div>
+
+    <form class="flex flex-wrap gap-4 w-full px-6 py-4" [formGroup]="form">
+
+      <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+        <label class="label-input-text label-required" translate="global.field.day"></label>
+        <select class="select input-text" formControlName="dayOfWeek">
+          @for (day of daysOFWeek; track day) {
+            <option class="select-option" translate="global.day.{{ day }}" value="{{day}}"></option>
+          }
+        </select>
+      </div>
+
+      <div formArrayName="shifts" class="mt-4 space-y-3 w-full">
+        @for (shift of shifts.controls; track $index) {
+          <div [formGroupName]="$index" class="flex items-center gap-4 animate-fadeIn justify-center">
+
+            <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+              <span class="label-input-text label-required" translate="timePeriod.startTime"></span>
+              <input type="time" formControlName="startTime" class="input-text w-[49%]">
+            </div>
+
+            <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+              <span class="label-input-text label-required" translate="timePeriod.endTime"></span>
+              <input type="time" formControlName="endTime" class="input-text w-[49%]">
+            </div>
+
+            <button type="button" (click)="removeShift($index)"
+                    class="flex self-center text-red-500 hover:text-red-700 hover:cursor-pointer transition-colors">
+              <i class="fa-regular fa-trash-can text-2xl"></i>
+            </button>
+          </div>
+        }
+
+        @if (shifts.length > 0) {
+          <button type="button" (click)="addShift()"
+                  class="text-sm text-pet-primary font-medium mt-2 hover:cursor-pointer hover:opacity-70">
+            <i class="fa-solid fa-plus"></i>
+            <span translate="timePeriod.addNewInterval"></span>
+          </button>
+        }
+      </div>
+
+      <div class="px-6 py-4 w-full border-t border-gray-200 flex justify-end gap-3">
+        <button
+          class="px-4 py-2 font-bold text-lg rounded bg-gray-200 opacity-50 text-gray-800 hover:bg-gray-300 hover:cursor-pointer"
+          (click)="cancel()">
+          <span translate="button.cancel"></span>
+        </button>
+
+        <button
+          class="px-4 py-2 font-bold text-lg rounded bg-green-600 Create new scratch file from selection text-white hover:bg-green-700 hover:cursor-pointer"
+          [ngClass]="!canSubmit() ? 'opacity-50 hover:cursor-auto' : '' "
+          [disabled]="!canSubmit()"
+          (click)="confirm()">
+          <span translate="button.add"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+}

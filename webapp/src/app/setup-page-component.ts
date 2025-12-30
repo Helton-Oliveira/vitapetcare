@@ -1,5 +1,5 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {RouterOutlet} from '@angular/router';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {PageService} from './shared/services/page/page-service';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
@@ -144,19 +144,17 @@ import {FormsModule} from '@angular/forms';
 export class SetupPageComponent implements OnInit {
   private pageService = inject(PageService)
   private authService = inject(AuthService)
-  private router = inject(Router)
   page = this.pageService.page;
   isOpen = false;
   user = signal<User>(new User());
 
   ngOnInit(): void {
     this.authService.getCurrentAccount()
-      .then(res => this.user.set(res)); // Atualiza o sinal
+      .then(res => this.user.set(res));
   }
 
-  async logout(): Promise<void> {
-    localStorage.clear();
-    await this.router.navigate(['/login'])
+  logout(): void {
+    this.authService.logout();
   }
 
   toggleMenu(): void {

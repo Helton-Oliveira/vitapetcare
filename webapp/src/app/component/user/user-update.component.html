@@ -73,5 +73,84 @@
         </ngx-dropzone-image-preview>
       }
     </ngx-dropzone>
+
+    @if (user.files?.length) {
+      @for (f of user.files; track f.id) {
+        <div class="flex flex-col items-center justify-around">
+          <img class="h-auto max-w-xs" [ngSrc]="f.path!" alt="avatar do perfil" height="1024" width="1024" priority/>
+          <div class="flex justify-center items-center font-bold ">
+            <span>{{ f.name }}</span>
+            <button class="hover:cursor-pointer hover:opacity-75" type="button">
+              <i class="fa-solid fa-x text-rose-600 text-lg font-bold"></i>
+            </button>
+          </div>
+        </div>
+      }
+    }
+
+    <!-- WORK_DAY SESSION -->
+    <mat-accordion [multi]="true" class="w-full mt-5">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="flex items-center justify-between p-5">
+            <span translate="workDay.pluralTitle" class="text-2xl font-bold opacity-50"></span>
+
+            <button class="btn-primary bg-amber-200 font-bold text-black opacity-70" type="button"
+                    (click)="addWorkDay($event)">
+              <span translate="button.add" class="text-lg"></span>
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng-content class="p-10">
+
+          @if (!user.workDays?.length) {
+            <button class="w-full h-full opacity-50 hover:cursor-pointer p-5" type="button"
+                    (click)="addWorkDay($event)">
+              <span translate="workDay.add" class="text-2xl"></span>
+            </button>
+          }
+
+          @if (user.workDays?.length) {
+            <table class="w-full table-auto border-collapse rounded-t-lg shadow-sm">
+              <thead class="bg-gray-100">
+              <tr class="text-left text-sm text-gray-600">
+                <th class="p-3"></th>
+                <th class="p-3"><span translate="global.field.id"></span></th>
+                <th class="p-3"><span translate="global.field.day"></span></th>
+                <th class="p-3"></th>
+              </tr>
+              </thead>
+
+              <tbody class="text-sm">
+
+                @for (workDay of getWorkDaysActive(); track workDay.uuid) {
+                  <tr [ngClass]="{'opacity-40 line-through pointer-events-none select-none': !workDay.active}">
+                    <td class="flex items-center justify-center">@if (!workDay.id) {
+                      <i class="fa-solid fa-circle-exclamation text-lg text-yellow-500 "></i>
+                    }</td>
+                    <td class="p-3">{{ workDay.id }}</td>
+                    <td class="p-3">{{ "global.day." + workDay.dayOfWeek | translate }}</td>
+
+                    <td class="p-3 flex gap-1 justify-center items-center">
+                      <button class="hover:cursor-pointer text-blue-500" type="button"
+                              (click)="editWorkDay(workDay)">
+                        <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                      </button>
+                      <button class="hover:cursor-pointer" type="button"
+                              (click)="deleteWorkDay(workDay?.uuid!!)">
+                        <i class="fa-regular fa-trash-can text-2xl text-gray-500"></i>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+        </ng-content>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
 </form>

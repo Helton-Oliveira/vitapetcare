@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="73edd0d6-d35c-4c85-add0-d6d35c6c85e0" author="heltonOliveira">
+    <createTable tableName="roles_permissions">
+      <column name="role_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="permission_id" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addPrimaryKey tableName="roles_permissions" columnNames="role_id, permission_id"
+                   constraintName="pk_roles_permissions"/>
+  </changeSet>
+
+</databaseChangeLog>

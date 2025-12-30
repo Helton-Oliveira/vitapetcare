@@ -1,6 +1,7 @@
 import {BaseEntity, IBaseEntity} from '../../../root/base-entity';
 import {Role} from './role';
 import {FileApp} from '../file/file-app-model';
+import {WorkDay} from '../workDay/work-day-model';
 
 export interface IUser extends IBaseEntity {
   name?: string;
@@ -9,6 +10,7 @@ export interface IUser extends IBaseEntity {
   role?: Role;
   permissions?: string[];
   files?: FileApp[];
+  workDays?: WorkDay[];
 }
 
 export class User extends BaseEntity implements IUser {
@@ -18,4 +20,5 @@ export class User extends BaseEntity implements IUser {
   public role?: Role;
   public permissions?: string[];
   public files?: FileApp[];
+  public workDays?: WorkDay[];
 }

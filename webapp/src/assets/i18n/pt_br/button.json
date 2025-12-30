@@ -2,6 +2,7 @@
   "button": {
     "new": "Novo",
     "save": "Salvar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "add": "Adicionar"
   }
 }

@@ -42,5 +42,6 @@ export default class AuthService {
   logout(): void {
     localStorage.clear();
     this.isAuthenticated = false;
+    window.location.href = '/login';
   }
 }

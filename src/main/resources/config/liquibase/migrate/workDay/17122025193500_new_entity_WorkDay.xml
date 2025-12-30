@@ -31,7 +31,7 @@
 
       <column name="created_by" type="text"/>
 
-      <column name="date" type="date">
+      <column name="day_of_week" type="text">
         <constraints nullable="false"/>
       </column>
 
