@@ -3,17 +3,14 @@ package com.exampledigisphere.vitapetcare.config.root;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-  @Serial
   @Transient
-  private Long serialVersionUID = 1L;
+  private final Long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,48 +34,11 @@ public class BaseEntity implements Serializable {
   private String lastModifiedBy;
 
   @Transient
-  private boolean _edited;
+  private boolean edited;
 
-  @Transient
-  private List<String> _loadedAssociations = new java.util.ArrayList<>();
-
-  public List<String> get_loadedAssociations() {
-    if (_loadedAssociations == null) {
-      _loadedAssociations = new java.util.ArrayList<>();
-    }
-    return _loadedAssociations;
+  public BaseEntity() {
   }
 
-  public interface Json {
-    interface List {
-    }
-
-    interface Detail extends List {
-    }
-
-    interface All extends Detail {
-    }
-  }
-
-  public void disabled() {
-    this.active = false;
-  }
-
-  public boolean wasEdited() {
-    return _edited;
-  }
-
-  public void audit(String username) {
-    // TODO();
-  }
-
-  public Long getSerialVersionUID() {
-    return serialVersionUID;
-  }
-
-  public void setSerialVersionUID(Long serialVersionUID) {
-    this.serialVersionUID = serialVersionUID;
-  }
 
   public Long getId() {
     return id;
@@ -144,11 +104,31 @@ public class BaseEntity implements Serializable {
     this.lastModifiedBy = lastModifiedBy;
   }
 
-  public boolean is_edited() {
-    return _edited;
+  public boolean isEdited() {
+    return edited;
   }
 
-  public void set_edited(boolean _edited) {
-    this._edited = _edited;
+  public void setEdited(boolean edited) {
+    this.edited = edited;
+  }
+
+  public interface Json {
+    interface List {
+    }
+
+    interface Detail extends List {
+    }
+
+    interface All extends Detail {
+    }
+  }
+
+  public void disabled() {
+    this.active = false;
+  }
+
+
+  public void audit(String username) {
+    // TODO();
   }
 }

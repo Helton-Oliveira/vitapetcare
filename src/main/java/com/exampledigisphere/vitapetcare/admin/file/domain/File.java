@@ -2,19 +2,16 @@ package com.exampledigisphere.vitapetcare.admin.file.domain;
 
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
-@Data
+import java.util.Objects;
+
 @Entity
 @Table(name = "fil_files")
-@NoArgsConstructor
 public class File extends BaseEntity {
 
   @Transient
@@ -31,8 +28,6 @@ public class File extends BaseEntity {
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
-  @JsonView(Json.WithUser.class)
-  @JsonIgnoreProperties("user")
   private User user;
 
   @NotNull
@@ -40,23 +35,44 @@ public class File extends BaseEntity {
   @JsonView(Json.Detail.class)
   private FileType type;
 
-  public File loadOwner() {
-    Hibernate.initialize(user);
-    return this;
+  public File() {
   }
 
-  public interface Json {
-    interface List {
-    }
+  public String getName() {
+    return name;
+  }
 
-    interface Detail extends List {
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    interface WithUser extends User.Json.List {
-    }
+  public String getPath() {
+    return path;
+  }
 
-    interface All extends Detail, WithUser {
-    }
+  public void setPath(String path) {
+    this.path = path;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public FileType getType() {
+    return type;
+  }
+
+  public void setType(FileType type) {
+    this.type = type;
+  }
+
+  public File loadUser() {
+    Hibernate.initialize(user);
+    return this;
   }
 
   public interface Authority {
@@ -67,4 +83,19 @@ public class File extends BaseEntity {
     String FILE_DELETE = "FILE_DELETE";
   }
 
+  @Override
+  public boolean equals(Object object) {
+    if (object == null || getClass() != object.getClass()) return false;
+    if (!super.equals(object)) return false;
+    File file = (File) object;
+    return Objects.equals(name, file.name)
+      && Objects.equals(path, file.path)
+      && Objects.equals(user, file.user)
+      && type == file.type;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), TABLE_NAME, name, path, user, type);
+  }
 }

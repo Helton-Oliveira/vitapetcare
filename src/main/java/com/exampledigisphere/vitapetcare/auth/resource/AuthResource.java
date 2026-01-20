@@ -1,8 +1,11 @@
 package com.exampledigisphere.vitapetcare.auth.resource;
 
+import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.auth.DTO.LoginRequest;
 import com.exampledigisphere.vitapetcare.auth.DTO.TokenRequest;
-import com.exampledigisphere.vitapetcare.auth.service.AuthService;
+import com.exampledigisphere.vitapetcare.auth.useCases.GetCurrentAccountUseCase;
+import com.exampledigisphere.vitapetcare.auth.useCases.LoginUseCase;
+import com.exampledigisphere.vitapetcare.auth.useCases.RefreshTokenUseCase;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,29 +21,36 @@ import org.springframework.web.bind.annotation.*;
 )
 public class AuthResource {
 
-  private final AuthService authService;
+  private final LoginUseCase loginUseCase;
+  private final RefreshTokenUseCase refreshTokenUseCase;
+  private final GetCurrentAccountUseCase getCurrentAccountUseCase;
 
-  public AuthResource(final AuthService authService) {
-    this.authService = authService;
+  public AuthResource(final LoginUseCase loginUseCase,
+                      final RefreshTokenUseCase refreshTokenUseCase,
+                      final GetCurrentAccountUseCase getCurrentAccountUseCase) {
+    this.loginUseCase = loginUseCase;
+    this.refreshTokenUseCase = refreshTokenUseCase;
+    this.getCurrentAccountUseCase = getCurrentAccountUseCase;
   }
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginRequest credentials) {
-    return authService.login(credentials)
+    return loginUseCase.execute(credentials)
       .map(ResponseEntity::ok)
       .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
   }
 
   @PostMapping("/refresh")
   public ResponseEntity<?> refresh(@RequestBody TokenRequest request) {
-    return authService.refresh(request)
+    return refreshTokenUseCase.execute(request)
       .map(ResponseEntity::ok)
       .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
   }
 
   @GetMapping("/current-account")
   public ResponseEntity<?> getCurrentUser() {
-    return authService.getCurrentAccount()
+    return getCurrentAccountUseCase.execute()
+      .map(User::loadFiles)
       .map(ResponseEntity::ok)
       .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
   }

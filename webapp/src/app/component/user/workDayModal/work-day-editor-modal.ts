@@ -69,7 +69,7 @@ export class WorkDayEditorModal implements OnInit {
       startTime: shift.startTime,
       endTime: shift.endTime,
       active: true,
-      _edited: true
+      edited: true
     } as TimePeriod));
   }
 
@@ -104,7 +104,7 @@ export class WorkDayEditorModal implements OnInit {
         dayOfWeek: this.form.value.dayOfWeek,
         shifts: this.updateTimePeriod(),
         active: true,
-        _edited: true
+        edited: true
       } as WorkDay
     );
   }

@@ -16,10 +16,25 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query(
     nativeQuery = true, //
     value =
-      " select * from usr_users u   " +//
-        "   where u.email = :email  " +//
-        "   and u.active = true     "
+      """
+          select u.* from usr_users u
+          left join fil_files f on f.user_id = u.id
+          where u.email = :email
+            and u.active = true
+        """
   )
   Optional<User> findByUsername(@Param("email") String email);
+
+  @Query(
+    nativeQuery = true, //
+    value =
+      """
+          select u.* from usr_users u
+          left join fil_files f on f.user_id = u.id
+          where u.id = :id
+            and u.active = true
+        """
+  )
+  Optional<User> findFullById(@Param("id") Long id);
 
 }

@@ -122,7 +122,7 @@ graph TD
  public Optional<UserOutput> save(@NonNull UserInput input) {     
     log.info("Iniciando criação de usuário para o input: {}", input);      
     final List<FileInput> editedFiles = Optional.ofNullable(input.avatar())             
-          .filter(FileInput::_edited)
+          .filter(FileInput::edited)
           .map(List::of)
           .orElseGet(List::of);      
    return Optional.of(userRepository.save(userMapper.toDomain(input)))
@@ -161,7 +161,7 @@ graph TD
 
 * Enforced via `@PreAuthorize`
 
-### 6.1 Permission Hierarchy
+### 6.1 PermissionModel Hierarchy
 
 * **Admin**
 

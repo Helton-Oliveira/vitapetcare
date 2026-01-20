@@ -8,7 +8,7 @@ Content-Type: application/json
   "email": "admin@vitapetcare.com",
   "password": "admin123",
   "active": true,
-  "_edited": true,
+  "edited": true,
   "_loadedAssociations": [],
   "role": "ADMIN",
   "files": [],

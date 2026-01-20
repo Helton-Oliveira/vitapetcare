@@ -177,6 +177,13 @@
     ora "9.0.0"
     rxjs "7.8.2"
 
+"@angular/animations@^21.0.8":
+  version "21.0.8"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-21.0.8.tgz#84038fd77a4baf29386eafcad3f8421d11b4f75d"
+  integrity sha512-1YXHZQO/LYiExbg7sZhiqqF5fMcH17iVgK1tI2Gk90Yy0HQAuqnteOv3pPGgUfLowNOWK0sGhCYbB2Lq21LA3w==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/build@^21.0.1":
   version "21.0.1"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-21.0.1.tgz#dd6a7b37be5e0956102c1aa146ac4ba42df7b6d4"
@@ -3449,6 +3456,13 @@ ngx-dropzone@^3.1.0:
   integrity sha512-5RBaEl07QUcY6sv/BBPyIxN6nbWY/KqTGheEKgbuGS0N1QPFY7NJUo8+X3fYUwQgLS+wjJeqPiR37dd0YNDtWA==
   dependencies:
     tslib "^2.0.0"
+
+ngx-toastr@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-19.1.0.tgz#c3a676e2b7c2e186e192e75ef272b4caaa778417"
+  integrity sha512-Qa7Kg7QzGKNtp1v04hu3poPKKx8BGBD/Onkhm6CdH5F0vSMdq+BdR/f8DTpZnGFksW891tAFufpiWb9UZX+3vg==
+  dependencies:
+    tslib "^2.3.0"
 
 ngx-translate-multi-http-loader@^20.0.0:
   version "20.0.0"

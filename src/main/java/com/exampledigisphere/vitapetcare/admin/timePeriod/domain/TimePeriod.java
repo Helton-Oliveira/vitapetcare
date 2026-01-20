@@ -7,15 +7,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "wrk_times_periods")
-@Getter
-@Setter
 @Info(
   dev = Info.Dev.heltonOliveira,
   label = Info.Label.doc,
@@ -42,6 +39,9 @@ public class TimePeriod extends BaseEntity {
   @JsonIgnoreProperties("shifts")
   private WorkDay workDay;
 
+  public TimePeriod() {
+  }
+
   public LocalTime getStartTime() {
     return startTime;
   }
@@ -64,6 +64,11 @@ public class TimePeriod extends BaseEntity {
 
   public void setWorkDay(WorkDay workDay) {
     this.workDay = workDay;
+  }
+
+  public TimePeriod loadWorkDay() {
+    Hibernate.initialize(workDay);
+    return this;
   }
 
   public interface Json {

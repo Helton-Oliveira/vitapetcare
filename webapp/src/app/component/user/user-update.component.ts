@@ -39,8 +39,8 @@ import {
 })
 export class UserUpdateComponent implements OnInit {
   private page = inject(PageService);
-  private userActionsService = inject(UserActionsService)
-  private userService = inject(UserService)
+  private userActionsService = inject(UserActionsService);
+  private userService = inject(UserService);
   private translateService = inject(TranslateService);
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
@@ -64,7 +64,7 @@ export class UserUpdateComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.userService.get(id)
-        .then(res => {
+        .then((res) => {
           this.user = res;
           this.form.get('password')?.disable();
           this.updateForm();
@@ -103,9 +103,10 @@ export class UserUpdateComponent implements OnInit {
         this.fileApp = {
           name: fileToUpload.name,
           path: urlFile.url,
-          type: FileType.IMAGE
-        } as FileApp;
-
+          type: FileType.IMAGE,
+          edited: true,
+          active: true,
+        };
         this.markFormAsChanged();
       } catch (error) {
         this.files = [];
@@ -117,9 +118,8 @@ export class UserUpdateComponent implements OnInit {
     $event?.stopPropagation();
     this.user.files?.filter(f => f.uuid === file?.uuid)
       .forEach(file => {
-        file._edited = true
+        file.edited = true
         file.active = false
-
         this.markFormAsChanged();
       });
   }
@@ -151,7 +151,7 @@ export class UserUpdateComponent implements OnInit {
     this.user.workDays?.filter(wk => wk.uuid === uuid)
       .forEach(wk => {
         wk.active = false
-        wk._edited = true
+        wk.edited = true
       });
     this.markFormAsChanged();
   }
@@ -164,7 +164,8 @@ export class UserUpdateComponent implements OnInit {
       password: this.form.value.password,
       role: this.form.value.role,
       files: [this.fileApp],
-      _edited: true,
+      workDays: this.user.workDays,
+      edited: true,
       active: true
     } as User;
   }

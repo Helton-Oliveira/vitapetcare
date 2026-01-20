@@ -3,6 +3,8 @@
 @import "@ng-select/ng-select/themes/default.theme.css";
 @import "tailwindcss";
 
+@import 'ngx-toastr/toastr';
+
 ::ng-deep .mat-expansion-panel {
   @apply rounded-xl;
 }

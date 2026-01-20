@@ -3,10 +3,12 @@ import AuthService from '../shared/services/auth/auth.service';
 import {HttpInterceptorFn} from '@angular/common/http';
 import {catchError, from, switchMap, throwError} from 'rxjs';
 import {environment} from '../../../../environment';
+import {ToastrService} from 'ngx-toastr';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   console.warn(`Interceptando: ${req.method} ${req.url}`);
   const authService = inject(AuthService);
+  const toastService = inject(ToastrService);
 
   if (!req.url.startsWith(environment.BASE_API_URL)) {
     return next(req);
@@ -45,9 +47,8 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
           return next(retryReq);
         }),
-        catchError(() => {
-          authService.logout();
-          window.location.href = '/login';
+        catchError((err: Error) => {
+          toastService.error("ERROR: ", err.message);
           return throwError(() => error);
         })
       );

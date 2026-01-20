@@ -5,11 +5,8 @@ import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.time.DayOfWeek;
@@ -18,8 +15,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "wrk_works_days")
-@Getter
-@Setter
 @Info(
   dev = Info.Dev.heltonOliveira,
   label = Info.Label.doc,
@@ -33,28 +28,18 @@ public class WorkDay extends BaseEntity {
 
   @NotNull
   @Enumerated(EnumType.STRING)
-  @JsonView(Json.List.class)
   private DayOfWeek dayOfWeek;
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
-  @JsonView(Json.Detail.class)
   private User user;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "workDay", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("workDay")
-  @JsonView(Json.All.class)
   private Set<TimePeriod> shifts = new HashSet<>();
 
-  public WorkDay loadShifts() {
-    Hibernate.initialize(shifts);
-    return this;
-  }
-
-  public WorkDay loadUser() {
-    Hibernate.initialize(user);
-    return this;
+  public WorkDay() {
   }
 
   public DayOfWeek getDayOfWeek() {
@@ -81,14 +66,25 @@ public class WorkDay extends BaseEntity {
     this.shifts = shifts;
   }
 
-  public interface Json {
-    interface List {
-    }
+  public WorkDay loadUser() {
+    Hibernate.initialize(user);
+    return this;
+  }
 
-    interface Detail extends List {
-    }
+  public WorkDay loadShifts() {
+    Hibernate.initialize(shifts);
+    return this;
+  }
 
-    interface All extends Detail {
-    }
+  public void prepareToCreation() {
+    shifts = null;
+  }
+
+  public interface Authority {
+    String WORK_DAY_CREATE = "WORK_DAYS_CREATE";
+    String WORK_DAY_EDIT = "WORK_DAYS_EDIT";
+    String WORK_DAY_VIEW = "WORK_DAYS_VIEW";
+    String WORK_DAY_VIEW_LIST = "WORK_DAYS_VIEW_LIST";
+    String WORK_DAY_DELETE = "WORK_DAYS_DELETE";
   }
 }
