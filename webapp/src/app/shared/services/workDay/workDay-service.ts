@@ -2,11 +2,11 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../../environment';
 import {firstValueFrom} from 'rxjs';
-import {Page} from '../../dto/page-dto';
+import {IPage} from '../../dto/page-dto';
 import {WorkDay} from '../../models/workDay/work-day-model';
 
 type EntityResponseType = WorkDay
-type EntityArrayResponseType = Page<WorkDay[]>
+type EntityArrayResponseType = IPage<WorkDay[]>
 
 @Injectable({
   providedIn: 'root'

@@ -17,7 +17,9 @@
       "forgotPassword": "Esqueceu a senha?",
       "createAccount": "Criar conta",
       "dontHaveAnAccount": "Não possio uma conta?",
-      "day": "Dia"
+      "day": "Dia",
+      "next": "Próxima",
+      "previous": "Anterior"
     },
     "role": {
       "ADMIN": "Administrador",

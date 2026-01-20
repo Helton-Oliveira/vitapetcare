@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouterLink} from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 import {User} from '../../shared/models/user/user.model';
 import {Role} from '../../shared/models/role/role.enum';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,8 @@ import {Role} from '../../shared/models/role/role.enum';
   imports: [
     TranslateModule,
     RouterLink,
+    NgOptimizedImage,
+    RouterLinkActive,
   ]
 })
 export class SidebarComponent {

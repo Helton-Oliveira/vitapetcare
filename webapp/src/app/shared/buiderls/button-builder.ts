@@ -20,7 +20,7 @@ export class ButtonBuilder {
     return new Button(
       title,
       'fa-solid fa-plus',
-      '#4A9327',
+      '#4ade80',
       '',
       'submit',
       isActive,
@@ -45,7 +45,7 @@ export class ButtonBuilder {
       title,
       'fa-solid fa-filter',
       'white',
-      'gray',
+      'black',
       'submit',
       isActive,
       action

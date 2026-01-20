@@ -9,6 +9,8 @@ import {UserService} from '../../shared/services/user/user-service';
 import {UserActionsService} from './UserActionsService';
 import {RolePipe} from '../../shared/pipes/role-pipe';
 import {ActionEditorModalService} from '../../shared/services/modal/action-modal-service';
+import {RangePipe} from '../../shared/pipes/range-pipe';
+import {TPage} from '../../shared/dto/page-dto';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,8 @@ import {ActionEditorModalService} from '../../shared/services/modal/action-modal
     CommonModule,
     RolePipe,
     TranslatePipe,
-    TranslateModule
+    TranslateModule,
+    RangePipe
   ]
 })
 export class UserComponent implements OnInit {
@@ -30,12 +33,14 @@ export class UserComponent implements OnInit {
   private actionEditorModalService = inject(ActionEditorModalService);
 
   public users: User[] = [];
+  public pagination: TPage = {number: 0, totalPages: 0, totalElements: 0, size: 0};
 
   ngOnInit(): void {
     this.setup()
     this.userService.getAll()
       .then(res => {
         this.users = res.content;
+        this.pagination = res.page;
         this.changeDetectorRef.detectChanges();
       })
   }
@@ -46,8 +51,11 @@ export class UserComponent implements OnInit {
       subtitle: this.translateService.instant('user.subTitle'),
       showSearch: true,
       actions: [
-        ButtonBuilder.sort({}),
-        ButtonBuilder.filter({}),
+        ButtonBuilder.filter({
+          title: this.translateService.instant('button.filter'),
+          action: () => {
+          }
+        }),
         ButtonBuilder.add({
           title: this.translateService.instant('button.new'),
           action: () => this.userActionsService.goToNew()

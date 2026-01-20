@@ -1,64 +1,82 @@
-<body class="flex h-screen items-center justify-center bg-pet-background from-cyan-50 to-cyan-200 ">
-<section class="flex bg-green-200 items-stretch justify-center rounded-md p-2 w-[80%] h-[65%]">
-  <form [formGroup]="form" (ngSubmit)="login()"
-        class="flex flex-col justify-center items-start p-20 rounded-md w-[75%] gap-5">
-    <div class="w-full flex items-center justify-center">
-      <img ngSrc="assets/logo.png" height="1024" width="1024" alt="Logo do app" class="h-50 w-50" priority/>
-    </div>
+<div class="flex h-screen items-center justify-center bg-gray-100 p-4">
 
-    <div class="flex shadow-xs rounded-md bg-white w-full">
-      <label class="label-input-text" translate="login.email"></label>
-      <input class="input-text" type="email" formControlName="email" required/>
-    </div>
+  <section class="flex bg-white shadow-2xl rounded-[2rem] overflow-hidden w-full max-w-5xl h-[min(650px,85vh)]">
 
-    @if (form.get('email')?.touched && form.get('email')?.invalid) {
-      <div class="flex justify-center items-center gap-1 -mt-3">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
-        {{ "global.field.required" | translate: {field: 'global.field.email' | translate} }}</span>
-      </div>
-    }
+    <form [formGroup]="form" (ngSubmit)="login()"
+          class="flex-1 flex flex-col justify-center px-12 lg:px-20 gap-6">
 
-    <div class="flex shadow-xs rounded-base bg-white rounded-md w-full">
-      <span class="label-input-text" translate="login.password"></span>
-      <input class="input-text" type="password" formControlName="password" required/>
-    </div>
-
-    @if (form.get('password')?.touched && form.get('password')?.invalid) {
-      <div class="flex justify-center items-center gap-1 -mt-3">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
-        {{ "global.field.required" | translate: {field: 'global.field.password' | translate} }}</span>
-      </div>
-    }
-
-    <div class="flex items-center justify-between w-full">
-      <div class="flex gap-2">
-        <input class="accent-blue-500" type="checkbox" formControlName="rememberMe"/>
-        <span class="text-[90%]" translate="global.field.rememberMe"></span>
+      <div class="flex flex-col items-center mb-4">
+        <img ngSrc="assets/logo.png" height="80" width="80" alt="Logo" class="mb-2" priority/>
+        <h2 class="text-2xl font-bold text-gray-800">Bem-vindo de volta</h2>
+        <p class="text-gray-400 text-sm">Acesse sua conta para continuar</p>
       </div>
 
-      <a class="underline text-[90%] cursor-pointer text-blue-800" translate="global.field.forgotPassword"></a>
+      <div class="flex flex-col gap-1.5">
+        <div
+          class="flex items-center border border-gray-200 rounded-xl focus:outline-none focus-within:ring-4 focus-within:ring-green-50 transition-all overflow-hidden bg-gray-50">
+          <span
+            class="bg-gray-200 px-4 py-3 text-gray-500 text-sm font-medium border-r border-gray-300 min-w-[90px] text-center"
+            translate="login.email"></span>
+          <input class="w-full px-4 py-3 bg-transparent outline-none text-sm text-gray-700" type="email"
+                 formControlName="email" required placeholder="exemplo@email.com"/>
+        </div>
+        @if (form.get('email')?.touched && form.get('email')?.invalid) {
+          <span class="text-xs text-red-500 flex items-center gap-1 ml-1">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {{ "global.field.required" | translate: {field: 'global.field.email' | translate} }}
+          </span>
+        }
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <div
+          class="flex items-center border border-gray-200 rounded-xl focus:outline-none focus-within:ring-4 focus-within:ring-green-50 transition-all overflow-hidden bg-gray-50">
+          <span
+            class="bg-gray-200 px-4 py-3 text-gray-500 text-sm font-medium border-r border-gray-300 min-w-[90px] text-center"
+            translate="login.password"></span>
+          <input class="w-full px-4 py-3 bg-transparent outline-none text-sm text-gray-700" type="password"
+                 formControlName="password" required placeholder="••••••••"/>
+        </div>
+        @if (form.get('password')?.touched && form.get('password')?.invalid) {
+          <span class="text-xs text-red-500 flex items-center gap-1 ml-1">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {{ "global.field.required" | translate: {field: 'global.field.password' | translate} }}
+          </span>
+        }
+      </div>
+
+      <div class="flex items-center justify-between w-full text-xs md:text-sm">
+        <label class="flex items-center gap-2 cursor-pointer text-gray-600">
+          <input class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-500" type="checkbox"
+                 formControlName="rememberMe"/>
+          <span translate="global.field.rememberMe"></span>
+        </label>
+        <a class="font-medium text-green-600 hover:underline cursor-pointer"
+           translate="global.field.forgotPassword"></a>
+      </div>
+
+      <button
+        class="w-full py-3.5 bg-green-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-green-100 hover:bg-green-700 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none"
+        type="submit"
+        [disabled]="!canSubmit()"
+      >
+        Entrar
+      </button>
+
+      <div class="flex justify-center gap-2 text-sm mt-2">
+        <span class="text-gray-500" translate="global.field.dontHaveAnAccount"></span>
+        <a class="text-green-600 font-bold hover:underline cursor-pointer" translate="global.field.createAccount"></a>
+      </div>
+    </form>
+
+    <div class="hidden lg:block flex-1 relative">
+      <img
+        src="assets/dog_cat.jpeg"
+        alt="Pets"
+        class="absolute inset-0 w-full h-full object-cover"/>
+      <div class="absolute inset-0 bg-linear-to-tr from-green-600/20 to-transparent"></div>
     </div>
 
-    <button
-      class="btn-primary bg-green-500  w-full -mt-2 "
-      [ngClass]="!canSubmit() ? 'opacity-50 hover:cursor-auto' : '' "
-      [disabled]="!canSubmit()"
-      type="submit"
-    >Login
-    </button>
-
-    <div class="flex gap-2 ml-[10%] mt-[10%]">
-      <span translate="global.field.dontHaveAnAccount"></span>
-      <a class="underline cursor-pointer text-blue-800" translate="global.field.createAccount"></a>
-    </div>
-  </form>
-
-  <img
-    src="assets/dog_cat.jpeg"
-    alt="Logo do app"
-    class="bg-blue-300 w-full rounded-md"/>
-</section>
-</body>
+  </section>
+</div>
 

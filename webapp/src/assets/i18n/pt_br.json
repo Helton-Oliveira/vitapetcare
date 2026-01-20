@@ -3,7 +3,8 @@
     "new": "Novo",
     "save": "Salvar",
     "cancel": "Cancelar",
-    "add": "Adicionar"
+    "add": "Adicionar",
+    "filter": "Filtrar"
   },
   "global": {
     "field": {
@@ -23,7 +24,9 @@
       "forgotPassword": "Esqueceu a senha?",
       "createAccount": "Criar conta",
       "dontHaveAnAccount": "Não possio uma conta?",
-      "day": "Dia"
+      "day": "Dia",
+      "next": "Próxima",
+      "previous": "Anterior"
     },
     "role": {
       "ADMIN": "Administrador",

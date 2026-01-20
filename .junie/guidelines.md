@@ -32,9 +32,6 @@ graph TD
     user --> UserResource.java
     user --> UserService.java
     user --> UserRepository.java
-    user --> UserMapper.java
-    user --> UserInput.java[UserInput.java - Record DTO]
-    user --> UserOutput.java[UserOutput.java - Record DTO] 
 ```
 
 ## 3\. Architecture & Patterns
@@ -44,10 +41,6 @@ graph TD
 * **Resource (Controller)**
 
 * REST entrypoint
-
-* Receives DTOs (`record`)
-
-* Validates input via Bean Validation (`@Valid`)
 
 * Handles `Optional` returned by Service
 

@@ -128,7 +128,8 @@ public class User extends BaseEntity implements Serializable {
   }
 
   public void encryptPassword() {
-    if (!this.password.isBlank()) this.password = new BCryptPasswordEncoder().encode(this.password);
+    if (this.password != null && !this.password.isBlank())
+      this.password = new BCryptPasswordEncoder().encode(this.password);
   }
 
   public void prepareForCreation() {

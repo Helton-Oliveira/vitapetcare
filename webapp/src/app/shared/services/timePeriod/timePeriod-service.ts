@@ -2,11 +2,11 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../../environment';
 import {firstValueFrom} from 'rxjs';
-import {Page} from '../../dto/page-dto';
+import {IPage} from '../../dto/page-dto';
 import {TimePeriod} from '../../models/timePeriod/time-period.model';
 
 type EntityResponseType = TimePeriod
-type EntityArrayResponseType = Page<TimePeriod[]>
+type EntityArrayResponseType = IPage<TimePeriod[]>
 
 @Injectable({
   providedIn: 'root'
