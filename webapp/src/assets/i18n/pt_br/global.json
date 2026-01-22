@@ -19,7 +19,10 @@
       "dontHaveAnAccount": "Não possio uma conta?",
       "day": "Dia",
       "next": "Próxima",
-      "previous": "Anterior"
+      "previous": "Anterior",
+      "confirm": "Confirmar",
+      "error": "Erro",
+      "success": "Sucesso"
     },
     "role": {
       "ADMIN": "Administrador",

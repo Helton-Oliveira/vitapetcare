@@ -208,6 +208,48 @@
   .overflow-y-auto::-webkit-scrollbar-thumb:hover {
     background: #cbd5e1;
   }
+
+  .time-input {
+    @apply
+    rounded-none
+    rounded-s-lg
+    flex-1
+    block
+    w-full
+    p-2.5
+    border
+    border-gray-50
+    text-sm
+    shadow-xs
+  }
+
+  .error-message {
+    @apply
+    flex
+    bg-red-200
+    text-red-700
+    rounded-2xl
+    items-start
+    sm:items-center
+    p-4
+    text-sm
+    border-2
+    border-red-700
+  }
+
+  .success-message {
+    @apply
+    flex
+    bg-green-200
+    text-green-700
+    rounded-2xl
+    items-start
+    sm:items-center
+    p-4
+    text-sm
+    border-2
+    border-green-700
+  }
 }
 
 /* 5. ANIMAÇÕES */

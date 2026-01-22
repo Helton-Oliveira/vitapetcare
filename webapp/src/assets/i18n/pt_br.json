@@ -26,7 +26,10 @@
       "dontHaveAnAccount": "Não possio uma conta?",
       "day": "Dia",
       "next": "Próxima",
-      "previous": "Anterior"
+      "previous": "Anterior",
+      "confirm": "Confirmar",
+      "error": "Erro",
+      "success": "Sucesso"
     },
     "role": {
       "ADMIN": "Administrador",
@@ -49,7 +52,11 @@
   },
   "login": {
     "email": "Email",
-    "password": "Senha"
+    "password": "Senha",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Senha",
+    "sendMailSuccess": "Email de recuperacao enviado com sucesso!",
+    "sendMailError": "Erro ao enviar o email. Tente novamente mais tarde!"
   },
   "sidebar": {
     "dashboard": "Dashboard",

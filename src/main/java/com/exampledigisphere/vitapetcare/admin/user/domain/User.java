@@ -11,12 +11,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "usr_users")
@@ -37,6 +41,12 @@ public class User extends BaseEntity implements Serializable {
   @JsonView(Json.List.class)
   private Role role;
 
+  @JsonView(Json.Detail.class)
+  private String resetCode;
+
+  @JsonView(Json.Detail.class)
+  private Instant createdResetCodeAt;
+
   @Transient
   @JsonView(Json.List.class)
   private Set<String> authorities = new HashSet<>();
@@ -48,6 +58,7 @@ public class User extends BaseEntity implements Serializable {
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
   @JsonView(Json.WithWorkDay.class)
+  @SQLRestriction("active = true")
   @JsonIgnoreProperties("user")
   private Set<WorkDay> workDays = new HashSet<>();
 
@@ -103,6 +114,10 @@ public class User extends BaseEntity implements Serializable {
     this.workDays = workDays;
   }
 
+  public String getResetCode() {
+    return resetCode;
+  }
+
   @Transient
   @JsonView(Json.List.class)
   @JsonProperty("authorities")
@@ -115,6 +130,11 @@ public class User extends BaseEntity implements Serializable {
 
   public void setAuthorities(Set<String> authorities) {
     this.authorities = authorities;
+  }
+
+
+  public Instant getCreatedResetCodeAt() {
+    return createdResetCodeAt;
   }
 
   public User loadFiles() {
@@ -135,6 +155,25 @@ public class User extends BaseEntity implements Serializable {
   public void prepareForCreation() {
     this.files = null;
     this.workDays = null;
+  }
+
+  public void generateResetCode() {
+    this.resetCode = new Random().ints(5, 1, 9)
+      .mapToObj(String::valueOf)
+      .collect(Collectors.joining());
+    this.createdResetCodeAt = Instant.now();
+    this.setEdited(true);
+  }
+
+  public boolean verifyResetCode(String inputResetCode) {
+    if (inputResetCode.isBlank() && createdResetCodeAt == null) return false;
+    final var expiration = createdResetCodeAt.plusSeconds(1500);
+    return resetCode.equals(inputResetCode) && Instant.now().isBefore(expiration);
+  }
+
+  public void markResetCodeUsed() {
+    this.resetCode = null;
+    this.createdResetCodeAt = null;
   }
 
   public interface Authority {

@@ -1,6 +1,10 @@
 {
   "login": {
     "email": "Email",
-    "password": "Senha"
+    "password": "Senha",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Senha",
+    "sendMailSuccess": "Email de recuperacao enviado com sucesso!",
+    "sendMailError": "Erro ao enviar o email. Tente novamente mais tarde!"
   }
 }

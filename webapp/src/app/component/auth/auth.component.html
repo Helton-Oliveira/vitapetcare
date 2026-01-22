@@ -51,8 +51,8 @@
                  formControlName="rememberMe"/>
           <span translate="global.field.rememberMe"></span>
         </label>
-        <a class="font-medium text-green-600 hover:underline cursor-pointer"
-           translate="global.field.forgotPassword"></a>
+        <button type="button" class="font-medium text-green-600 hover:underline cursor-pointer"
+                translate="global.field.forgotPassword" (click)="goToPasswordRecovery()"></button>
       </div>
 
       <button
@@ -62,11 +62,6 @@
       >
         Entrar
       </button>
-
-      <div class="flex justify-center gap-2 text-sm mt-2">
-        <span class="text-gray-500" translate="global.field.dontHaveAnAccount"></span>
-        <a class="text-green-600 font-bold hover:underline cursor-pointer" translate="global.field.createAccount"></a>
-      </div>
     </form>
 
     <div class="hidden lg:block flex-1 relative">

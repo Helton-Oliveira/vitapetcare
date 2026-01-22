@@ -3,7 +3,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {_, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {PageService} from '../../shared/services/page/page-service';
-import {ButtonBuilder} from '../../shared/buiderls/button-builder';
+import {ButtonBuilder} from '../../shared/builders/button-builder';
 import {User} from '../../shared/models/user/user.model';
 import {UserService} from '../../shared/services/user/user-service';
 import {Role} from '../../shared/models/role/role.enum';
@@ -206,5 +206,9 @@ export class UserUpdateComponent implements OnInit {
 
   getWorkDaysActive(): WorkDay[] | undefined {
     return this.user.workDays?.filter(wk => wk.active);
+  }
+
+  existsWorkDayActive(): boolean | undefined {
+    return this.user.workDays?.some(wk => wk.active);
   }
 }

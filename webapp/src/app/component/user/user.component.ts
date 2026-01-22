@@ -3,7 +3,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {PageService} from '../../shared/services/page/page-service';
-import {ButtonBuilder} from '../../shared/buiderls/button-builder';
+import {ButtonBuilder} from '../../shared/builders/button-builder';
 import {User} from '../../shared/models/user/user.model';
 import {UserService} from '../../shared/services/user/user-service';
 import {UserActionsService} from './UserActionsService';
@@ -69,7 +69,10 @@ export class UserComponent implements OnInit {
   }
 
   disableToast(id?: string) {
-    this.actionEditorModalService.show(() => this.userService.disable(id!!), 'md');
+    this.actionEditorModalService.show(() => {
+      this.userService.disable(id!!)
+        .then(() => this.setup());
+    }, 'md');
   }
 
 

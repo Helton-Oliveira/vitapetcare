@@ -42,6 +42,12 @@ dependencies {
   runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
 
   implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
+
+  implementation("org.springframework.boot:spring-boot-starter-mail")
+  testImplementation("org.springframework.boot:spring-boot-starter-mail-test")
+
+  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+  testImplementation("org.springframework.boot:spring-boot-starter-thymeleaf-test")
 }
 
 tasks.withType<Test> {

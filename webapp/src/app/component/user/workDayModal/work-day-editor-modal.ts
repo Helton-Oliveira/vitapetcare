@@ -29,7 +29,6 @@ export class WorkDayEditorModal implements OnInit {
   workDay?: WorkDay;
 
   daysOFWeek?: DayOfWeek[] = WorkDay.getAllDays();
-  timePeriods?: TimePeriod[] = [];
 
   form = this.fb.group({
     dayOfWeek: ['', Validators.required],
@@ -62,6 +61,8 @@ export class WorkDayEditorModal implements OnInit {
   removeShift(index: number): void {
     this.shifts.invalid
     this.shifts.removeAt(index);
+    this.workDay?.shifts?.splice(index, 1);
+    this.markFormAsChanged();
   }
 
   private updateTimePeriod(): TimePeriod[] {
@@ -88,6 +89,11 @@ export class WorkDayEditorModal implements OnInit {
         }));
       });
     }
+  }
+
+  private markFormAsChanged(): void {
+    this.form.markAsDirty();
+    this.form.updateValueAndValidity({emitEvent: false});
   }
 
   canSubmit(): boolean {

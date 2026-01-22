@@ -43,6 +43,10 @@
         <constraints nullable="false"/>
       </column>
 
+      <column name="reset_code" type="text"/>
+
+      <column name="created_reset_code_at" type="timestamp"/>
+
       <column name="password" type="text"/>
 
     </createTable>

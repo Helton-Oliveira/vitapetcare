@@ -37,4 +37,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
   )
   Optional<User> findFullById(@Param("id") Long id);
 
+  @Query(nativeQuery = true, //
+    value =
+      """
+        select u.* from usr_users u
+         where u.reset_code = :resetCode
+          and u.active = true
+        """
+  )
+  Optional<User> findByResetCode(@Param("resetCode") String resetCode);
+
 }
