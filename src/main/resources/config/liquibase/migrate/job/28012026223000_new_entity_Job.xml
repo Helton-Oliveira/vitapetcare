@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="ed6c7c8b-44ec-4f51-ac7c-8b44ecaf5124" author="heltonOliveira">
+    <createTable tableName="cat_jobs">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="true" nullable="false"/>
+      </column>
+
+      <column name="uuid" type="text">
+        <constraints unique="true" nullable="false"/>
+      </column>
+
+      <column name="active" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_at" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="last_modified_at" type="timestamp"/>
+
+      <column name="last_modified_by" type="text"/>
+
+      <column name="deleted_at" type="timestamp"/>
+
+      <column name="created_by" type="text"/>
+
+      <column name="name" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="value_in_cents" type="number">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="duration" type="number">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="types_of_professionals" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="type" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="status" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="has_return" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="time_to_return_in_days" type="number"/>
+    </createTable>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__id">
+      <column name="id" type="bigint"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__active">
+      <column name="active" type="boolean"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__type">
+      <column name="type" type="text"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__types_of_professionals">
+      <column name="types_of_professionals" type="text"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__has_return">
+      <column name="has_return" type="boolean"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__status">
+      <column name="status" type="text"/>
+    </createIndex>
+
+    <createIndex tableName="cat_jobs" indexName="idx_cat_jobs__duration">
+      <column name="duration" type="number"/>
+    </createIndex>
+
+  </changeSet>
+
+</databaseChangeLog>

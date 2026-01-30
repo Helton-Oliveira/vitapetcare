@@ -33,8 +33,6 @@ spring:
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 5
   jpa:
     hibernate:
       ddl-auto: none
@@ -50,7 +48,7 @@ logging:
   level:
     liquibase: DEBUG
     org.springframework.security: DEBUG
-    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.hibernate.SQL: INFO
 
 
 jwt:

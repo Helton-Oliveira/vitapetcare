@@ -184,7 +184,7 @@ public class User extends BaseEntity implements Serializable {
     String USER_DELETE = "USER_DELETE";
   }
 
-  interface Json {
+  public interface Json {
     interface List {
     }
 
