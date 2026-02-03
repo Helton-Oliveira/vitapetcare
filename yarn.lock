@@ -3457,6 +3457,13 @@ ngx-dropzone@^3.1.0:
   dependencies:
     tslib "^2.0.0"
 
+ngx-mask@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-mask/-/ngx-mask-21.0.1.tgz#725d39717a7247bd9fdc18e2fc00f318da3496e9"
+  integrity sha512-L7zyKhXHQjfMLIGPxEmaVXdZ6VurHemgPt352yY9vP0dmWKmmzwF1nkKzDjYqpqEWhL/KMooSqrMGApNVzWeYA==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-toastr@^19.1.0:
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-19.1.0.tgz#c3a676e2b7c2e186e192e75ef272b4caaa778417"
