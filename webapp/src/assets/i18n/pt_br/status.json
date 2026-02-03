@@ -1,0 +1,10 @@
+{
+  "status": {
+    "ACTIVE": "Ativo",
+    "INACTIVE": "Inativo",
+    "IN_PROGRESS": "Em Andamento",
+    "CONFIRM": "Confirmado",
+    "DECLINED": "Recusado",
+    "NOT_INFORMED": "Não Informado"
+  }
+}
