@@ -1,0 +1,96 @@
+@if (jobs) {
+  <body class=" w-full bg-white rounded-xl shadow-sm border border-gray-100">
+  <table class="w-full text-left ">
+    <thead>
+    <tr class="text-gray-400 text-sm font-medium border-b border-gray-200">
+      <th class="p-4 font-normal"></th>
+      <th class="p-4 font-normal"><span translate="global.field.id"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal"><span translate="global.field.name"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal"><span translate="job.type"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal"><span translate="job.valueInCents"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal"><span translate="job.duration"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal"><span translate="global.field.status"></span> <i
+        class="fa-solid fa-sort ml-1 text-xs opacity-50"></i></th>
+      <th class="p-4 font-normal text-center"></th>
+    </tr>
+    </thead>
+
+    <tbody class="text-gray-700">
+      @if (jobs.length) {
+        @for (job of jobs; track job.id) {
+          <tr class="hover:bg-gray-50 transition-colors group border-b border-gray-200"
+              [ngClass]="{'opacity-40 line-through pointer-events-none select-none': !job.active}">
+            <td></td>
+            <td class="p-4 font-medium text-gray-500 border-b border-gray-200">{{ job.id }}</td>
+            <td class="p-4 font-bold text-gray-900 border-b border-gray-200">{{ job.name }}</td>
+            <td class="p-4 border-b border-gray-200">
+                <span class="text-xs font-semibold px-3 py-1 rounded-full"
+                      [ngClass]="job.type?.toString() | jobTypePipe">
+                  {{ "job.jobType." + job.type | translate }}
+                </span>
+            </td>
+            <td class="p-4 text-gray-500 border-b border-gray-200">
+              {{
+                job.valueInCents || 0 | mask: 'separator.2' : {
+                  prefix: 'R$ ',
+                  thousandSeparator: '.',
+                  decimalMarker: ','
+                }
+              }}
+            </td>
+            <td class="p-4 text-gray-500 border-b border-gray-200">
+              {{ job.duration || 0 | mask: '00:00' }}
+            </td>
+            <td class="p-4 text-gray-500 border-b border-gray-200 font-bold">
+              {{ "status." + job.status | translate }}
+            </td>
+
+
+            <td class="p-4 border-b border-gray-200">
+              <div class="flex gap-3 justify-center items-center">
+                <button class="hover:text-blue-600 text-gray-400 transition-colors hover:cursor-pointer" type="button"
+                        (click)="goEdit(job.id?.toString()!!)">
+                  <i class="fa-solid fa-pen-to-square text-lg"></i>
+                </button>
+                <button class="hover:text-red-500 text-gray-400 transition-colors hover:cursor-pointer" type="button"
+                        (click)="disableToast(job.id?.toString())">
+                  <i class="fa-regular fa-trash-can text-lg"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+
+    @if (pagination) {
+      <div class="flex items-center justify-between p-4 border-t border-gray-200 text-sm text-gray-400">
+        <button class="flex items-center hover:text-gray-600 hover:cursor-pointer">
+          <i class="fa-solid fa-chevron-left mr-2"></i>
+          <span translate="global.field.previous"></span>
+        </button>
+        <div class="flex items-center gap-2">
+          @for (page of (pagination.totalPages | range); track page) {
+            <button
+              class="w-8 h-8 flex items-center justify-center"
+              [class]="page+1 === pagination.number+1
+                ? 'bg-green-400 opacity-100 text-white rounded shadow-md shadow-blue-200'
+                : '' ">
+              {{ page + 1 }}
+            </button>
+          }
+        </div>
+        <button class="flex items-center hover:text-gray-600 hover:cursor-pointer">
+          <span translate="global.field.next"></span>
+          <i class="fa-solid fa-chevron-right ml-2"></i>
+        </button>
+      </div>
+    }
+  </body>
+}
