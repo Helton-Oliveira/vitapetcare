@@ -1,0 +1,8 @@
+export enum Status {
+  ACTIVE,
+  INACTIVE,
+  IN_PROGRESS,
+  CONFIRM,
+  DECLINED,
+  NOT_INFORMED
+}
