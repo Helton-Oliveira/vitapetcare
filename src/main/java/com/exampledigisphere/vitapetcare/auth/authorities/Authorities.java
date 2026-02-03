@@ -3,6 +3,7 @@ package com.exampledigisphere.vitapetcare.auth.authorities;
 import com.exampledigisphere.vitapetcare.admin.file.domain.File;
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.admin.workDay.domain.WorkDay;
+import com.exampledigisphere.vitapetcare.catalog.job.Job;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -38,11 +39,20 @@ public final class Authorities {
     WorkDay.Authority.WORK_DAY_VIEW_LIST
   );
 
+  public static final Set<String> JOB_AUTHORITIES = Set.of(
+    Job.Authority.JOB_CREATE,
+    Job.Authority.JOB_EDIT,
+    Job.Authority.JOB_VIEW,
+    Job.Authority.JOB_DELETE,
+    Job.Authority.JOB_VIEW_LIST
+  );
+
   public static Set<String> ALL() {
     return Stream.of(
         USER_AUTHORITIES,
         FILE_AUTHORITIES,
-        WORK_DAY_AUTHORITIES
+        WORK_DAY_AUTHORITIES,
+        JOB_AUTHORITIES
       ).flatMap(Set::stream)
       .collect(Collectors.toSet());
   }

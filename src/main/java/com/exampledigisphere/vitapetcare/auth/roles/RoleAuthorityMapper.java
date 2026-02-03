@@ -44,6 +44,7 @@ public class RoleAuthorityMapper {
         authorities.add(User.Authority.USER_VIEW_LIST);
         authorities.addAll(Authorities.FILE_AUTHORITIES);
         authorities.addAll(Authorities.WORK_DAY_AUTHORITIES);
+        authorities.addAll(Authorities.JOB_AUTHORITIES);
         yield Collections.unmodifiableSet(authorities);
       }
 
@@ -60,6 +61,7 @@ public class RoleAuthorityMapper {
         authorities.add(User.Authority.USER_EDIT);
         authorities.add(User.Authority.USER_VIEW);
         authorities.addAll(Authorities.FILE_AUTHORITIES);
+        authorities.addAll(Authorities.JOB_AUTHORITIES);
         yield Collections.unmodifiableSet(authorities);
       }
 
