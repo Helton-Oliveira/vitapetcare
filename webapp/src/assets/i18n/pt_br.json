@@ -50,6 +50,30 @@
       "SUNDAY": "Domingo"
     }
   },
+  "job": {
+    "title": "Serviços",
+    "singleTitle": "Serviço",
+    "subTitle": "Lista de Serviços",
+    "type": "Tipo de Serviço",
+    "valueInCents": "Valor",
+    "duration": "Duração",
+    "typeOfProfessional": "Profissional",
+    "hasReturn": "Possui Retorno?",
+    "timeToReturnInDays": "Dias para Retorno",
+    "jobType": {
+      "CONSULTATION": "Consulta",
+      "EXAMINATION": "Exame",
+      "SURGERY": "Cirurgia",
+      "HOSPITALIZATION": "Internação",
+      "EMERGENCY": "Emergência",
+      "BATH": "Banho",
+      "GROOMING": "Tosa",
+      "BATH_AND_GROOMING": "Banho e Tosa",
+      "SANITARY_GROOMING": "Tosa Higiênica",
+      "STAY": "Estadia",
+      "NOT_INFORMED": "Não Informado"
+    }
+  },
   "login": {
     "email": "Email",
     "password": "Senha",
@@ -62,7 +86,16 @@
     "dashboard": "Dashboard",
     "collaborators": "Colaboradores",
     "users": "Usuarios",
-    "permissions": "Permissões"
+    "permissions": "Permissões",
+    "jobs": "Serviços"
+  },
+  "status": {
+    "ACTIVE": "Ativo",
+    "INACTIVE": "Inativo",
+    "IN_PROGRESS": "Em Andamento",
+    "CONFIRM": "Confirmado",
+    "DECLINED": "Recusado",
+    "NOT_INFORMED": "Não Informado"
   },
   "timePeriod": {
     "startTime": "Início",

@@ -45,5 +45,20 @@
         </a>
       </li>
     }
+
+    @if (hasPermission("JOB_VIEW_LIST")) {
+      <li class="w-full">
+        <a routerLink="/app/job"
+           routerLinkActive="bg-green-400 text-white shadow-md shadow-green-100"
+           class="flex items-center gap-4 px-3 py-3 rounded-xl text-black hover:bg-green-400 hover:text-white transition-all duration-200">
+
+          <i class="fa-solid fa-briefcase text-xl w-8 text-center"></i>
+          <span
+            class="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 text-sm font-medium"
+            translate="sidebar.jobs">
+          </span>
+        </a>
+      </li>
+    }
   </ul>
 </nav>
