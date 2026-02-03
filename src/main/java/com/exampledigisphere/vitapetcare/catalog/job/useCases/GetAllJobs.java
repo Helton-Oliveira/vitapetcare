@@ -20,7 +20,12 @@ public class GetAllJobs {
   public Page<Job> execute(Pageable pageable) {
     log.info("GetAllJobs, {}", pageable);
 
-    return jobRepository.findAll(pageable);
+    return jobRepository.findAll(pageable)
+      .map(job -> {
+        job.convertCentsInDollars();
+        job.convertMinutesInHours();
+        return job;
+      });
   }
 
 }

@@ -23,6 +23,11 @@ public class CreateJob {
 
     return Optional.of(input)
       .filter(Job::isEdited)
+      .map(job -> {
+        job.convertDollarsInCents();
+        job.convertHoursInMinutes();
+        return job;
+      })
       .map(jobRepository::save);
   }
 

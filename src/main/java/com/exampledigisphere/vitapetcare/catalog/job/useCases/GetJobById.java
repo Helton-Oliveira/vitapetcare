@@ -21,7 +21,12 @@ public class GetJobById {
   public Optional<Job> execute(@NonNull Long jobId) {
     log.info("GetJobById, {}", jobId);
 
-    return jobRepository.findById(jobId);
+    return jobRepository.findById(jobId)
+      .map(job -> {
+        job.convertCentsInDollars();
+        job.convertMinutesInHours();
+        return job;
+      });
   }
 
 }
