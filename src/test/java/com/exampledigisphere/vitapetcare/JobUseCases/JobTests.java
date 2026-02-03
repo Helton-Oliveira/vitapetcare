@@ -6,6 +6,7 @@ import com.exampledigisphere.vitapetcare.catalog.job.Job;
 import com.exampledigisphere.vitapetcare.catalog.job.JobRepository;
 import com.exampledigisphere.vitapetcare.catalog.job.JobType;
 import com.exampledigisphere.vitapetcare.catalog.job.useCases.CreateJob;
+import com.exampledigisphere.vitapetcare.catalog.job.useCases.DisableJob;
 import com.exampledigisphere.vitapetcare.catalog.job.useCases.GetAllJobs;
 import com.exampledigisphere.vitapetcare.catalog.job.useCases.GetJobById;
 import org.junit.jupiter.api.DisplayName;
@@ -76,6 +77,22 @@ public class JobTests {
           assertThat(job.getType()).isEqualTo(JobType.GROOMING);
           assertThat(job.getStatus()).isEqualTo(Status.ACTIVE);
         });
+  }
+
+  @Test
+  @DisplayName("Deve realizar exclusao logica do Job")
+  public void disableJob() {
+    final var getJob = new GetJobById(jobRepository);
+    final var activeJob = getJob.execute(10L)
+      .filter(Job::isActive)
+      .orElseThrow();
+
+    activeJob.setEdited(true);
+
+    final var disableJob = new DisableJob(jobRepository);
+    final boolean isDisable = disableJob.execute(activeJob);
+
+    assertThat(isDisable).isTrue();
   }
 
 }
