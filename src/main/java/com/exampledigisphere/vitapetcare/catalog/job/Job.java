@@ -84,6 +84,22 @@ public class Job extends BaseEntity {
     );
   }
 
+  public void convertDollarsInCents() {
+    this.valueInCents = this.valueInCents.multiply(BigDecimal.valueOf(100));
+  }
+
+  public void convertCentsInDollars() {
+    this.valueInCents = this.valueInCents.divideToIntegralValue(BigDecimal.valueOf(100));
+  }
+
+  public void convertHoursInMinutes() {
+    this.duration = this.duration.multiply(BigInteger.valueOf(60));
+  }
+
+  public void convertMinutesInHours() {
+    this.duration = this.duration.divide(BigInteger.valueOf(60));
+  }
+
   public String getName() {
     return name;
   }
