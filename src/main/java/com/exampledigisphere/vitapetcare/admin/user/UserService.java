@@ -4,7 +4,6 @@ import com.exampledigisphere.vitapetcare.admin.file.FileService;
 import com.exampledigisphere.vitapetcare.admin.user.domain.UserAssociations;
 import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository;
 import com.exampledigisphere.vitapetcare.admin.workDay.WorkDayService;
-import com.exampledigisphere.vitapetcare.config.root.Association;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +46,7 @@ public class UserService {
     date = "06/02/2026",
     description = "Registra ou atualiza um usuário processando seus vínculos de forma funcional"
   )
-  public Optional<UserDTO> register(UserDTO input, Set<Association> associations) {
+  public Optional<UserDTO> register(UserDTO input, Set<UserAssociations> associations) {
     log.info("Matriculando/Atualizando usuário: {}", input);
     required(input, () -> "User cannot be null to save!");
 
@@ -55,7 +54,7 @@ public class UserService {
       .map(userRepository::save)
       .map(usr -> usr.applyAssociations(transformToAssociationSet(associations)))
       .map(UserFactory::toResponse)
-      .map(this::persistDependencies);
+      .map(savedUser -> persistDependencies(input, savedUser));
   }
 
   @Info(
@@ -103,9 +102,12 @@ public class UserService {
       });
   }
 
-  private UserDTO persistDependencies(UserDTO input) {
-    input.editedFiles().ifPresent(f -> fileService.catalog(f, input));
-    input.editedWorkDays().ifPresent(wk -> workDayService.assign(wk, input));
+  private UserDTO persistDependencies(UserDTO input, UserDTO savedUser) {
+    log.info("Usuario DTO antigo: {}", input);
+    log.info("Usuario DTO salvo: {}", input);
+
+    input.editedFiles().ifPresent(f -> fileService.catalog(f, savedUser));
+    input.editedWorkDays().ifPresent(wk -> workDayService.assign(wk, savedUser));
     return input;
   }
 }

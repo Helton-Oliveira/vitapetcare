@@ -3,7 +3,6 @@ package com.exampledigisphere.vitapetcare.admin.workDay;
 import com.exampledigisphere.vitapetcare.admin.timePeriod.TimePeriodService;
 import com.exampledigisphere.vitapetcare.admin.user.UserDTO;
 import com.exampledigisphere.vitapetcare.admin.workDay.repository.WorkDayRepository;
-import com.exampledigisphere.vitapetcare.config.root.Association;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -58,14 +57,14 @@ public class WorkDayService {
     date = "06/02/2026",
     description = "Agenda ou atualiza um dia de trabalho individualmente"
   )
-  public Optional<WorkDayDTO> schedule(@NonNull WorkDayDTO input, Set<Association> associations) {
+  public Optional<WorkDayDTO> schedule(@NonNull WorkDayDTO input, Set<WorkDayAssociations> associations) {
     log.info("Agendando dia de trabalho: {}", input);
 
     return Optional.of(WorkDayFactory.createFrom(input))
       .map(workDayRepository::save)
       .map(wk -> wk.applyAssociations(transformToAssociationSet(associations)))
       .map(WorkDayFactory::toResponse)
-      .map(this::persistDependencies);
+      .map(savedWk -> persistDependencies(input, savedWk));
   }
 
   @Info(
@@ -75,7 +74,7 @@ public class WorkDayService {
     description = "Recupera um dia de trabalho através de seu identificador"
   )
   @Transactional(readOnly = true)
-  public Optional<WorkDayDTO> retrieve(@NonNull Long id, Set<WorkPeriodAssociations> associations) {
+  public Optional<WorkDayDTO> retrieve(@NonNull Long id, Set<WorkDayAssociations> associations) {
     log.info("Recuperando dia de trabalho ID: {}", id);
 
     return workDayRepository.findById(id)
@@ -113,8 +112,8 @@ public class WorkDayService {
       });
   }
 
-  private WorkDayDTO persistDependencies(WorkDayDTO input) {
-    input.editedShifts().ifPresent(shifts -> timePeriodService.allocate(shifts, input));
-    return input;
+  private WorkDayDTO persistDependencies(WorkDayDTO input, WorkDayDTO savedWorkDay) {
+    input.editedShifts().ifPresent(shifts -> timePeriodService.allocate(shifts, savedWorkDay));
+    return savedWorkDay;
   }
 }
