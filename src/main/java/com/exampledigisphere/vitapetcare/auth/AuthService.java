@@ -1,9 +1,11 @@
 package com.exampledigisphere.vitapetcare.auth;
 
+import com.exampledigisphere.vitapetcare.admin.user.UserDTO;
+import com.exampledigisphere.vitapetcare.admin.user.UserFactory;
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
+import com.exampledigisphere.vitapetcare.admin.user.domain.UserAssociations;
 import com.exampledigisphere.vitapetcare.admin.user.repository.UserRepository;
 import com.exampledigisphere.vitapetcare.auth.DTO.*;
-import com.exampledigisphere.vitapetcare.config.root.AssociationFetcher;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import com.exampledigisphere.vitapetcare.config.root.util.SecurityUtils;
 import com.exampledigisphere.vitapetcare.config.security.JwtTokenUtil;
@@ -25,6 +27,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static com.exampledigisphere.vitapetcare.config.root.Utils.initialize;
+import static com.exampledigisphere.vitapetcare.config.root.Utils.transformToAssociationSet;
 
 @Slf4j
 @Service
@@ -125,12 +128,14 @@ public class AuthService {
     date = "06/02/2026",
     description = "Busca o usuário autenticado no banco de dados com associações"
   )
-  public Optional<User> getCurrentAccount(Set<AssociationFetcher<User>> associations) {
+  public Optional<UserDTO> getCurrentAccount(Set<UserAssociations> associations) {
     String username = SecurityUtils.getAuthenticatedUsername();
     log.info("Buscando conta atual para o usuário: {}", username);
 
     return userRepository.findByUsername(username)
-      .map(user -> initialize(user, associations));
+      .map(usr -> usr.applyAssociations(transformToAssociationSet(associations)))
+      .map(user -> initialize(user, (associations)))
+      .map(UserFactory::toResponse);
   }
 
   @Info(
