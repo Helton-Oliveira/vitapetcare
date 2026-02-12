@@ -13,6 +13,7 @@ import {Role} from '../../shared/models/role/role.enum';
 import {Status} from '../../shared/enumerations/Status';
 import {JobType} from '../../shared/models/job/JobType';
 import {NgxMaskDirective} from 'ngx-mask';
+import {JobTypePipe} from '../../shared/pipes/job-type-pipe';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ import {NgxMaskDirective} from 'ngx-mask';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    JobTypePipe
   ]
 })
 export class JobUpdateComponent implements OnInit {
@@ -39,12 +41,12 @@ export class JobUpdateComponent implements OnInit {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    duration: [0, [Validators.required]],
-    valueInCents: [0, [Validators.required]],
+    duration: [null as number | null, [Validators.required]],
+    valueInCents: [null as number | null, [Validators.required]],
     typesOfProfessionals: ['', [Validators.required]],
     type: ['', [Validators.required]],
     hasReturn: [false],
-    timeToReturnInDays: [0],
+    timeToReturnInDays: [null as number | null],
     status: ['', Validators.required],
   });
 
@@ -127,11 +129,5 @@ export class JobUpdateComponent implements OnInit {
   canSubmit(): boolean {
     return this.form.valid
       && this.form.dirty
-  }
-
-  private markFormAsChanged(): void {
-    this.form.markAsDirty();
-    this.form.updateValueAndValidity({emitEvent: false});
-    this.setup();
   }
 }

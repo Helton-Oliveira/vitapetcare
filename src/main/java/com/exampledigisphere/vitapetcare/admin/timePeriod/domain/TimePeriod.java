@@ -3,11 +3,7 @@ package com.exampledigisphere.vitapetcare.admin.timePeriod.domain;
 import com.exampledigisphere.vitapetcare.admin.workDay.domain.WorkDay;
 import com.exampledigisphere.vitapetcare.config.root.BaseEntity;
 import com.exampledigisphere.vitapetcare.config.root.Info;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.Hibernate;
 
 import java.time.LocalTime;
 
@@ -19,24 +15,14 @@ import java.time.LocalTime;
   date = "29/12/2025",
   description = "Entidade que representa um período de tempo dentro de um dia de trabalho"
 )
-public class TimePeriod extends BaseEntity {
+public class TimePeriod extends BaseEntity<TimePeriod> {
 
   @Transient
   public static final String TABLE_NAME = "wrk_times_periods";
-
-  @NotNull
-  @JsonView(Json.List.class)
   private LocalTime startTime;
-
-  @NotNull
-  @JsonView(Json.List.class)
   private LocalTime endTime;
-
-  @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "work_day_id")
-  @JsonView(Json.WithWorkDay.class)
-  @JsonIgnoreProperties("shifts")
   private WorkDay workDay;
 
   public TimePeriod() {
@@ -66,22 +52,11 @@ public class TimePeriod extends BaseEntity {
     this.workDay = workDay;
   }
 
-  public TimePeriod loadWorkDay() {
-    Hibernate.initialize(workDay);
-    return this;
-  }
-
-  public interface Json {
-    interface List {
-    }
-
-    interface Detail extends List {
-    }
-
-    interface WithWorkDay extends WorkDay.Json.List {
-    }
-
-    interface All extends Detail, WithWorkDay {
-    }
+  public interface Authority {
+    String TIME_PERIOD_CREATE = "TIME_PERIOD_CREATE";
+    String TIME_PERIOD_EDIT = "TIME_PERIOD_EDIT";
+    String TIME_PERIOD_VIEW = "TIME_PERIOD_VIEW";
+    String TIME_PERIOD_VIEW_LIST = "TIME_PERIOD_VIEW_LIST";
+    String TIME_PERIOD_DELETE = "TIME_PERIOD_DELETE";
   }
 }

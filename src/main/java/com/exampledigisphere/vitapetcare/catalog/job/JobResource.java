@@ -1,12 +1,7 @@
 package com.exampledigisphere.vitapetcare.catalog.job;
 
-import com.exampledigisphere.vitapetcare.catalog.job.useCases.CreateJob;
-import com.exampledigisphere.vitapetcare.catalog.job.useCases.DisableJob;
-import com.exampledigisphere.vitapetcare.catalog.job.useCases.GetAllJobs;
-import com.exampledigisphere.vitapetcare.catalog.job.useCases.GetJobById;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,25 +15,25 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/api/jobs")
-@RequiredArgsConstructor
 @Info(
   dev = Info.Dev.heltonOliveira,
   label = Info.Label.feature,
-  date = "29/12/2025",
+  date = "06/02/2026",
   description = "Recurso REST para gestão de servicos"
 )
 public class JobResource {
 
-  private final CreateJob createJob;
-  private final GetAllJobs getAllJobs;
-  private final GetJobById getJobById;
-  private final DisableJob disableJob;
+  private final JobService jobService;
+
+  public JobResource(JobService jobService) {
+    this.jobService = jobService;
+  }
 
   @PostMapping
   @PreAuthorize("hasAuthority('JOB_CREATE')")
   @Transactional
   public ResponseEntity<?> create(@RequestBody @Valid Job input, UriComponentsBuilder uriBuilder) {
-    return createJob.execute(input)
+    return jobService.catalog(input)
       .map(job -> {
         var uri = uriBuilder.path("/api/jobs/{id}").buildAndExpand(job.getId()).toUri();
         return ResponseEntity.created(uri).body(job);
@@ -50,7 +45,7 @@ public class JobResource {
   @PreAuthorize("hasAuthority('JOB_EDIT')")
   @Transactional
   public ResponseEntity<?> update(@RequestBody @Valid Job input) {
-    return createJob.execute(input)
+    return jobService.catalog(input)
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
   }
@@ -58,7 +53,7 @@ public class JobResource {
   @GetMapping("/{id}")
   @PreAuthorize("hasAuthority('JOB_VIEW')")
   public ResponseEntity<?> getOne(@PathVariable Long id) {
-    return getJobById.execute(id)
+    return jobService.retrieve(id)
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }
@@ -66,13 +61,13 @@ public class JobResource {
   @GetMapping
   @PreAuthorize("hasAuthority('JOB_VIEW_LIST')")
   public ResponseEntity<Page<?>> getAll(@PageableDefault(page = 0, size = 20) Pageable pageable) {
-    return ResponseEntity.ok(getAllJobs.execute(pageable));
+    return ResponseEntity.ok(jobService.browse(pageable));
   }
 
   @DeleteMapping("/{id}")
   @PreAuthorize("hasAuthority('JOB_DELETE')")
   public ResponseEntity<?> disable(@PathVariable Long id) {
-    disableJob.execute(id);
+    jobService.discontinue(id);
     return ResponseEntity.ok().build();
   }
 }

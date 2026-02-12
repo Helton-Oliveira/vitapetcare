@@ -4,14 +4,12 @@ import com.exampledigisphere.vitapetcare.admin.file.domain.File;
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.admin.workDay.domain.WorkDay;
 import com.exampledigisphere.vitapetcare.catalog.job.Job;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@NoArgsConstructor
 @Component
 public final class Authorities {
 

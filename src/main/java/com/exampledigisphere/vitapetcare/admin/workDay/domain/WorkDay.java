@@ -7,7 +7,6 @@ import com.exampledigisphere.vitapetcare.config.root.Info;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.Hibernate;
 
 import java.time.DayOfWeek;
 import java.util.HashSet;
@@ -21,7 +20,7 @@ import java.util.Set;
   date = "29/12/2025",
   description = "Entidade que representa o dia de trabalho de um usuário"
 )
-public class WorkDay extends BaseEntity {
+public class WorkDay extends BaseEntity<WorkDay> {
 
   @Transient
   public static final String TABLE_NAME = "wrk_works_days";
@@ -66,25 +65,11 @@ public class WorkDay extends BaseEntity {
     this.shifts = shifts;
   }
 
-  public WorkDay loadUser() {
-    Hibernate.initialize(user);
-    return this;
-  }
-
-  public WorkDay loadShifts() {
-    Hibernate.initialize(shifts);
-    return this;
-  }
-
-  public void prepareToCreation() {
-    shifts = null;
-  }
-
   public interface Authority {
-    String WORK_DAY_CREATE = "WORK_DAYS_CREATE";
-    String WORK_DAY_EDIT = "WORK_DAYS_EDIT";
-    String WORK_DAY_VIEW = "WORK_DAYS_VIEW";
-    String WORK_DAY_VIEW_LIST = "WORK_DAYS_VIEW_LIST";
-    String WORK_DAY_DELETE = "WORK_DAYS_DELETE";
+    String WORK_DAY_CREATE = "WORK_DAY_CREATE";
+    String WORK_DAY_EDIT = "WORK_DAY_EDIT";
+    String WORK_DAY_VIEW = "WORK_DAY_VIEW";
+    String WORK_DAY_VIEW_LIST = "WORK_DAY_VIEW_LIST";
+    String WORK_DAY_DELETE = "WORK_DAY_DELETE";
   }
 }

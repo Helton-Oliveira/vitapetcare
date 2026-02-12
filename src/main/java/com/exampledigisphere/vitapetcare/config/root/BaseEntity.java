@@ -5,10 +5,10 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.UUID;
+import java.util.*;
 
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+public class BaseEntity<T extends BaseEntity<T>> implements Serializable {
   @Transient
   private final Long serialVersionUID = 1L;
 
@@ -36,9 +36,22 @@ public class BaseEntity implements Serializable {
   @Transient
   private boolean edited;
 
-  public BaseEntity() {
+  @Transient
+  private final Set<String> associations = new HashSet<>();
+
+  public T applyAssociations(Set<String> associations) {
+    if (associations != null) {
+      this.associations.addAll(associations);
+    }
+    return (T) this;
   }
 
+  public boolean hasAssociation(String association) {
+    return associations.contains(association);
+  }
+
+  public BaseEntity() {
+  }
 
   public Long getId() {
     return id;
@@ -130,5 +143,32 @@ public class BaseEntity implements Serializable {
 
   public void audit(String username) {
     // TODO();
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null || getClass() != object.getClass()) return false;
+    BaseEntity<?> that = (BaseEntity<?>) object;
+    return Objects.equals(id, that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+
+  @Override
+  public String toString() {
+    return new StringJoiner(", ", BaseEntity.class.getSimpleName() + "[", "]")
+      .add("id=" + id)
+      .add("uuid='" + uuid + "'")
+      .add("active=" + active)
+      .add("createdAt=" + createdAt)
+      .add("lastModifiedAt=" + lastModifiedAt)
+      .add("deletedAt=" + deletedAt)
+      .add("createdBy='" + createdBy + "'")
+      .add("lastModifiedBy='" + lastModifiedBy + "'")
+      .add("edited=" + edited)
+      .toString();
   }
 }

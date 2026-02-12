@@ -1,7 +1,6 @@
 package com.exampledigisphere.vitapetcare.config.security;
 
 import com.exampledigisphere.vitapetcare.config.root.Info;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,7 +24,6 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 @Info(
   dev = Info.Dev.heltonOliveira,
   label = Info.Label.doc,
@@ -35,6 +33,10 @@ import java.util.List;
 public class SecurityConfig {
 
   private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+  public SecurityConfig(final CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
+    this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {

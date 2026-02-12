@@ -3,14 +3,12 @@ package com.exampledigisphere.vitapetcare.auth.roles;
 import com.exampledigisphere.vitapetcare.admin.user.domain.User;
 import com.exampledigisphere.vitapetcare.auth.authorities.Authorities;
 import com.exampledigisphere.vitapetcare.config.root.Info;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@NoArgsConstructor
 @Component
 @Info(
   dev = Info.Dev.heltonOliveira,

@@ -94,8 +94,6 @@ graph TD
 
 * No manual constructors
 
-* Prefer `@RequiredArgsConstructor`
-
 * **Functional Logic**
 
 * Mandatory use of Streams

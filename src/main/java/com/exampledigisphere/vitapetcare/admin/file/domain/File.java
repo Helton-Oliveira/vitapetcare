@@ -10,9 +10,11 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
+import static com.exampledigisphere.vitapetcare.config.root.Utils.required;
+
 @Entity
 @Table(name = "fil_files")
-public class File extends BaseEntity {
+public class File extends BaseEntity<File> {
 
   @Transient
   final String TABLE_NAME = "fil_files";
@@ -59,6 +61,8 @@ public class File extends BaseEntity {
   }
 
   public void setUser(User user) {
+    required(user, () -> "To create a file, the username cannot be null!");
+
     this.user = user;
   }
 

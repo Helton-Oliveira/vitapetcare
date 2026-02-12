@@ -18,7 +18,7 @@ import java.util.StringJoiner;
 
 @Entity
 @Table(name = "cat_jobs")
-public class Job extends BaseEntity {
+public class Job extends BaseEntity<Job> {
   public static final String TABLE_NAME = "cat_jobs";
 
   @NotBlank
