@@ -1,8 +1,8 @@
 package com.exampledigisphere.vitapetcare.admin.workDay.resource;
 
+import com.exampledigisphere.vitapetcare.admin.workDay.WorkDayAssociations;
 import com.exampledigisphere.vitapetcare.admin.workDay.WorkDayDTO;
 import com.exampledigisphere.vitapetcare.admin.workDay.WorkDayService;
-import com.exampledigisphere.vitapetcare.admin.workDay.WorkPeriodAssociations;
 import com.exampledigisphere.vitapetcare.config.root.Info;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -56,7 +56,7 @@ public class WorkDayResource {
   @GetMapping("/{id}")
   @PreAuthorize("hasAuthority('WORK_DAY_VIEW')")
   public ResponseEntity<WorkDayDTO> getOne(@PathVariable Long id) {
-    return workDayService.retrieve(id, Set.of(WorkPeriodAssociations.USER, WorkPeriodAssociations.TIME_PERIOD))
+    return workDayService.retrieve(id, Set.of(WorkDayAssociations.USER, WorkDayAssociations.TIME_PERIOD))
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }

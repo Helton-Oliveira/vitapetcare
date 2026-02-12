@@ -7,13 +7,13 @@ import org.hibernate.Hibernate;
 
 import java.util.function.Consumer;
 
-public enum WorkPeriodAssociations implements AssociationFetcher<WorkDay>, Association {
+public enum WorkDayAssociations implements AssociationFetcher<WorkDay>, Association {
   USER(workDay -> Hibernate.initialize(workDay.getUser())),
   TIME_PERIOD(workDay -> Hibernate.initialize(workDay.getShifts()));
 
   private final Consumer<WorkDay> initializer;
 
-  WorkPeriodAssociations(Consumer<WorkDay> initializer) {
+  WorkDayAssociations(Consumer<WorkDay> initializer) {
     this.initializer = initializer;
   }
 

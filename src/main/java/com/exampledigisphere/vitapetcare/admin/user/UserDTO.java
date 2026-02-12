@@ -3,19 +3,14 @@ package com.exampledigisphere.vitapetcare.admin.user;
 import com.exampledigisphere.vitapetcare.admin.file.FileDTO;
 import com.exampledigisphere.vitapetcare.admin.workDay.WorkDayDTO;
 import com.exampledigisphere.vitapetcare.auth.roles.Role;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.exampledigisphere.vitapetcare.auth.roles.RoleAuthorityMapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserDTO implements Serializable {
@@ -38,16 +33,17 @@ public class UserDTO implements Serializable {
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
-  @Enumerated(EnumType.STRING)
+  @NotNull
   @JsonView(Json.List.class)
   private Role role;
 
+  @JsonView(Json.List.class)
+  private Set<String> authorities = new HashSet<>();
+
   @JsonView(Json.WithFIle.class)
-  @JsonIgnoreProperties("user")
   private Set<FileDTO> files;
 
   @JsonView(Json.WithWorkDay.class)
-  @JsonIgnoreProperties("user")
   private Set<WorkDayDTO> workDays;
 
   @NotNull
@@ -68,6 +64,7 @@ public class UserDTO implements Serializable {
     this.email = email;
     this.password = password;
     this.role = role;
+    this.authorities = RoleAuthorityMapper.getAuthorities(role);
     this.files = files;
     this.workDays = workDays;
     this.edited = edited;

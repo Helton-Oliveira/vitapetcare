@@ -38,8 +38,8 @@ public class WorkDayFactory {
       domain.getId(),
       domain.getUuid(),
       domain.getDayOfWeek(),
-      mapIfRequested(domain.hasAssociation(WorkPeriodAssociations.USER.name()), () -> toUserDTO(domain)),
-      mapIfRequested(domain.hasAssociation(WorkPeriodAssociations.TIME_PERIOD.name()), () -> toTimePeriodDTOList(domain)),
+      mapIfRequested(domain.hasAssociation(WorkDayAssociations.USER.name()), () -> toUserDTO(domain)),
+      mapIfRequested(domain.hasAssociation(WorkDayAssociations.TIME_PERIOD.name()), () -> toTimePeriodDTOList(domain)),
       domain.isEdited(),
       domain.isActive()
     );
