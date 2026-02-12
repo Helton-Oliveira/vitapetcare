@@ -29,7 +29,7 @@ public class FileDTO implements Serializable {
   @JsonView(Json.Detail.class)
   private FileType type;
 
-  @JsonView(Json.Detail.class)
+  @JsonView(Json.WithUser.class)
   private UserDTO user;
 
   @NotNull
@@ -97,7 +97,10 @@ public class FileDTO implements Serializable {
     interface Detail extends List {
     }
 
-    interface All extends Detail {
+    interface WithUser extends UserDTO.Json.Detail {
+    }
+
+    interface All extends Detail, WithUser {
     }
   }
 }
