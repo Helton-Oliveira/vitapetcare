@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 import static com.exampledigisphere.vitapetcare.config.root.Utils.required;
 
@@ -101,5 +102,15 @@ public class File extends BaseEntity<File> {
   @Override
   public int hashCode() {
     return Objects.hash(super.hashCode(), TABLE_NAME, name, path, user, type);
+  }
+
+  @Override
+  public String toString() {
+    return new StringJoiner(", ", File.class.getSimpleName() + "[", "]")
+      .add("name='" + name + "'")
+      .add("path='" + path + "'")
+      //  .add("user=" + user)
+      .add("type=" + type)
+      .toString();
   }
 }
