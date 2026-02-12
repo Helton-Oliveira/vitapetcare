@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="05bc7941-faae-4536-bc79-41faae3536a2" author="heltonOliveira">
+    <createTable tableName="wrk_works_days">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="true" nullable="false"/>
+      </column>
+
+      <column name="uuid" type="text">
+        <constraints unique="true" nullable="false"/>
+      </column>
+
+      <column name="active" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_at" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="last_modified_at" type="timestamp"/>
+
+      <column name="last_modified_by" type="text"/>
+
+      <column name="deleted_at" type="timestamp"/>
+
+      <column name="created_by" type="text"/>
+
+      <column name="day_of_week" type="text">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="user_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+
+    <createIndex tableName="wrk_works_days" indexName="idx_wrk_works_days__id">
+      <column name="id" type="bigint"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_works_days" indexName="idx_wrk_works_days__active">
+      <column name="active" type="boolean"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_works_days" indexName="idx_wrk_works_days__user_id">
+      <column name="user_id" type="bigint"/>
+    </createIndex>
+
+  </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+  <changeSet id="acefcefa-9426-4c12-afce-fa9426ec129e" author="heltonOliveira">
+    <createTable tableName="wrk_times_periods">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" unique="true" nullable="false"/>
+      </column>
+
+      <column name="uuid" type="text">
+        <constraints unique="true" nullable="false"/>
+      </column>
+
+      <column name="active" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_at" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="last_modified_at" type="timestamp"/>
+
+      <column name="last_modified_by" type="text"/>
+
+      <column name="deleted_at" type="timestamp"/>
+
+      <column name="created_by" type="text"/>
+
+      <column name="start_time" type="time">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="end_time" type="time">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="work_day_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+
+    <createIndex tableName="wrk_times_periods" indexName="idx_wrk_times_periods__id">
+      <column name="id" type="bigint"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_times_periods" indexName="idx_wrk_times_periods__active">
+      <column name="active" type="boolean"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_times_periods" indexName="idx_wrk_times_periods__start_time">
+      <column name="start_time" type="time"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_times_periods" indexName="idx_wrk_times_periods__end_time">
+      <column name="end_time" type="time"/>
+    </createIndex>
+
+    <createIndex tableName="wrk_times_periods" indexName="idx_wrk_times_periods__work_day_id">
+      <column name="work_day_id" type="bigint"/>
+    </createIndex>
+
+  </changeSet>
+
+</databaseChangeLog>

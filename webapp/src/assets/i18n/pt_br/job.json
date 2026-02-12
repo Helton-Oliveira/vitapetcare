@@ -1,0 +1,26 @@
+{
+  "job": {
+    "title": "Serviços",
+    "singleTitle": "Serviço",
+    "subTitle": "Lista de Serviços",
+    "type": "Tipo de Serviço",
+    "valueInCents": "Valor",
+    "duration": "Duração",
+    "typeOfProfessional": "Profissional",
+    "hasReturn": "Possui Retorno?",
+    "timeToReturnInDays": "Dias para Retorno",
+    "jobType": {
+      "CONSULTATION": "Consulta",
+      "EXAMINATION": "Exame",
+      "SURGERY": "Cirurgia",
+      "HOSPITALIZATION": "Internação",
+      "EMERGENCY": "Emergência",
+      "BATH": "Banho",
+      "GROOMING": "Tosa",
+      "BATH_AND_GROOMING": "Banho e Tosa",
+      "SANITARY_GROOMING": "Tosa Higiênica",
+      "STAY": "Estadia",
+      "NOT_INFORMED": "Não Informado"
+    }
+  }
+}

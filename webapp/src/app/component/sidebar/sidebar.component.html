@@ -1,44 +1,64 @@
 <nav
-  class="group flex flex-col items-center justify-start mt-5 ml-5 gap-6
-         w-16 hover:w-60 transition-all duration-20
-         bg-white shadow-lg py-6 hover:rounded-lg
-         rounded-2xl group-hover:rounded-2xl hover:cursor-pointer">
+  class="group flex flex-col items-start justify-start h-screen transition-all duration-300
+         w-20 hover:w-64 bg-white border-r border-gray-100 py-6 px-4">
 
-  <ul class="flex flex-col gap-6 w-full px-1">
+  <div class="flex items-center justify-center w-full mb-10 overflow-hidden">
+    <img
+      ngSrc="../assets/logo.png"
+      alt="Logo"
+      class="h-20 min-w-20 w-full "
+      width="1000"
+      height="1000"
+    />
+  </div>
 
-    <!-- DASHBOARD -->
+  <ul class="flex flex-col gap-2 w-full">
+
     @if (isAdmin()) {
-      <li>
-        <a routerLink="/app/dashboard" class="sidebar-icon">
-          <i class="fa-solid fa-gauge text-2xl"></i>
-          <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-sm font-medium"
-                translate="sidebar.dashboard">
+      <li class="w-full">
+        <a routerLink="/app/dashboard"
+           routerLinkActive="bg-green-400 text-white shadow-md shadow-green-100"
+           class="flex items-center gap-4 px-3 py-3 rounded-xl text-black hover:bg-green-400 hover:text-white transition-all duration-200">
+
+          <i class="fa-solid fa-gauge text-xl w-8 text-center"></i>
+
+          <span
+            class="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 text-sm font-medium"
+            translate="sidebar.dashboard">
           </span>
         </a>
       </li>
     }
 
-    <!-- USER -->
     @if (hasPermission("USER_VIEW_LIST")) {
-      <li>
-        <a routerLink="/app/user" class="sidebar-icon">
-          <i class="fa-solid fa-users text-2xl"></i>
-          <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
-                translate="sidebar.users">
-        </span>
+      <li class="w-full">
+        <a routerLink="/app/user"
+           routerLinkActive="bg-green-400 text-white shadow-md shadow-green-100"
+           class="flex items-center gap-4 px-3 py-3 rounded-xl text-black hover:bg-green-400 hover:text-white transition-all duration-200">
+
+          <i class="fa-solid fa-users text-xl w-8 text-center"></i>
+
+          <span
+            class="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 text-sm font-medium"
+            translate="sidebar.users">
+          </span>
         </a>
       </li>
     }
 
-    <!-- ROLE
-    <li>
-      <a routerLink="/app/role" class="sidebar-icon">
-        <i class="fa-solid fa-shield-halved text-2xl"></i>
-        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium"
-              translate="sidebar.permissions">
-        </span>
-      </a>
-    </li> -->
+    @if (hasPermission("JOB_VIEW_LIST")) {
+      <li class="w-full">
+        <a routerLink="/app/job"
+           routerLinkActive="bg-green-400 text-white shadow-md shadow-green-100"
+           class="flex items-center gap-4 px-3 py-3 rounded-xl text-black hover:bg-green-400 hover:text-white transition-all duration-200">
 
+          <i class="fa-solid fa-briefcase text-xl w-8 text-center"></i>
+          <span
+            class="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-200 text-sm font-medium"
+            translate="sidebar.jobs">
+          </span>
+        </a>
+      </li>
+    }
   </ul>
 </nav>

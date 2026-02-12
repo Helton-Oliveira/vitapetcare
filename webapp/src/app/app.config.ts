@@ -7,6 +7,8 @@ import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/h
 import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
 import {createTranslateLoader} from './shared/loaders/translate.loader';
 import {tokenInterceptor} from './interceptor/token-interceptor';
+import {provideToastr} from 'ngx-toastr';
+import {provideNgxMask} from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(APP_ROUTES),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideToastr(),
+    provideNgxMask(),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

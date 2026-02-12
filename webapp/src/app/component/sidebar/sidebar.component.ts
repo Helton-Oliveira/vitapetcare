@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouterLink} from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 import {User} from '../../shared/models/user/user.model';
-import {Role} from '../../shared/models/user/role';
+import {Role} from '../../shared/models/role/role.enum';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,8 @@ import {Role} from '../../shared/models/user/role';
   imports: [
     TranslateModule,
     RouterLink,
+    NgOptimizedImage,
+    RouterLinkActive,
   ]
 })
 export class SidebarComponent {
@@ -25,8 +28,8 @@ export class SidebarComponent {
   }
 
   hasPermission(permission: string): boolean {
-    if (!this.currentAccount?.permissions) return false;
-    return this.currentAccount.permissions.includes(permission);
+    if (!this.currentAccount?.authorities) return false;
+    return this.currentAccount.authorities.includes(permission);
   }
 
   isAdmin(): boolean {

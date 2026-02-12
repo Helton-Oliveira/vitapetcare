@@ -5,6 +5,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import AuthService from '../../shared/services/auth/auth.service';
 import {LoginRequest} from '../../shared/models/auth/auth-dto';
+import {AuthActionsService} from './auth-actions-service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class AuthComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  authActionsServices = inject(AuthActionsService);
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -50,6 +52,10 @@ export class AuthComponent implements OnInit {
     } catch (error) {
       console.error('Erro ao autenticar', error);
     }
+  }
+
+  async goToPasswordRecovery() {
+    await this.authActionsServices.goToForgotPassword();
   }
 
   canSubmit(): boolean {

@@ -16,17 +16,35 @@
            relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/file/77777777777777_modules_entities.xml"
            relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/workDay/77777777777777_modules_entities.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/timePeriod/77777777777777_modules_entities.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/job/77777777777777_modules_entities.xml"
+           relativeToChangelogFile="false"/>
 
   <!-- modules fks -->
   <include file="config/liquibase/migrate/user/88888888888888_modules_fks.xml"
            relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/file/88888888888888_modules_fks.xml"
            relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/workDay/88888888888888_modules_fks.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/timePeriod/88888888888888_modules_fks.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/job/88888888888888_modules_fks.xml"
+           relativeToChangelogFile="false"/>
 
   <!-- modules fixes -->
   <include file="config/liquibase/migrate/user/99999999999999_modules_fixes.xml"
            relativeToChangelogFile="false"/>
   <include file="config/liquibase/migrate/file/99999999999999_modules_fixes.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/workDay/99999999999999_modules_fixes.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/timePeriod/99999999999999_modules_fixes.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/migrate/job/99999999999999_modules_fixes.xml"
            relativeToChangelogFile="false"/>
 
   <!-- global fixes - must be always the last one -->

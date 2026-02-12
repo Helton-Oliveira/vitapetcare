@@ -2,18 +2,20 @@ import {inject} from '@angular/core';
 import AuthService from '../shared/services/auth/auth.service';
 import {HttpInterceptorFn} from '@angular/common/http';
 import {catchError, from, switchMap, throwError} from 'rxjs';
+import {environment} from '../../../../environment';
+import {ToastrService} from 'ngx-toastr';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(`Interceptando: ${req.method} ${req.url}`);
+  console.warn(`Interceptando: ${req.method} ${req.url}`);
+  const authService = inject(AuthService);
+  const toastService = inject(ToastrService);
 
-  if (req.url.includes('cloudinary.com')) {
-    console.log('Ignorando Cloudinary...');
+  if (!req.url.startsWith(environment.BASE_API_URL)) {
     return next(req);
   }
 
-  const authService = inject(AuthService);
-
-  let accessToken = localStorage.getItem('accessToken') ||
+  let accessToken =
+    localStorage.getItem('accessToken') ||
     sessionStorage.getItem('accessToken');
 
   const clonedReq = accessToken
@@ -24,17 +26,16 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedReq).pipe(
     catchError((error) => {
-      console.log(error.status, error.message)
       if (error.status !== 401) return throwError(() => error);
 
       return from(authService.refreshToken()).pipe(
         switchMap((res) => {
           if (!res.accessToken) {
-            return throwError(() => error);
+            throw error;
           }
 
-          sessionStorage.setItem('accessToken', JSON.stringify(res.accessToken));
-          localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
+          sessionStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('accessToken', res.accessToken);
 
           const accessToken = localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')
 
@@ -46,14 +47,13 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
           return next(retryReq);
         }),
-        catchError((err) => {
-          console.warn(err.message)
-          localStorage.clear();
-          sessionStorage.clear();
-          window.location.href = '/login';
+        catchError((err: Error) => {
+          toastService.error("ERROR: ", err.message);
           return throwError(() => error);
         })
       );
     })
   );
 };
+
+

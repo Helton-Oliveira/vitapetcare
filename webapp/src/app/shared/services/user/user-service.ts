@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../../environment';
 import {User} from '../../models/user/user.model';
 import {firstValueFrom} from 'rxjs';
-import {Page} from '../../dto/page-dto';
+import {IPage} from '../../dto/page-dto';
 
 type EntityResponseType = User
-type EntityArrayResponseType = Page<User[]>
+type EntityArrayResponseType = IPage<User[]>
 
 @Injectable({
   providedIn: 'root'

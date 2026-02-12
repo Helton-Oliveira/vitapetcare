@@ -1,10 +1,11 @@
-export interface Page<T> {
+export interface IPage<T> {
   content: T;
-  totalPages: number;
-  totalElements: number;
+  page: TPage;
+}
+
+export type TPage = {
   size: number;
   number: number;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
+  totalPages: number;
+  totalElements: number;
 }

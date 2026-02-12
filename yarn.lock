@@ -177,6 +177,13 @@
     ora "9.0.0"
     rxjs "7.8.2"
 
+"@angular/animations@^21.0.8":
+  version "21.0.8"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-21.0.8.tgz#84038fd77a4baf29386eafcad3f8421d11b4f75d"
+  integrity sha512-1YXHZQO/LYiExbg7sZhiqqF5fMcH17iVgK1tI2Gk90Yy0HQAuqnteOv3pPGgUfLowNOWK0sGhCYbB2Lq21LA3w==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/build@^21.0.1":
   version "21.0.1"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-21.0.1.tgz#dd6a7b37be5e0956102c1aa146ac4ba42df7b6d4"
@@ -1938,6 +1945,13 @@
     "@types/http-errors" "*"
     "@types/node" "*"
 
+"@types/uuid@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-11.0.0.tgz#f4fa34bbf2af941148ef1973c4361fc43617971c"
+  integrity sha512-HVyk8nj2m+jcFRNazzqyVKiZezyhDKrGUA3jlEcg/nZ6Ms+qHwocba1Y/AaVaznJTAM9xpdFSh+ptbNrhOGvZA==
+  dependencies:
+    uuid "*"
+
 "@vitejs/plugin-basic-ssl@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-basic-ssl/-/plugin-basic-ssl-2.1.0.tgz#c70d2a922bc437f154089d7ef0505db4b383eb7b"
@@ -3443,6 +3457,20 @@ ngx-dropzone@^3.1.0:
   dependencies:
     tslib "^2.0.0"
 
+ngx-mask@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-mask/-/ngx-mask-21.0.1.tgz#725d39717a7247bd9fdc18e2fc00f318da3496e9"
+  integrity sha512-L7zyKhXHQjfMLIGPxEmaVXdZ6VurHemgPt352yY9vP0dmWKmmzwF1nkKzDjYqpqEWhL/KMooSqrMGApNVzWeYA==
+  dependencies:
+    tslib "^2.3.0"
+
+ngx-toastr@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-19.1.0.tgz#c3a676e2b7c2e186e192e75ef272b4caaa778417"
+  integrity sha512-Qa7Kg7QzGKNtp1v04hu3poPKKx8BGBD/Onkhm6CdH5F0vSMdq+BdR/f8DTpZnGFksW891tAFufpiWb9UZX+3vg==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-translate-multi-http-loader@^20.0.0:
   version "20.0.0"
   resolved "https://registry.yarnpkg.com/ngx-translate-multi-http-loader/-/ngx-translate-multi-http-loader-20.0.0.tgz#88ecba262edffec7f7aa05be66dc413d171460ae"
@@ -4386,6 +4414,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+uuid@*, uuid@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-13.0.0.tgz#263dc341b19b4d755eb8fe36b78d95a6b65707e8"
+  integrity sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==
 
 validate-npm-package-license@^3.0.4:
   version "3.0.4"

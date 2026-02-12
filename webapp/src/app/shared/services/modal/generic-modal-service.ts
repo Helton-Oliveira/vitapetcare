@@ -20,8 +20,13 @@ export class GenericModalService {
     const overlayRef = this.overlay.create({
       hasBackdrop: true,
       backdropClass: 'modal-backdrop',
-      panelClass: ['modal-panel', options.size ?? 'md'],
+      panelClass: ['modal-panel', options.size || 'md'],
       scrollStrategy: this.overlay.scrollStrategies.block(),
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerVertically()
+        .centerHorizontally()
     });
 
     const portal = new ComponentPortal(component, null, this.injector);

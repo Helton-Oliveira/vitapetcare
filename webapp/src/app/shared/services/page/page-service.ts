@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {PageDefinition} from '../../buiderls/page-definition';
+import {PageDefinition} from '../../builders/page-definition';
 
 @Injectable({providedIn: 'root'})
 export class PageService {

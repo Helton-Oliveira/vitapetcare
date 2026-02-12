@@ -39,13 +39,15 @@
         <constraints nullable="false"/>
       </column>
 
-      <column name="password" type="text">
-        <constraints nullable="false"/>
-      </column>
-
       <column name="role" type="text">
         <constraints nullable="false"/>
       </column>
+
+      <column name="reset_code" type="text"/>
+
+      <column name="created_reset_code_at" type="timestamp"/>
+
+      <column name="password" type="text"/>
 
     </createTable>
 
@@ -61,7 +63,7 @@
       <column name="email" type="text"/>
     </createIndex>
 
-    <createIndex tableName="usr_users" indexName="idx_usr_role">
+    <createIndex tableName="usr_users" indexName="idx_usr_users__role">
       <column name="role" type="text"/>
     </createIndex>
 

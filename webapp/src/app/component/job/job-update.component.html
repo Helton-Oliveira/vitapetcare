@@ -1,0 +1,119 @@
+<form [formGroup]="form" (ngSubmit)="onSave()" class="p-10 bg-white rounded-lg overflow-scroll">
+  <div class="flex flex-wrap gap-4 w-full">
+    <!-- Nome -->
+    <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.name"></label>
+      <input class="input-text" type="text" formControlName="name" required/>
+    </div>
+
+    @if (form.get('name')?.touched && form.get('name')?.invalid) {
+      <div class="flex items-center gap-1 -mt-3 w-full">
+        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+        <span class="text-sm text-red-800">
+        {{ "global.field.required" | translate: {field: 'global.field.name' | translate} }}</span>
+      </div>
+    }
+
+    <!-- Tipo de Serviço, Status e Duração -->
+    <div class="flex shadow-xs rounded-md bg-white flex-1 border border-gray-200">
+      <label class="label-input-text label-required w-[16%]" translate="job.type"></label>
+      <select class="select input-text" formControlName="type">
+        @for (type of jobTypes; track type) {
+          <option [ngClass]="type | jobTypePipe"
+                  translate="job.jobType.{{ type }}" value="{{type}}"></option>
+        }
+      </select>
+    </div>
+
+    <div class="flex shadow-xs rounded-md bg-white w-1/4 border border-gray-200">
+      <label class="label-input-text label-required" translate="global.field.status"></label>
+      <select class="select input-text" formControlName="status">
+        @for (st of statuses; track st) {
+          <option class="select-option" translate="status.{{ st }}" value="{{st}}"></option>
+        }
+      </select>
+    </div>
+
+    <div class="flex shadow-xs rounded-md bg-white w-1/4 border border-gray-200">
+      <label class="label-input-text label-required" translate="job.duration"></label>
+      <input class="input-text" type="text" formControlName="duration" placeholder="00:00" mask="00:00"/>
+    </div>
+
+    <div class="flex flex-wrap gap-4 w-full -mt-3">
+      @if (form.get('type')?.touched && form.get('type')?.invalid) {
+        <div class="flex items-center gap-1 flex-1">
+          <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+          <span class="text-sm text-red-800">
+          {{ "global.field.required" | translate: {field: 'job.type' | translate} }}</span>
+        </div>
+      }
+
+      @if (form.get('status')?.touched && form.get('status')?.invalid) {
+        <div class="flex items-center gap-1 w-1/4">
+          <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+          <span class="text-sm text-red-800">
+          {{ "global.field.required" | translate: {field: 'global.field.status' | translate} }}</span>
+        </div>
+      }
+
+      @if (form.get('duration')?.touched && form.get('duration')?.invalid) {
+        <div class="flex items-center gap-1 w-1/4">
+          <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+          <span class="text-sm text-red-800">
+          {{ "global.field.required" | translate: {field: 'job.duration' | translate} }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Profissional e Valor -->
+    <div class="flex shadow-xs rounded-md bg-white flex-1 h-11 border border-gray-200">
+      <label class="label-input-text label-required" translate="job.typeOfProfessional"></label>
+      <select class="select input-text" formControlName="typesOfProfessionals">
+        @for (role of typesOfProfessionals; track role) {
+          <option class="select-option" translate="global.role.{{ role }}" value="{{role}}"></option>
+        }
+      </select>
+    </div>
+
+    <div class="flex shadow-xs rounded-md bg-white w-1/3 h-11 border border-gray-200">
+      <label class="label-input-text label-required" translate="job.valueInCents"></label>
+      <input class="input-text" type="text" formControlName="valueInCents" placeholder="0,00"
+             mask="separator.2" prefix="R$ " thousandSeparator="." decimalMarker=","/>
+    </div>
+
+    <div class="flex flex-wrap gap-4 w-full -mt-3">
+      @if (form.get('typesOfProfessionals')?.touched && form.get('typesOfProfessionals')?.invalid) {
+        <div class="flex items-center gap-1 flex-1">
+          <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+          <span class="text-sm text-red-800">
+          {{ "global.field.required" | translate: {field: 'global.field.function' | translate} }}</span>
+        </div>
+      }
+
+      @if (form.get('valueInCents')?.touched && form.get('valueInCents')?.invalid) {
+        <div class="flex items-center gap-1 w-1/3">
+          <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+          <span class="text-sm text-red-800">
+          {{ "global.field.required" | translate: {field: 'job.valueInCents' | translate} }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Retorno -->
+    <div class="flex items-center gap-4 w-full p-2">
+      <div class="flex items-center gap-2">
+        <input type="checkbox" formControlName="hasReturn" id="hasReturn"
+               class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500">
+        <label for="hasReturn" class="text-sm font-medium text-gray-700" translate="job.hasReturn"></label>
+      </div>
+
+      @if (form.get('hasReturn')?.value) {
+        <div class="flex shadow-xs rounded-md bg-white flex-1 border border-gray-200">
+          <label class="label-input-text w-[8%]" translate="job.timeToReturnInDays"></label>
+          <input class="input-text" type="number" formControlName="timeToReturnInDays"/>
+        </div>
+      }
+    </div>
+  </div>
+</form>
+

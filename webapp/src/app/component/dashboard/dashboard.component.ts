@@ -3,7 +3,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {PageService} from '../../shared/services/page/page-service';
-import {ButtonBuilder} from '../../shared/buiderls/button-builder';
+import {ButtonBuilder} from '../../shared/builders/button-builder';
 
 @Component({
   selector: 'app-dashboard',

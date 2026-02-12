@@ -2,7 +2,9 @@
   "button": {
     "new": "Novo",
     "save": "Salvar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "filter": "Filtrar"
   },
   "global": {
     "field": {
@@ -21,7 +23,13 @@
       "rememberMe": "Lembrar de mim",
       "forgotPassword": "Esqueceu a senha?",
       "createAccount": "Criar conta",
-      "dontHaveAnAccount": "Não possio uma conta?"
+      "dontHaveAnAccount": "Não possio uma conta?",
+      "day": "Dia",
+      "next": "Próxima",
+      "previous": "Anterior",
+      "confirm": "Confirmar",
+      "error": "Erro",
+      "success": "Sucesso"
     },
     "role": {
       "ADMIN": "Administrador",
@@ -31,21 +39,77 @@
       "VETERINARIAN": "Veterinario",
       "GROOMER": "Tosador",
       "NOT_INFORMED": "Não Informado"
+    },
+    "day": {
+      "MONDAY": "Segunda",
+      "TUESDAY": "Terça",
+      "WEDNESDAY": "Quarta",
+      "THURSDAY": "Quinta",
+      "FRIDAY": "Sexta",
+      "SATURDAY": "Sabado",
+      "SUNDAY": "Domingo"
+    }
+  },
+  "job": {
+    "title": "Serviços",
+    "singleTitle": "Serviço",
+    "subTitle": "Lista de Serviços",
+    "type": "Tipo de Serviço",
+    "valueInCents": "Valor",
+    "duration": "Duração",
+    "typeOfProfessional": "Profissional",
+    "hasReturn": "Possui Retorno?",
+    "timeToReturnInDays": "Dias para Retorno",
+    "jobType": {
+      "CONSULTATION": "Consulta",
+      "EXAMINATION": "Exame",
+      "SURGERY": "Cirurgia",
+      "HOSPITALIZATION": "Internação",
+      "EMERGENCY": "Emergência",
+      "BATH": "Banho",
+      "GROOMING": "Tosa",
+      "BATH_AND_GROOMING": "Banho e Tosa",
+      "SANITARY_GROOMING": "Tosa Higiênica",
+      "STAY": "Estadia",
+      "NOT_INFORMED": "Não Informado"
     }
   },
   "login": {
     "email": "Email",
-    "password": "Senha"
+    "password": "Senha",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Senha",
+    "sendMailSuccess": "Email de recuperacao enviado com sucesso!",
+    "sendMailError": "Erro ao enviar o email. Tente novamente mais tarde!"
   },
   "sidebar": {
     "dashboard": "Dashboard",
     "collaborators": "Colaboradores",
     "users": "Usuarios",
-    "permissions": "Permissões"
+    "permissions": "Permissões",
+    "jobs": "Serviços"
+  },
+  "status": {
+    "ACTIVE": "Ativo",
+    "INACTIVE": "Inativo",
+    "IN_PROGRESS": "Em Andamento",
+    "CONFIRM": "Confirmado",
+    "DECLINED": "Recusado",
+    "NOT_INFORMED": "Não Informado"
+  },
+  "timePeriod": {
+    "startTime": "Início",
+    "endTime": "Término",
+    "addNewInterval": "Adicionar outro intervalo"
   },
   "user": {
     "title": "Usuários",
     "singleTitle": "Usuário",
     "subTitle": "Lista de Usuários"
+  },
+  "workDay": {
+    "singleTitle": "Escala de trabalho",
+    "pluralTitle": "Escalas de trabalho",
+    "add": "Adicionar escala de trabalho"
   }
 }

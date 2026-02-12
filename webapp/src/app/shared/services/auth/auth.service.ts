@@ -31,6 +31,22 @@ export default class AuthService {
     return firstValueFrom(this._http.get(`${this.BASE_URL}/current-account`));
   }
 
+  async resetPasswordRequest(email: string, url: string): Promise<boolean> {
+    const params = {
+      email: email,
+      url: url
+    }
+    return firstValueFrom(this._http.post<boolean>(`${this.BASE_URL}/forgot-password`, params));
+  }
+
+  async confirmResetPassword(newPassword: string, resetCode: string): Promise<boolean> {
+    const params = {
+      newPassword: newPassword,
+      resetCode: resetCode
+    }
+    return firstValueFrom(this._http.post<boolean>(`${this.BASE_URL}/new-password`, params));
+  }
+
   getAllPermissions(): Promise<PermissionsArrayResponseType> {
     return firstValueFrom(this._http.get<PermissionsArrayResponseType>(`${this.BASE_URL}/permissions`));
   }
@@ -42,5 +58,6 @@ export default class AuthService {
   logout(): void {
     localStorage.clear();
     this.isAuthenticated = false;
+    window.location.href = '/login';
   }
 }

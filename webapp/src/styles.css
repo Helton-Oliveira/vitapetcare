@@ -1,8 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "@ng-select/ng-select/themes/default.theme.css";
-@import "tailwindcss";
+@import 'ngx-toastr/toastr';
 
+@layer base {
+  /* Reset de box-sizing e margens para segurança extra */
+  *, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Fonte da imagem (inter ou similar) costuma ser melhor que Roboto */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  /* Reset de botões para não herdarem estilos de browser */
+  button {
+    background: none;
+    cursor: pointer;
+  }
+
+}
+
+/* 2. ANGULAR MATERIAL OVERRIDES (Limpando o visual pesado) */
+::ng-deep {
+  .mat-expansion-panel {
+    @apply rounded-xl shadow-none border border-gray-100 ;
+  }
+
+  .mat-expansion-panel-header {
+    @apply px-5 py-4 hover:bg-gray-50 ;
+  }
+
+  .mat-expansion-panel-body {
+    @apply bg-white p-6 ;
+  }
+}
+
+/* 3. MODAIS & OVERLAYS (CDK) */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-40;
+}
+
+.cdk-overlay-pane.modal-panel {
+  @apply flex justify-center items-center ;
+}
+
+/* Classes de largura responsiva usando utilitários Tailwind */
+.cdk-overlay-pane.sm {
+  width: min(100%, 380px);
+}
+
+.cdk-overlay-pane.md {
+  width: min(100%, 520px);
+}
+
+.cdk-overlay-pane.lg {
+  width: min(100%, 720px);
+}
+
+.cdk-overlay-pane.xl {
+  width: min(100%, 920px);
+}
+
+/* 4. COMPONENTES CUSTOMIZADOS (Estilo Moderno) */
 @layer components {
   .input-text {
     @apply block w-full px-3 py-2.5 text-sm rounded-md rounded-e-md focus:outline-none focus:ring-0;
@@ -91,12 +160,21 @@
 
   .btn-primary {
     @apply
-    px-6 py-2
-    rounded-full
-    font-medium
+    flex
+    items-center
+    gap-2
+    px-4
+    md:px-5
+    h-10
+    md:h-11
+    rounded-xl
+    bg-blue-600
     text-white
-    hover:cursor-pointer
-    transition duration-150 ease-in-out;
+    hover:bg-blue-700
+    transition-all shadow-sm
+    text-sm font-semibold
+    active:scale-95 disabled:opacity-50
+    disabled:pointer-events-none
   }
 
   .btn-secondary {
@@ -108,14 +186,82 @@
     transition duration-150 ease-in-out;
   }
 
+  /* Utilitários para a Tabela da imagem anterior */
+  .status-pill {
+    @apply px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider;
+  }
+
+  /* Custom Scrollbar para o Main */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #e2e8f0; /* Um cinza bem clarinho */
+    border-radius: 10px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+  }
+
+  .time-input {
+    @apply
+    rounded-none
+    rounded-s-lg
+    flex-1
+    block
+    w-full
+    p-2.5
+    border
+    border-gray-50
+    text-sm
+    shadow-xs
+  }
+
+  .error-message {
+    @apply
+    flex
+    bg-red-200
+    text-red-700
+    rounded-2xl
+    items-start
+    sm:items-center
+    p-4
+    text-sm
+    border-2
+    border-red-700
+  }
+
+  .success-message {
+    @apply
+    flex
+    bg-green-200
+    text-green-700
+    rounded-2xl
+    items-start
+    sm:items-center
+    p-4
+    text-sm
+    border-2
+    border-green-700
+  }
 }
 
-
-html, body {
-  height: 100%;
+/* 5. ANIMAÇÕES */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.animate-fadeIn {
+  animation: fadeIn 200ms ease-out forwards;
 }
