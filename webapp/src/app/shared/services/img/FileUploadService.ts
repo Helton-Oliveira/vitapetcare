@@ -1,7 +1,7 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../../environment';
-import {lastValueFrom} from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../../environment';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class FileUploadService {
   async uploadImage(file: File): Promise<{ publicId: string, url: string }> {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', environment.PRESET_NAME);
+    formData.append('upload_preset', environment.CLOUDINARY_PRESET);
 
     try {
       const res: any = await lastValueFrom(
