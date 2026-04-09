@@ -4,14 +4,18 @@
 @import 'ngx-toastr/toastr';
 
 @layer base {
+
   /* Reset de box-sizing e margens para segurança extra */
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     box-sizing: border-box;
     border-width: 0;
     border-style: solid;
   }
 
-  html, body {
+  html,
+  body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -33,15 +37,15 @@
 /* 2. ANGULAR MATERIAL OVERRIDES (Limpando o visual pesado) */
 ::ng-deep {
   .mat-expansion-panel {
-    @apply rounded-xl shadow-none border border-gray-100 ;
+    @apply rounded-xl shadow-none border border-gray-100;
   }
 
   .mat-expansion-panel-header {
-    @apply px-5 py-4 hover:bg-gray-50 ;
+    @apply px-5 py-4 hover:bg-gray-50;
   }
 
   .mat-expansion-panel-body {
-    @apply bg-white p-6 ;
+    @apply bg-white p-6;
   }
 }
 
@@ -51,7 +55,7 @@
 }
 
 .cdk-overlay-pane.modal-panel {
-  @apply flex justify-center items-center ;
+  @apply flex justify-center items-center;
 }
 
 /* Classes de largura responsiva usando utilitários Tailwind */
@@ -71,6 +75,10 @@
   width: min(100%, 920px);
 }
 
+.toast-top-center {
+  top: 20px !important;
+}
+
 /* 4. COMPONENTES CUSTOMIZADOS (Estilo Moderno) */
 @layer components {
   .input-text {
@@ -83,8 +91,7 @@
   }
 
   .label-input-text {
-    @apply bg-gray-200 inline-flex font-medium items-center px-3 text-base text-gray-500
-    rounded-r-none p-1 rounded-md rounded-s-md;
+    @apply bg-gray-200 inline-flex font-medium items-center px-3 text-base text-gray-500 rounded-r-none p-1 rounded-md rounded-s-md;
   }
 
   .label-required::after {
@@ -93,14 +100,11 @@
   }
 
   .sidebar-icon {
-    @apply flex items-center gap-4 text-green-700 hover:text-green-900
-    w-full px-4 py-3 rounded-xl hover:bg-green-100
-    transition-all duration-200
+    @apply flex items-center gap-4 text-green-700 hover:text-green-900 w-full px-4 py-3 rounded-xl hover:bg-green-100 transition-all duration-200
   }
 
   .btn-secondary {
-    @apply box-border border focus:ring-4
-    shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none hover:cursor-pointer
+    @apply box-border border focus:ring-4 shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none hover:cursor-pointer
   }
 
   .select {
@@ -115,10 +119,12 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
   }
+
   .animate-fadeIn {
     animation: fadeIn 200ms ease-out forwards;
   }
@@ -128,11 +134,13 @@
       transform: translateY(-18px) scale(0.985);
       opacity: 0;
     }
+
     to {
       transform: translateY(0) scale(1);
       opacity: 1;
     }
   }
+
   .animate-dropIn {
     animation: dropIn 220ms cubic-bezier(.22, .9, .34, 1) forwards;
   }
@@ -159,31 +167,11 @@
   }
 
   .btn-primary {
-    @apply
-    flex
-    items-center
-    gap-2
-    px-4
-    md:px-5
-    h-10
-    md:h-11
-    rounded-xl
-    bg-blue-600
-    text-white
-    hover:bg-blue-700
-    transition-all shadow-sm
-    text-sm font-semibold
-    active:scale-95 disabled:opacity-50
-    disabled:pointer-events-none
+    @apply flex items-center gap-2 px-4 md:px-5 h-10 md:h-11 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-sm text-sm font-semibold active:scale-95 disabled:opacity-50 disabled:pointer-events-none
   }
 
   .btn-secondary {
-    @apply
-    px-6 py-2
-    rounded-full
-    font-medium
-    text-white
-    transition duration-150 ease-in-out;
+    @apply px-6 py-2 rounded-full font-medium text-white transition duration-150 ease-in-out;
   }
 
   /* Utilitários para a Tabela da imagem anterior */
@@ -201,7 +189,8 @@
   }
 
   .overflow-y-auto::-webkit-scrollbar-thumb {
-    background: #e2e8f0; /* Um cinza bem clarinho */
+    background: #e2e8f0;
+    /* Um cinza bem clarinho */
     border-radius: 10px;
   }
 
@@ -210,45 +199,15 @@
   }
 
   .time-input {
-    @apply
-    rounded-none
-    rounded-s-lg
-    flex-1
-    block
-    w-full
-    p-2.5
-    border
-    border-gray-50
-    text-sm
-    shadow-xs
+    @apply rounded-none rounded-s-lg flex-1 block w-full p-2.5 border border-gray-50 text-sm shadow-xs
   }
 
   .error-message {
-    @apply
-    flex
-    bg-red-200
-    text-red-700
-    rounded-2xl
-    items-start
-    sm:items-center
-    p-4
-    text-sm
-    border-2
-    border-red-700
+    @apply flex bg-red-200 text-red-700 rounded-2xl items-start sm:items-center p-4 text-sm border-2 border-red-700
   }
 
   .success-message {
-    @apply
-    flex
-    bg-green-200
-    text-green-700
-    rounded-2xl
-    items-start
-    sm:items-center
-    p-4
-    text-sm
-    border-2
-    border-green-700
+    @apply flex bg-green-200 text-green-700 rounded-2xl items-start sm:items-center p-4 text-sm border-2 border-green-700
   }
 }
 
@@ -257,6 +216,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

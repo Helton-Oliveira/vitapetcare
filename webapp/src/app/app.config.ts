@@ -1,14 +1,15 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
-import {provideRouter} from '@angular/router';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import {APP_ROUTES} from './app.routes';
-import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
-import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
-import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
-import {createTranslateLoader} from './shared/loaders/translate.loader';
-import {tokenInterceptor} from './interceptor/token-interceptor';
-import {provideToastr} from 'ngx-toastr';
-import {provideNgxMask} from 'ngx-mask';
+import { APP_ROUTES } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { createTranslateLoader } from './shared/loaders/translate.loader';
+import { tokenInterceptor } from './interceptor/token-interceptor';
+import { provideToastr } from 'ngx-toastr';
+import { provideNgxMask } from 'ngx-mask';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptors([tokenInterceptor])),
     provideToastr(),
+    provideAnimationsAsync(),
     provideNgxMask(),
     provideTranslateService({
       loader: {
