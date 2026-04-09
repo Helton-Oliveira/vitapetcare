@@ -1,17 +1,20 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app/webapp",
     "types": [
       "node"
-    ]
+    ],
+    /* Garante que o Angular use a resolução moderna herdada */
+    "moduleResolution": "bundler"
   },
+  /* O include deve ser preciso para não indexar arquivos desnecessários */
   "include": [
-    "webapp/src/**/*.ts"
+    "webapp/src/**/*.ts",
+    "webapp/src/**/*.d.ts"
   ],
   "exclude": [
-    "webapp/src/**/*.spec.ts"
+    "webapp/src/**/*.spec.ts",
+    "webapp/src/test.ts"
   ]
 }

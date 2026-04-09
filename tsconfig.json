@@ -1,27 +1,49 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {},
+    /* Resolução de Módulos (Onde a mágica acontece) */
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    /* Configurações de Caminho (Sem o baseUrl obsoleto) */
+    "paths": {
+      "@webapp/*": [
+        "./webapp/src/*"
+      ],
+      "@env/*": [
+        "./webapp/src/environments/*"
+      ]
+    },
+    /* Rigor e Qualidade (Clean Code) */
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    /* Performance e Compatibilidade */
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "preserve"
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "extendedDiagnostics": {
+      "checks": {
+        "suffixNotSupported": "error"
+      }
+    }
   },
   "files": [],
   "references": [
