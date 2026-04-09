@@ -1,59 +1,59 @@
-<form [formGroup]="form" (ngSubmit)="onSave()" class="p-10 bg-white rounded-lg overflow-scroll">
+<form [formGroup]="form" (ngSubmit)="onSave($event)" class="p-10 bg-white rounded-lg overflow-scroll">
   <div class="flex flex-wrap gap-4 w-full">
     <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
       <label class="label-input-text label-required" translate="global.field.name"></label>
-      <input class="input-text" type="text" formControlName="name" required/>
+      <input class="input-text" type="text" formControlName="name" required />
     </div>
 
     @if (form.get('name')?.touched && form.get('name')?.invalid) {
-      <div class="flex justify-center items-center gap-1 -mt-3">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
+    <div class="flex justify-center items-center gap-1 -mt-3">
+      <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+      <span class="text-sm text-red-800">
         {{ "global.field.required" | translate: {field: 'global.field.name' | translate} }}</span>
-      </div>
+    </div>
     }
 
     <div class="flex shadow-xs rounded-md bg-white w-full border border-gray-200">
       <label class="label-input-text label-required" translate="global.field.email"></label>
-      <input class="input-text" type="email" formControlName="email" required/>
+      <input class="input-text" type="email" formControlName="email" required />
     </div>
 
     @if (form.get('email')?.touched && form.get('email')?.invalid) {
-      <div class="flex items-center gap-1 -mt-3 w-full">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
+    <div class="flex items-center gap-1 -mt-3 w-full">
+      <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+      <span class="text-sm text-red-800">
         {{ "global.field.required" | translate: {field: 'global.field.email' | translate} }}</span>
-      </div>
+    </div>
     }
 
     <div class="flex shadow-xs rounded-md bg-white w-[49%] border border-gray-200">
       <label class="label-input-text label-required" translate="global.field.password"></label>
-      <input class="input-text" type="password" formControlName="password" required/>
+      <input class="input-text" type="password" formControlName="password" required />
     </div>
 
     <div class="flex shadow-xs rounded-md bg-white w-[49%] border border-gray-200">
       <label class="label-input-text label-required" translate="global.field.function"></label>
       <select id="role" class="select input-text" formControlName="role">
         @for (role of roles; track role) {
-          <option class="select-option" translate="global.role.{{ role }}" value="{{role}}"></option>
+        <option class="select-option" translate="global.role.{{ role }}" value="{{role}}"></option>
         }
       </select>
     </div>
 
     @if (form.get('password')?.touched && form.get('password')?.invalid) {
-      <div class="flex items-center gap-1 -mt-3 w-full">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
+    <div class="flex items-center gap-1 -mt-3 w-full">
+      <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+      <span class="text-sm text-red-800">
         {{ "global.field.required" | translate: {field: 'global.field.password' | translate} }}</span>
-      </div>
+    </div>
     }
 
     @if (form.get('role')?.touched && form.get('role')?.invalid) {
-      <div class="flex justify-center items-center gap-1 -mt-3 ml-[50%]">
-        <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
-        <span class="text-sm text-red-800">
+    <div class="flex justify-center items-center gap-1 -mt-3 ml-[50%]">
+      <i class="fa-solid fa-circle-exclamation text-rose-600"></i>
+      <span class="text-sm text-red-800">
         {{ "global.field.required" | translate: {field: 'global.field.function' | translate} }}</span>
-      </div>
+    </div>
     }
 
     <ngx-dropzone (change)="addImage($event)" [multiple]="false" accept="image/*" class="w-full border-solid ">
@@ -65,27 +65,24 @@
       </ngx-dropzone-label>
 
       @for (f of files; track f) {
-        <ngx-dropzone-image-preview
-          ngProjectAs="ngx-dropzone-preview"
-          [file]="f"
-          [removable]="true">
-          <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-        </ngx-dropzone-image-preview>
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f" [removable]="true">
+        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+      </ngx-dropzone-image-preview>
       }
     </ngx-dropzone>
 
     @if (user.files?.length) {
-      @for (f of user.files; track f.id) {
-        <div class="flex flex-col items-center justify-around">
-          <img class="h-auto max-w-xs" [ngSrc]="f.path!" alt="avatar do perfil" height="1024" width="1024" priority/>
-          <div class="flex justify-center items-center font-bold ">
-            <span>{{ f.name }}</span>
-            <button class="hover:cursor-pointer hover:opacity-75" type="button">
-              <i class="fa-solid fa-x text-rose-600 text-lg font-bold"></i>
-            </button>
-          </div>
-        </div>
-      }
+    @for (f of user.files; track f.id) {
+    <div class="flex flex-col items-center justify-around">
+      <img class="h-auto max-w-xs" [ngSrc]="f.path!" alt="avatar do perfil" height="1024" width="1024" priority />
+      <div class="flex justify-center items-center font-bold ">
+        <span>{{ f.name }}</span>
+        <button class="hover:cursor-pointer hover:opacity-75" type="button">
+          <i class="fa-solid fa-x text-rose-600 text-lg font-bold"></i>
+        </button>
+      </div>
+    </div>
+    }
     }
 
     <!-- WORK_DAY SESSION -->
@@ -96,7 +93,7 @@
             <span translate="workDay.pluralTitle" class="text-2xl font-bold opacity-50"></span>
 
             <button class="btn-primary bg-green-400 font-bold text-white opacity-8=90" type="button"
-                    (click)="addWorkDay($event)">
+              (click)="addWorkDay($event)">
               <span translate="button.add" class="text-lg"></span>
               <i class="fa-solid fa-plus"></i>
             </button>
@@ -106,47 +103,45 @@
         <ng-content class="p-10">
 
           @if (!user.workDays?.length) {
-            <button class="w-full h-full opacity-50 hover:cursor-pointer p-5" type="button"
-                    (click)="addWorkDay($event)">
-              <span translate="workDay.add" class="text-2xl"></span>
-            </button>
+          <button class="w-full h-full opacity-50 hover:cursor-pointer p-5" type="button" (click)="addWorkDay($event)">
+            <span translate="workDay.add" class="text-2xl"></span>
+          </button>
           }
 
           @if (user.workDays?.length) {
-            <table class="w-full table-auto border-collapse rounded-t-lg shadow-sm">
-              <thead class="bg-gray-100">
+          <table class="w-full table-auto border-collapse rounded-t-lg shadow-sm">
+            <thead class="bg-gray-100">
               <tr class="text-left text-sm text-gray-600">
                 <th class="p-3"></th>
                 <th class="p-3"><span translate="global.field.id"></span></th>
                 <th class="p-3"><span translate="global.field.day"></span></th>
                 <th class="p-3"></th>
               </tr>
-              </thead>
+            </thead>
 
-              <tbody class="text-sm">
+            <tbody class="text-sm">
 
-                @for (workDay of getWorkDaysActive(); track workDay.uuid) {
-                  <tr [ngClass]="{'opacity-40 line-through pointer-events-none select-none': !workDay.active}">
-                    <td class="flex items-center justify-center">@if (!workDay.id) {
-                      <i class="fa-solid fa-circle-exclamation text-lg text-yellow-500 "></i>
-                    }</td>
-                    <td class="p-3">{{ workDay.id }}</td>
-                    <td class="p-3">{{ "global.day." + workDay.dayOfWeek | translate }}</td>
+              @for (workDay of getWorkDaysActive(); track workDay.uuid) {
+              <tr [ngClass]="{'opacity-40 line-through pointer-events-none select-none': !workDay.active}">
+                <td class="flex items-center justify-center">@if (!workDay.id) {
+                  <i class="fa-solid fa-circle-exclamation text-lg text-yellow-500 "></i>
+                  }
+                </td>
+                <td class="p-3">{{ workDay.id }}</td>
+                <td class="p-3">{{ "global.day." + workDay.dayOfWeek | translate }}</td>
 
-                    <td class="p-3 flex gap-1 justify-center items-center">
-                      <button class="hover:cursor-pointer text-blue-500" type="button"
-                              (click)="editWorkDay(workDay)">
-                        <i class="fa-solid fa-pen-to-square text-2xl"></i>
-                      </button>
-                      <button class="hover:cursor-pointer" type="button"
-                              (click)="deleteWorkDay(workDay?.uuid!!)">
-                        <i class="fa-regular fa-trash-can text-2xl text-gray-500"></i>
-                      </button>
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+                <td class="p-3 flex gap-1 justify-center items-center">
+                  <button class="hover:cursor-pointer text-blue-500" type="button" (click)="editWorkDay(workDay)">
+                    <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                  </button>
+                  <button class="hover:cursor-pointer" type="button" (click)="deleteWorkDay(workDay?.uuid!!)">
+                    <i class="fa-regular fa-trash-can text-2xl text-gray-500"></i>
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
           }
         </ng-content>
       </mat-expansion-panel>

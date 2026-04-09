@@ -1,26 +1,28 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {_, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {PageService} from '../../shared/services/page/page-service';
-import {ButtonBuilder} from '../../shared/builders/button-builder';
-import {User} from '../../shared/models/user/user.model';
-import {UserService} from '../../shared/services/user/user-service';
-import {Role} from '../../shared/models/role/role.enum';
-import {UserActionsService} from './UserActionsService';
-import {ActivatedRoute} from '@angular/router';
-import {FileUploadService} from '../../shared/services/img/FileUploadService';
-import {FileApp, IFileApp} from '../../shared/models/file/file-app-model';
-import {FileType} from '../../shared/models/file/file-type';
-import {NgxDropzoneModule} from 'ngx-dropzone';
-import {WorkDayEditorModalService} from './workDayModal/work-day-editor-modal-service';
-import {WorkDay} from '../../shared/models/workDay/work-day-model';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { _, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { PageService } from '../../shared/services/page/page-service';
+import { ButtonBuilder } from '../../shared/builders/button-builder';
+import { User } from '../../shared/models/user/user.model';
+import { UserService } from '../../shared/services/user/user-service';
+import { Role } from '../../shared/models/role/role.enum';
+import { UserActionsService } from './UserActionsService';
+import { ActivatedRoute } from '@angular/router';
+import { FileUploadService } from '../../shared/services/img/FileUploadService';
+import { FileApp, IFileApp } from '../../shared/models/file/file-app-model';
+import { FileType } from '../../shared/models/file/file-type';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { WorkDayEditorModalService } from './workDayModal/work-day-editor-modal-service';
+import { WorkDay } from '../../shared/models/workDay/work-day-model';
 import {
   MatAccordion,
   MatExpansionPanel,
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
+import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '@webapp/app/shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,6 +48,7 @@ export class UserUpdateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private fileUploadService = inject(FileUploadService);
   private workDayEditorModalService = inject(WorkDayEditorModalService);
+  private toastService = inject(ToastService);
 
   user: User = new User();
   roles: Role[] = Object.values(Role);
@@ -161,7 +164,7 @@ export class UserUpdateComponent implements OnInit {
       ...this.user,
       name: this.form.value.name,
       email: this.form.value.email,
-      password: this.form.value.password,
+      password: this.form.value.password ?? this.user.password,
       role: this.form.value.role,
       files: [this.fileApp],
       workDays: this.user.workDays,
@@ -178,12 +181,17 @@ export class UserUpdateComponent implements OnInit {
     });
   }
 
-  async onSave() {
+  async onSave($event?: any) {
+    $event?.stopPropagation();
     const canId = this.user?.id != null;
     switch (canId) {
       case false:
         this.updateUser();
         await this.userService.save(this.user);
+
+        this.toastService.onSuccess('Usuario salvo com sucesso!', 'Usuario Salvo!')
+          .onHidden.subscribe(() => this.userActionsService.goToList());
+
         break;
       case true:
         this.updateUser();
@@ -200,7 +208,7 @@ export class UserUpdateComponent implements OnInit {
 
   private markFormAsChanged(): void {
     this.form.markAsDirty();
-    this.form.updateValueAndValidity({emitEvent: false});
+    this.form.updateValueAndValidity({ emitEvent: false });
     this.setup();
   }
 
